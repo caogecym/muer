@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from joke_collector.models import Joke
+from apps.joke.models import Joke
 import requests
 import lxml
 from lxml import html

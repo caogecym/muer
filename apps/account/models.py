@@ -1,5 +1,5 @@
 from django.db import models
-from custom.fields import ListField
+from libs.models.fields import ListField
 
 # Create your models here.
 class UserAccount(models.Model):

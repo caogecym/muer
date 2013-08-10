@@ -1,9 +1,9 @@
 from django.db import models
-from custom.fields import ListField
+from libs.models.fields import ListField
 
 # Create your models here.
 class Joke(models.Model):
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=60, unique=True)
     content = models.CharField(max_length=1024)
 
     # like pool
