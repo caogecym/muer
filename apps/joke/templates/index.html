@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+
+{% block forejs %}
+    <script type='text/javascript' src='/static/js/post.js'></script>
+{% endblock %}
+
+{% block content %}
+    {% if latest_joke_list %}
+        <table class="table">
+            {% for joke in latest_joke_list %}
+                <tr>
+                    <td>
+                        <div class='post-img-like-wrapper'><a id="post-img-like-{{ joke.id }}" class="post-img-like" > </a></div>
+                                <div class="post-content">
+                        {{ joke.content }}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No jokes are available.</p>
+    {% endif %}
+{% endblock %}

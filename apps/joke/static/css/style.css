@@ -1,0 +1,18 @@
+.post-img-like:hover{
+        background:url(/static/images/liked.png) no-repeat 0 0;
+        background-size:contain;
+        width:16px;
+        height:16px;
+}
+.post-img-like {
+        margin-top: 8px;
+        background: url('/static/images/like.png') no-repeat 0 0;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-size: contain;
+}
+.post-content {
+        position:relative;
+        left:30px;
+}

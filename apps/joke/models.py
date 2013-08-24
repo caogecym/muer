@@ -8,6 +8,7 @@ class Joke(models.Model):
 
     # like pool
     likedBy = ListField(null=True)
+    like_count = models.IntegerField(default=0)
     # for joke categorization
     tags = ListField(null=True)
 

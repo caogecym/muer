@@ -3,6 +3,10 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+#for OpenID auth
+ugettext = lambda s: s
+LOGIN_URL = '/%s%s' % (ugettext('account/'), ugettext('signin/'))
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -121,7 +125,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.joke',
-    'apps.account',
+    'django_authopenid',
+    'bootstrap_toolkit',
+    'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

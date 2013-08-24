@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load bootstrap_toolkit %}
+{% load url from future %}
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Yuming's best jokes</title>
+    <meta name="description" content="">
+    <meta name="author" content="Yuming Cao">
+    {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cachedcommons.org/cache/jquery-cookie/0.0.0/javascripts/jquery-cookie.js"></script>
+    {% block forejs %}
+    {% endblock %}
+    {% bootstrap_javascript_tag %}
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    {% include "header.html" %}
+    <div class="container">
+    
+        {% bootstrap_messages %}
+    
+        {% block content %}Empty page{% endblock %}
+    
+        <p><hr></p>
+    
+        <footer class="row">
+            <div class="span6" style="text-align:right">
+                <p>
+                    &copy; Yuming Cao 2013
+                </p>
+            </div>
+        </footer>
+    
+    </div> <!-- container -->
+
+</body>
+</html>
