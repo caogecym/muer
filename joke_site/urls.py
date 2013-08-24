@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-from apps.joke import urls as joke_urls
+from forum import urls as forum_urls
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^joke/', include(joke_urls, namespace="joke")),
+    url(r'^posts/', include(forum_urls, namespace="forum")),
     url(r'^account/', include('django_authopenid.urls')),
     url(r'^signin/$', 'django_authopenid.views.signin'),
     url(r'^admin/', include(admin.site.urls)),

@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/ycao/joke_site/data.db',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/ycao/my_site/data.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -124,7 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.joke',
+    'forum',
     'django_authopenid',
     'bootstrap_toolkit',
     'django.contrib.staticfiles',
