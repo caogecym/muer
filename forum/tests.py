@@ -12,12 +12,12 @@ class PostTestCase(TestCase):
         Post.objects.create(title="cold_joke", content="haha", tags=['cold'])
 
     def test_get_post_content(self):
-        """test get joke content"""
+        """test get post content"""
         coldJoke = Post.objects.get(title="cold_joke")
         self.assertEqual(coldJoke.tags, ['cold'])
 
-    def test_joke_duplicate_check(self):
-        """test get joke content"""
+    def test_post_duplicate_check(self):
+        """test get post content"""
         # create duplicate one
         self.assertRaises(IntegrityError, Post.objects.create, title="cold_joke", content="haha", \
                           tags=['cold', 'duplicate'])

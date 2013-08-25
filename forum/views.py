@@ -11,14 +11,14 @@ import random
 
 def index(request):
     latest_post_list = random.sample(Post.objects.all(), 5)
-    #latest_joke_list = Post.objects.all()[:5]
-    context = {'latest_joke_list': latest_joke_list}
+    #latest_post_list = Post.objects.all()[:5]
+    context = {'latest_post_list': latest_post_list}
     return render(request, 'index.html', context)
 
-def content(request, joke_id):
-    return HttpResponse("You're looking at the content of joke %s." % joke_id)
+def content(request, post_id):
+    return HttpResponse("You're looking at the content of post %s." % post_id)
 
-def like(request, joke_id):
+def like(request, post_id):
     '''
         vote code:
             status  =  0, By default
@@ -32,12 +32,12 @@ def like(request, joke_id):
         "message": ''
     }
 
-    liked_joke = Post.objects.filter(id=joke_id)[0]
-    if liked_joke is not None:
-        liked_joke.like_count += 1
+    liked_post = Post.objects.filter(id=post_id)[0]
+    if liked_post is not None:
+        liked_post.like_count += 1
         response_data['success'] = 1
         response_data['message'] = 'The post has been liked already'
-        liked_joke.save()
+        liked_post.save()
 
     data = simplejson.dumps(response_data)
     return HttpResponse(data, mimetype='application/json')

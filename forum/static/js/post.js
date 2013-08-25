@@ -51,7 +51,7 @@ var submit = function(object, callback) {
         type: "POST",
         cache: false,
         dataType: "json",
-        url: "/joke/" + postId + "/like/",
+        url: "/posts/" + postId + "/like/",
         data: { "postId": postId },
         error: handleFail,
         success: function(data){

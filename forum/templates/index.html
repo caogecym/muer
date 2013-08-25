@@ -7,20 +7,20 @@
 {% endblock %}
 
 {% block content %}
-    {% if latest_joke_list %}
+    {% if latest_post_list %}
         <table class="table">
-            {% for joke in latest_joke_list %}
+            {% for post in latest_post_list %}
                 <tr>
                     <td>
-                        <div class='post-img-like-wrapper'><a id="post-img-like-{{ joke.id }}" class="post-img-like" > </a></div>
+                        <div class='post-img-like-wrapper'><a id="post-img-like-{{ post.id }}" class="post-img-like" > </a></div>
                                 <div class="post-content">
-                        {{ joke.content }}
+                        {{ post.content }}
                         </div>
                     </td>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
-        <p>No jokes are available.</p>
+        <p>No posts are available.</p>
     {% endif %}
 {% endblock %}

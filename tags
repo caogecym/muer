@@ -1,0 +1,245 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ADMINS	./joke_site/settings.py	/^ADMINS = ($/;"	v
+ALLOWED_HOSTS	./joke_site/settings.py	/^ALLOWED_HOSTS = []$/;"	v
+Association	./django_authopenid/models.py	/^class Association(models.Model):$/;"	c
+ChangeemailForm	./django_authopenid/forms.py	/^class ChangeemailForm(forms.Form):$/;"	c
+ChangeopenidForm	./django_authopenid/forms.py	/^class ChangeopenidForm(forms.Form):$/;"	c
+ChangepwForm	./django_authopenid/forms.py	/^class ChangepwForm(forms.Form):$/;"	c
+Command	./forum/management/commands/scrapeJokes.py	/^class Command(BaseCommand):$/;"	c
+DATABASES	./joke_site/settings.py	/^DATABASES = {$/;"	v
+DEBUG	./joke_site/settings.py	/^DEBUG = True$/;"	v
+DEFAULT_NEXT	./django_authopenid/util.py	/^DEFAULT_NEXT = getattr(settings, 'OPENID_REDIRECT_NEXT', '\/')$/;"	v
+DeleteForm	./django_authopenid/forms.py	/^class DeleteForm(forms.Form):$/;"	c
+DjangoOpenIDStore	./django_authopenid/util.py	/^class DjangoOpenIDStore(OpenIDStore):$/;"	c
+EmailPasswordForm	./django_authopenid/forms.py	/^class EmailPasswordForm(forms.Form):$/;"	c
+INSTALLED_APPS	./joke_site/settings.py	/^INSTALLED_APPS = ($/;"	v
+LANGUAGE_CODE	./joke_site/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	v
+LOGGING	./joke_site/settings.py	/^LOGGING = {$/;"	v
+LOGIN_URL	./joke_site/settings.py	/^LOGIN_URL = '\/%s%s' % (ugettext('account\/'), ugettext('signin\/'))$/;"	v
+ListField	./libs/models/fields.py	/^class ListField(models.TextField):$/;"	c
+MANAGERS	./joke_site/settings.py	/^MANAGERS = ADMINS$/;"	v
+MEDIA_ROOT	./joke_site/settings.py	/^MEDIA_ROOT = ''$/;"	v
+MEDIA_URL	./joke_site/settings.py	/^MEDIA_URL = ''$/;"	v
+MIDDLEWARE_CLASSES	./joke_site/settings.py	/^MIDDLEWARE_CLASSES = ($/;"	v
+Nonce	./django_authopenid/models.py	/^class Nonce(models.Model):$/;"	c
+OpenID	./django_authopenid/util.py	/^class OpenID:$/;"	c
+OpenIDMiddleware	./django_authopenid/middleware.py	/^class OpenIDMiddleware(object):$/;"	c
+OpenidAuthForm	./django_authopenid/forms.py	/^class OpenidAuthForm(forms.Form):$/;"	c
+OpenidRegisterForm	./django_authopenid/forms.py	/^class OpenidRegisterForm(forms.Form):$/;"	c
+OpenidSigninForm	./django_authopenid/forms.py	/^class OpenidSigninForm(forms.Form):$/;"	c
+OpenidVerifyForm	./django_authopenid/forms.py	/^class OpenidVerifyForm(forms.Form):$/;"	c
+Post	./forum/models.py	/^class Post(models.Model):$/;"	c
+RESERVED_NAMES	./django_authopenid/forms.py	/^RESERVED_NAMES = (u'fuck', u'shit', u'ass', u'sex', u'add',$/;"	v
+ROOT_URLCONF	./joke_site/settings.py	/^ROOT_URLCONF = 'joke_site.urls'$/;"	v
+RegistrationForm	./django_authopenid/forms.py	/^class RegistrationForm(forms.Form):$/;"	c
+SECRET_KEY	./joke_site/settings.py	/^SECRET_KEY = 'gseb#7@0qznk#rnie6s2+r4a1#2d7*z!-j(*=yg5c2o3g4de5_'$/;"	v
+SITE_ID	./joke_site/settings.py	/^SITE_ID = 1$/;"	v
+STATICFILES_DIRS	./joke_site/settings.py	/^STATICFILES_DIRS = ($/;"	v
+STATICFILES_FINDERS	./joke_site/settings.py	/^STATICFILES_FINDERS = ($/;"	v
+STATIC_ROOT	./joke_site/settings.py	/^STATIC_ROOT = ''$/;"	v
+STATIC_URL	./joke_site/settings.py	/^STATIC_URL = '\/static\/'$/;"	v
+TEMPLATE_DEBUG	./joke_site/settings.py	/^TEMPLATE_DEBUG = DEBUG$/;"	v
+TEMPLATE_DIRS	./joke_site/settings.py	/^TEMPLATE_DIRS = ($/;"	v
+TEMPLATE_LOADERS	./joke_site/settings.py	/^TEMPLATE_LOADERS = ($/;"	v
+TIME_ZONE	./joke_site/settings.py	/^TIME_ZONE = 'America\/Los_Angeles'$/;"	v
+TestMimeParsing	./django_authopenid/mimeparse.py	/^    class TestMimeParsing(unittest.TestCase):$/;"	c
+USE_I18N	./joke_site/settings.py	/^USE_I18N = True$/;"	v
+USE_L10N	./joke_site/settings.py	/^USE_L10N = True$/;"	v
+USE_TZ	./joke_site/settings.py	/^USE_TZ = True$/;"	v
+UserAssociation	./django_authopenid/models.py	/^class UserAssociation(models.Model):$/;"	c
+UserAssociationAdmin	./django_authopenid/admin.py	/^class UserAssociationAdmin(admin.ModelAdmin):$/;"	c
+UserPasswordQueue	./django_authopenid/models.py	/^class UserPasswordQueue(models.Model):$/;"	c
+UserPasswordQueueManager	./django_authopenid/models.py	/^class UserPasswordQueueManager(models.Manager):$/;"	c
+WSGI_APPLICATION	./joke_site/settings.py	/^WSGI_APPLICATION = 'joke_site.wsgi.application'$/;"	v
+__all__	./django_authopenid/forms.py	/^__all__ = ['OpenidSigninForm', 'OpenidAuthForm', 'OpenidVerifyForm',$/;"	v
+__all__	./django_authopenid/middleware.py	/^__all__ = ["OpenIDMiddleware"]$/;"	v
+__all__	./django_authopenid/models.py	/^__all__ = ['Nonce', 'Association', 'UserAssociation', $/;"	v
+__all__	./django_authopenid/util.py	/^__all__ = ['OpenID', 'DjangoOpenIDStore', 'from_openid_response', 'clean_next']$/;"	v
+__author__	./django_authopenid/mimeparse.py	/^__author__ = 'Joe Gregorio'$/;"	v
+__credits__	./django_authopenid/mimeparse.py	/^__credits__ = ""$/;"	v
+__email__	./django_authopenid/mimeparse.py	/^__email__ = "joe@bitworking.org"$/;"	v
+__init__	./django_authopenid/forms.py	/^            initial=None, user=None):$/;"	m	class:ChangeemailForm
+__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None, $/;"	m	class:EmailPasswordForm
+__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, files=None, auto_id='id_%s',$/;"	m	class:DeleteForm
+__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, files=None, auto_id='id_%s',$/;"	m	class:OpenidAuthForm
+__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, files=None, auto_id='id_%s',$/;"	m	class:OpenidVerifyForm
+__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, user=None, *args, **kwargs):$/;"	m	class:ChangeopenidForm
+__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, user=None, *args, **kwargs):$/;"	m	class:ChangepwForm
+__init__	./django_authopenid/util.py	/^    def __init__(self):$/;"	m	class:DjangoOpenIDStore
+__init__	./django_authopenid/util.py	/^    def __init__(self, openid_, issued, attrs=None, sreg_=None):$/;"	m	class:OpenID
+__init__	./libs/models/fields.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:ListField
+__metaclass__	./libs/models/fields.py	/^    __metaclass__ = models.SubfieldBase$/;"	v	class:ListField
+__repr__	./django_authopenid/util.py	/^    def __repr__(self):$/;"	m	class:OpenID	file:
+__str__	./django_authopenid/util.py	/^    def __str__(self):$/;"	m	class:OpenID	file:
+__unicode__	./django_authopenid/models.py	/^    def __unicode__(self):$/;"	m	class:Association	file:
+__unicode__	./django_authopenid/models.py	/^    def __unicode__(self):$/;"	m	class:Nonce	file:
+__unicode__	./django_authopenid/models.py	/^    def __unicode__(self):$/;"	m	class:UserAssociation	file:
+__unicode__	./django_authopenid/models.py	/^    def __unicode__(self):$/;"	m	class:UserPasswordQueue	file:
+__unicode__	./forum/models.py	/^    def __unicode__(self):$/;"	m	class:Post	file:
+__version__	./django_authopenid/__init__.py	/^__version__ = "0.9.4"$/;"	v
+__version__	./django_authopenid/mimeparse.py	/^__version__ = "0.1.1"$/;"	v
+_send_email_key	./django_authopenid/views.py	/^def _send_email_key(user):$/;"	f
+account_settings	./django_authopenid/views.py	/^def account_settings(request):$/;"	f
+application	./joke_site/wsgi.py	/^application = get_wsgi_application()$/;"	v
+ask_openid	./django_authopenid/views.py	/^def ask_openid(request, openid_url, redirect_to, on_failure=None,$/;"	f
+assoc_type	./django_authopenid/models.py	/^    assoc_type = models.TextField(max_length=64)$/;"	v	class:Association
+attrs_dict	./django_authopenid/forms.py	/^attrs_dict = { 'class': 'required login' }$/;"	v
+attrs_dict	./django_authopenid/forms.py	/^attrs_dict = { 'class': 'required' }$/;"	v
+best_match	./django_authopenid/mimeparse.py	/^def best_match(supported, header):$/;"	f
+changeemail	./django_authopenid/views.py	/^def changeemail(request):$/;"	f
+changeopenid	./django_authopenid/views.py	/^def changeopenid(request):$/;"	f
+changeopenid_failure	./django_authopenid/views.py	/^def changeopenid_failure(request, message):$/;"	f
+changeopenid_success	./django_authopenid/views.py	/^def changeopenid_success(request, identity_url, openid_response):$/;"	f
+changepw	./django_authopenid/views.py	/^def changepw(request):$/;"	f
+clean_email	./django_authopenid/forms.py	/^    def clean_email(self):$/;"	m	class:ChangeemailForm
+clean_email	./django_authopenid/forms.py	/^    def clean_email(self):$/;"	m	class:OpenidRegisterForm
+clean_email	./django_authopenid/forms.py	/^    def clean_email(self):$/;"	m	class:RegistrationForm
+clean_next	./django_authopenid/forms.py	/^    def clean_next(self):$/;"	m	class:OpenidAuthForm
+clean_next	./django_authopenid/forms.py	/^    def clean_next(self):$/;"	m	class:OpenidSigninForm
+clean_next	./django_authopenid/util.py	/^def clean_next(next):$/;"	f
+clean_oldpw	./django_authopenid/forms.py	/^    def clean_oldpw(self):$/;"	m	class:ChangepwForm
+clean_openid_url	./django_authopenid/forms.py	/^    def clean_openid_url(self):$/;"	m	class:OpenidSigninForm
+clean_password	./django_authopenid/forms.py	/^    def clean_password(self):$/;"	m	class:ChangeemailForm
+clean_password	./django_authopenid/forms.py	/^    def clean_password(self):$/;"	m	class:DeleteForm
+clean_password	./django_authopenid/forms.py	/^    def clean_password(self):$/;"	m	class:OpenidAuthForm
+clean_password	./django_authopenid/forms.py	/^    def clean_password(self):$/;"	m	class:OpenidVerifyForm
+clean_password2	./django_authopenid/forms.py	/^    def clean_password2(self):$/;"	m	class:ChangepwForm
+clean_password2	./django_authopenid/forms.py	/^    def clean_password2(self):$/;"	m	class:RegistrationForm
+clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:EmailPasswordForm
+clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:OpenidAuthForm
+clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:OpenidRegisterForm
+clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:OpenidVerifyForm
+clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:RegistrationForm
+cleanupAssociations	./django_authopenid/util.py	/^    def cleanupAssociations(self):$/;"	m	class:DjangoOpenIDStore
+cleanupNonce	./django_authopenid/util.py	/^    def cleanupNonce(self):$/;"	m	class:DjangoOpenIDStore
+clear_email_validation_message	./django_authopenid/views.py	/^def clear_email_validation_message(user):$/;"	f
+complete	./django_authopenid/views.py	/^def complete(request, on_success=None, on_failure=None, return_to=None):$/;"	f
+complete_signin	./django_authopenid/views.py	/^def complete_signin(request):$/;"	f
+confirm	./django_authopenid/forms.py	/^    confirm = forms.CharField(widget=forms.CheckboxInput(attrs=attrs_dict))$/;"	v	class:DeleteForm
+confirm_key	./django_authopenid/models.py	/^    confirm_key = models.CharField(max_length=40)$/;"	v	class:UserPasswordQueue
+confirmchangepw	./django_authopenid/views.py	/^def confirmchangepw(request):$/;"	f
+content	./forum/models.py	/^    content = models.CharField(max_length=1024)$/;"	v	class:Post
+content	./forum/views.py	/^def content(request, post_id):$/;"	f
+decorated	./django_authopenid/views.py	/^    def decorated(request, *args, **kwargs):$/;"	f	function:not_authenticated
+default_on_failure	./django_authopenid/views.py	/^def default_on_failure(request, message):$/;"	f
+default_on_success	./django_authopenid/views.py	/^def default_on_success(request, identity_url, openid_response):$/;"	f
+delete	./django_authopenid/views.py	/^def delete(request):$/;"	f
+deleteopenid_failure	./django_authopenid/views.py	/^def deleteopenid_failure(request, message):$/;"	f
+deleteopenid_success	./django_authopenid/views.py	/^def deleteopenid_success(request, identity_url, openid_response):$/;"	f
+email	./django_authopenid/forms.py	/^    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict, $/;"	v	class:ChangeemailForm
+email	./django_authopenid/forms.py	/^    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict, $/;"	v	class:OpenidRegisterForm
+email	./django_authopenid/forms.py	/^    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict,$/;"	v	class:RegistrationForm
+emailopenid_failure	./django_authopenid/views.py	/^def emailopenid_failure(request, message):$/;"	f
+emailopenid_success	./django_authopenid/views.py	/^def emailopenid_success(request, identity_url, openid_response):$/;"	f
+find_email_validation_messages	./django_authopenid/views.py	/^def find_email_validation_messages(user):$/;"	f
+from_openid_response	./django_authopenid/util.py	/^def from_openid_response(openid_response):$/;"	f
+getAssociation	./django_authopenid/util.py	/^    def getAssociation(self, server_url, handle=None):$/;"	m	class:DjangoOpenIDStore
+getAuthKey	./django_authopenid/util.py	/^    def getAuthKey(self):$/;"	m	class:DjangoOpenIDStore
+get_db_prep_value	./libs/models/fields.py	/^    def get_db_prep_value(self, value, connection, prepared=False):$/;"	m	class:ListField
+get_full_url	./django_authopenid/views.py	/^def get_full_url(request):$/;"	f
+get_new_confirm_key	./django_authopenid/models.py	/^    def get_new_confirm_key(self):$/;"	m	class:UserPasswordQueueManager
+get_url_host	./django_authopenid/views.py	/^def get_url_host(request):$/;"	f
+get_user	./django_authopenid/forms.py	/^    def get_user(self):$/;"	m	class:OpenidAuthForm
+get_user	./django_authopenid/forms.py	/^    def get_user(self):$/;"	m	class:OpenidVerifyForm
+handle	./django_authopenid/models.py	/^    handle = models.CharField(max_length=255)$/;"	v	class:Association
+handle	./forum/management/commands/scrapeJokes.py	/^    def handle(self, *args, **options):$/;"	m	class:Command
+help	./forum/management/commands/scrapeJokes.py	/^    help = 'Scrapes the sites for new dockets'$/;"	v	class:Command
+index	./forum/views.py	/^def index(request):$/;"	f
+isDumb	./django_authopenid/util.py	/^    def isDumb(self):$/;"	m	class:DjangoOpenIDStore
+is_association_exist	./django_authopenid/views.py	/^def is_association_exist(openid_url):$/;"	f
+issued	./django_authopenid/models.py	/^    issued = models.IntegerField()$/;"	v	class:Association
+label	./django_authopenid/forms.py	/^            label=_('choose a username'))$/;"	v	class:RegistrationForm
+label	./django_authopenid/forms.py	/^            label=_('choose password'))$/;"	v	class:RegistrationForm
+label	./django_authopenid/forms.py	/^            label=_('retype password'))$/;"	v	class:RegistrationForm
+lifetime	./django_authopenid/models.py	/^    lifetime = models.IntegerField()$/;"	v	class:Association
+like	./forum/views.py	/^def like(request, post_id):$/;"	f
+like_count	./forum/models.py	/^    like_count = models.IntegerField(default=0)$/;"	v	class:Post
+likedBy	./forum/models.py	/^    likedBy = ListField(null=True)$/;"	v	class:Post
+login	./django_authopenid/views.py	/^def login(request,user):$/;"	f
+name	./django_authopenid/urls.py	/^        name='user_complete_signin'),$/;"	v
+new_password	./django_authopenid/models.py	/^    new_password = models.CharField(max_length=30)$/;"	v	class:UserPasswordQueue
+next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget = forms.HiddenInput(), $/;"	v	class:OpenidVerifyForm
+next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget=forms.HiddenInput(), $/;"	v	class:OpenidAuthForm
+next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget=forms.HiddenInput(), $/;"	v	class:OpenidRegisterForm
+next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget=forms.HiddenInput(), $/;"	v	class:RegistrationForm
+next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget=forms.HiddenInput(), required=False)$/;"	v	class:OpenidSigninForm
+not_authenticated	./django_authopenid/views.py	/^def not_authenticated(func):$/;"	f
+objects	./django_authopenid/models.py	/^    objects = UserPasswordQueueManager()$/;"	v	class:UserPasswordQueue
+oldpw	./django_authopenid/forms.py	/^    oldpw = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:ChangepwForm
+openid_url	./django_authopenid/forms.py	/^    openid_url = forms.CharField(max_length=255, widget=forms.widgets.TextInput(attrs={'class': 'openid-login-input', 'size':80}))$/;"	v	class:OpenidSigninForm
+openid_url	./django_authopenid/forms.py	/^    openid_url = forms.CharField(max_length=255,$/;"	v	class:ChangeopenidForm
+openid_url	./django_authopenid/models.py	/^    openid_url = models.CharField(blank=False, max_length=255)$/;"	v	class:UserAssociation
+parse_media_range	./django_authopenid/mimeparse.py	/^def parse_media_range(range):$/;"	f
+parse_mime_type	./django_authopenid/mimeparse.py	/^def parse_mime_type(mime_type):$/;"	f
+password	./django_authopenid/forms.py	/^    password = forms.CharField(max_length=128, $/;"	v	class:OpenidAuthForm
+password	./django_authopenid/forms.py	/^    password = forms.CharField(max_length=128, $/;"	v	class:OpenidVerifyForm
+password	./django_authopenid/forms.py	/^    password = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:ChangeemailForm
+password	./django_authopenid/forms.py	/^    password = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:DeleteForm
+password1	./django_authopenid/forms.py	/^    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:ChangepwForm
+password1	./django_authopenid/forms.py	/^    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict),$/;"	v	class:RegistrationForm
+password2	./django_authopenid/forms.py	/^    password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:ChangepwForm
+password2	./django_authopenid/forms.py	/^    password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict),$/;"	v	class:RegistrationForm
+process_request	./django_authopenid/middleware.py	/^    def process_request(self, request):$/;"	m	class:OpenIDMiddleware
+process_response	./django_authopenid/middleware.py	/^    def process_response(self, request, response):$/;"	m	class:OpenIDMiddleware
+quality	./django_authopenid/mimeparse.py	/^def quality(mime_type, ranges):$/;"	f
+quality_parsed	./django_authopenid/mimeparse.py	/^def quality_parsed(mime_type, parsed_ranges):$/;"	f
+register	./django_authopenid/views.py	/^def register(request):$/;"	f
+removeAssociation	./django_authopenid/util.py	/^    def removeAssociation(self, server_url, handle):$/;"	m	class:DjangoOpenIDStore
+required	./django_authopenid/forms.py	/^            required=False)$/;"	v	class:OpenidAuthForm
+required	./django_authopenid/forms.py	/^            required=False)$/;"	v	class:OpenidRegisterForm
+required	./django_authopenid/forms.py	/^            required=False)$/;"	v	class:OpenidVerifyForm
+required	./django_authopenid/forms.py	/^            required=False)$/;"	v	class:RegistrationForm
+salt	./django_authopenid/models.py	/^    salt = models.CharField(max_length=40)$/;"	v	class:Nonce
+secret	./django_authopenid/models.py	/^    secret = models.TextField(max_length=255) # Stored base64 encoded$/;"	v	class:Association
+send_email_key	./django_authopenid/views.py	/^def send_email_key(request):$/;"	f
+send_new_email_key	./django_authopenid/views.py	/^def send_new_email_key(user,nomessage=False):$/;"	f
+sendpw	./django_authopenid/views.py	/^def sendpw(request):$/;"	f
+server_url	./django_authopenid/models.py	/^    server_url = models.CharField(max_length=255)$/;"	v	class:Nonce
+server_url	./django_authopenid/models.py	/^    server_url = models.TextField(max_length=2047)$/;"	v	class:Association
+set_email_validation_message	./django_authopenid/views.py	/^def set_email_validation_message(user):$/;"	f
+set_new_email	./django_authopenid/views.py	/^def set_new_email(user, new_email, nomessage=False):$/;"	f
+signin	./django_authopenid/views.py	/^def signin(request,newquestion=False,newanswer=False):$/;"	f
+signin_failure	./django_authopenid/views.py	/^def signin_failure(request, message):$/;"	f
+signin_success	./django_authopenid/views.py	/^def signin_success(request, identity_url, openid_response):$/;"	f
+signout	./django_authopenid/views.py	/^def signout(request):$/;"	f
+signup	./django_authopenid/views.py	/^def signup(request):$/;"	f
+storeAssociation	./django_authopenid/util.py	/^    def storeAssociation(self, server_url, association):$/;"	m	class:DjangoOpenIDStore
+tags	./forum/models.py	/^    tags = ListField(null=True)$/;"	v	class:Post
+test_best_match	./django_authopenid/mimeparse.py	/^        def test_best_match(self):$/;"	m	class:.TestMimeParsing
+test_parse_media_range	./django_authopenid/mimeparse.py	/^        def test_parse_media_range(self):$/;"	m	class:.TestMimeParsing
+test_rfc_2616_example	./django_authopenid/mimeparse.py	/^        def test_rfc_2616_example(self):$/;"	m	class:.TestMimeParsing
+test_support_wildcards	./django_authopenid/mimeparse.py	/^        def test_support_wildcards(self):$/;"	m	class:.TestMimeParsing
+timestamp	./django_authopenid/models.py	/^    timestamp = models.IntegerField()$/;"	v	class:Nonce
+title	./forum/models.py	/^    title = models.CharField(max_length=60, unique=True)$/;"	v	class:Post
+to_python	./libs/models/fields.py	/^    def to_python(self, value):$/;"	m	class:ListField
+ugettext	./joke_site/settings.py	/^ugettext = lambda s: s$/;"	v
+urlpatterns	./django_authopenid/urls.py	/^urlpatterns = patterns('django_authopenid.views',$/;"	v
+urlpatterns	./forum/urls.py	/^urlpatterns = patterns('',$/;"	v
+urlpatterns	./joke_site/urls.py	/^urlpatterns = patterns('',$/;"	v
+useNonce	./django_authopenid/util.py	/^    def useNonce(self, server_url, timestamp, salt):$/;"	m	class:DjangoOpenIDStore
+user	./django_authopenid/models.py	/^    user = models.ForeignKey(User, unique=True)$/;"	v	class:UserAssociation
+user	./django_authopenid/models.py	/^    user = models.ForeignKey(User, unique=True)$/;"	v	class:UserPasswordQueue
+username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30,  $/;"	v	class:OpenidAuthForm
+username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30, $/;"	v	class:OpenidRegisterForm
+username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30, $/;"	v	class:OpenidVerifyForm
+username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30,$/;"	v	class:EmailPasswordForm
+username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30,$/;"	v	class:RegistrationForm
+username_re	./django_authopenid/forms.py	/^username_re = re.compile(r'^[\\w ]+$')$/;"	v
+username_re	./django_authopenid/forms.py	/^username_re = re.compile(r'^\\w+$')$/;"	v
+validation_email_sent	./django_authopenid/views.py	/^def validation_email_sent(request):$/;"	f
+value_to_string	./libs/models/fields.py	/^    def value_to_string(self, obj):$/;"	m	class:ListField
+verifyemail	./django_authopenid/views.py	/^def verifyemail(request,id=None,key=None):$/;"	f
+widget	./django_authopenid/forms.py	/^            widget=forms.TextInput(attrs=attrs_dict),$/;"	v	class:RegistrationForm
+widget	./django_authopenid/forms.py	/^            widget=forms.TextInput(attrs={'class': "required" }))$/;"	v	class:ChangeopenidForm
+widget	./django_authopenid/forms.py	/^            widget=forms.TextInput(attrs={'class': "required" }))$/;"	v	class:EmailPasswordForm
+widget	./django_authopenid/forms.py	/^            widget=forms.widgets.PasswordInput(attrs=attrs_dict))$/;"	v	class:OpenidAuthForm
+widget	./django_authopenid/forms.py	/^            widget=forms.widgets.PasswordInput(attrs=attrs_dict))$/;"	v	class:OpenidVerifyForm
+widget	./django_authopenid/forms.py	/^            widget=forms.widgets.TextInput(attrs=attrs_dict))$/;"	v	class:OpenidAuthForm
+widget	./django_authopenid/forms.py	/^            widget=forms.widgets.TextInput(attrs=attrs_dict))$/;"	v	class:OpenidRegisterForm
+widget	./django_authopenid/forms.py	/^            widget=forms.widgets.TextInput(attrs=attrs_dict))$/;"	v	class:OpenidVerifyForm
+xrdf	./django_authopenid/views.py	/^def xrdf(request):$/;"	f

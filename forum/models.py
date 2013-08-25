@@ -9,7 +9,7 @@ class Post(models.Model):
     # like pool
     likedBy = ListField(null=True)
     like_count = models.IntegerField(default=0)
-    # for joke categorization
+    # for post categorization
     tags = ListField(null=True)
 
     def __unicode__(self):
