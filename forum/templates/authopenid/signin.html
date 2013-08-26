@@ -38,7 +38,7 @@
             </div>
         {% endif %}
 		<div style="width:600px;float:left;margin-bottom:5px;">{% trans "Click to sign in through any of these services." %}</div>
-			<form id="openid_form" name="openid_form" class="openid" method="post" action="{% url "user_signin" %}"> 
+			<form id="openid_form" name="openid_form" class="openid" method="post" action="{% url "user_signin" %}">{% csrf_token %} 
 			  <ul class="providers"> 
 			  <li class="openid" title="OpenID">
 				  <div class="logo_box openid_box">

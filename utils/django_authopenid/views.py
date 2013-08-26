@@ -66,7 +66,7 @@ from django_authopenid.forms import OpenidSigninForm, OpenidAuthForm, OpenidRegi
         OpenidVerifyForm, RegistrationForm, ChangepwForm, ChangeemailForm, \
         ChangeopenidForm, DeleteForm, EmailPasswordForm
 
-def login(request,user):
+def login(request, user):
     from django.contrib.auth import login as _login
     from forum.models import user_logged_in #custom signal
     #1) get old session key

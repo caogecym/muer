@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load bootstrap_toolkit %}
 {% load url from future %}
 {% load staticfiles %}
 
@@ -7,16 +6,20 @@
 <head>
     <meta charset="utf-8">
     <title>Yuming's best jokes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Yuming Cao">
-    {% bootstrap_stylesheet_tag %}
-    {% bootstrap_stylesheet_tag "responsive" %}
-    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+
+    <!-- Le styles -->
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
     <style type="text/css">
-        body {
-            padding-top: 60px;
-        }
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
     </style>
+    <link href="{% static "css/bootstrap-responsive.css" %}" rel="stylesheet">
+
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -24,20 +27,15 @@
     <script src="//cachedcommons.org/cache/jquery-cookie/0.0.0/javascripts/jquery-cookie.js"></script>
     {% block forejs %}
     {% endblock %}
-    {% bootstrap_javascript_tag %}
     {% block extra_head %}{% endblock %}
 </head>
 
-<body>
+  <body>
+
     {% include "header.html" %}
     <div class="container">
-    
-        {% bootstrap_messages %}
-    
         {% block content %}Empty page{% endblock %}
-    
         <p><hr></p>
-    
         <footer class="row">
             <div class="span6" style="text-align:right">
                 <p>
@@ -45,8 +43,24 @@
                 </p>
             </div>
         </footer>
-    
-    </div> <!-- container -->
+    </div> <!-- /container -->
 
-</body>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/bootstrap-transition.js" %}"></script>
+    <script src="{% static "js/bootstrap-alert.js" %}"></script>
+    <script src="{% static "js/bootstrap-modal.js" %}"></script>
+    <script src="{% static "js/bootstrap-dropdown.js" %}"></script>
+    <script src="{% static "js/bootstrap-scrollspy.js" %}"></script>
+    <script src="{% static "js/bootstrap-tab.js" %}"></script>
+    <script src="{% static "js/bootstrap-tooltip.js" %}"></script>
+    <script src="{% static "js/bootstrap-popover.js" %}"></script>
+    <script src="{% static "js/bootstrap-button.js" %}"></script>
+    <script src="{% static "js/bootstrap-collapse.js" %}"></script>
+    <script src="{% static "js/bootstrap-carousel.js" %}"></script>
+    <script src="{% static "js/bootstrap-typeahead.js" %}"></script>
+
+  </body>
 </html>

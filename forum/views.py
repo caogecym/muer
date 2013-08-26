@@ -1,3 +1,5 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.utils import simplejson
 from django.http import HttpResponse
@@ -5,14 +7,16 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.contrib import auth
 
 from forum.models import Post
 import random
 
 def index(request):
     latest_post_list = random.sample(Post.objects.all(), 5)
-    #latest_post_list = Post.objects.all()[:5]
-    context = {'latest_post_list': latest_post_list}
+    context = {'latest_post_list': latest_post_list,
+               'user': request.user,
+              }
     return render(request, 'index.html', context)
 
 def content(request, post_id):
@@ -41,3 +45,15 @@ def like(request, post_id):
 
     data = simplejson.dumps(response_data)
     return HttpResponse(data, mimetype='application/json')
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return HttpResponseRedirect("/posts/")
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/register.html", {
+        'form': form,
+    })

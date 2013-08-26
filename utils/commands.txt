@@ -1,0 +1,19 @@
+# start server
+python manage.py runserver
+
+# run test
+python manage.py test forum
+
+# run db shell
+python manage.py shell
+
+# collect joke
+python manage.py scrapeJokes
+
+python manage.py syncdb
+python manage.py sqlclear post
+
+# add column
+python manage.py dbshell
+ALTER TABLE joke_joke ADD COLUMN like_count integer default 0;
+

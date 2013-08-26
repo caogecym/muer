@@ -25,7 +25,7 @@ DEFAULT_NEXT = getattr(settings, 'OPENID_REDIRECT_NEXT', '/')
 def clean_next(next):
     if next is None:
         return DEFAULT_NEXT
-    next = unicode(urllib.unquote(next), 'utf-8')
+    #next = unicode(urllib.unquote(next), 'utf-8')
     next = next.strip()
     if next.startswith('/'):
         return next

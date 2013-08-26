@@ -1,19 +1,25 @@
+import os.path
 from django.conf.urls import patterns, include, url
-
-# Uncomment the next two lines to enable the admin:
+from django.contrib.auth.views import login, logout
 from django.contrib import admin
+from forum import views as forum_views
 from forum import urls as forum_urls
+
 admin.autodiscover()
+APP_PATH = os.path.dirname(__file__)
 
 urlpatterns = patterns('',
-    # Examples:
+    (r'^$', forum_views.index),
+    (r'^posts/', include(forum_urls, namespace="forum")),
+    (r'^login/$', login),
+    (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
+    (r'^signup/$', 'forum.views.register'),
 
+    # following commets are for openid
+    #(r'^account/', include('django_authopenid.urls')),
+    #url(r'^signin/$', 'django_authopenid.views.signin'),
+
+    url(r'^admin/', include(admin.site.urls)),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    url(r'^posts/', include(forum_urls, namespace="forum")),
-    url(r'^account/', include('django_authopenid.urls')),
-    url(r'^signin/$', 'django_authopenid.views.signin'),
-    url(r'^admin/', include(admin.site.urls)),
 )

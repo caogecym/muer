@@ -1,4 +1,5 @@
 from django.db import models
+import django.dispatch
 from libs.models.fields import ListField
 
 # Create your models here.
@@ -14,3 +15,7 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.content
+
+# custom signal
+user_logged_in = django.dispatch.Signal(providing_args=["session"])
+

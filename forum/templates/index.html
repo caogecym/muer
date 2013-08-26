@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% load bootstrap_toolkit %}
+{% load staticfiles %}
 {% load url from future %}
 
 {% block forejs %}
-    <script type='text/javascript' src='/static/js/post.js'></script>
+    <script type='text/javascript' src="{% static "js/post.js" %}"></script>
 {% endblock %}
 
 {% block content %}

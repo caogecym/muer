@@ -1,6 +1,0 @@
-python manage.py runserver
-python manage.py test forum
-python manage.py shell
-python manage.py scrapeJokes
-python manage.py syncdb
-python manage.py sqlclear post
