@@ -3,24 +3,22 @@
 {% load url from future %}
 
 {% block forejs %}
-    <script type='text/javascript' src="{% static "js/post.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/post.js" %}"></script>
 {% endblock %}
 
 {% block content %}
-    {% if latest_post_list %}
-        <table class="table">
-            {% for post in latest_post_list %}
-                <tr>
-                    <td>
-                        <div class='post-img-like-wrapper'><a id="post-img-like-{{ post.id }}" class="post-img-like" > </a></div>
-                                <div class="post-content">
-                        {{ post.content }}
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p>No posts are available.</p>
-    {% endif %}
+  {% if latest_post_list %}
+    {% for post in latest_post_list %}
+      <div id="post-{{ post.id }}" class="featurette">
+        <img class="featurette-image pull-left" 
+             src="{% static "images/like.png" %}" 
+             onmouseover="this.src='{% static "images/liked.png" %}'"
+             onmouseout="this.src='{% static "images/like.png" %}'">
+        {{ post.content }}
+      </div>
+      <hr class="featurette-divider">
+    {% endfor %}
+  {% else %}
+    <p>No posts are available.</p>
+  {% endif %}
 {% endblock %}

@@ -4,7 +4,7 @@ Project Name: Elephant
 All Rights Resevred 2013. 
 */
 
-var imgIdPrefixLike = 'post-img-like-';
+var imgIdPrefixLike = 'post-';
 var postId;
 
 // For adding csrf token within internal url calls
@@ -26,6 +26,7 @@ function sameOrigin(url) {
         // or any other URL that isn't scheme relative or absolute i.e relative.
         !(/^(\/\/|http:|https:).*/.test(url));
 }
+
 $.ajaxSetup({
     beforeSend: function(xhr, settings) {
         if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
@@ -39,8 +40,8 @@ $.ajaxSetup({
 
 
 $(function () {
-    $('.post-img-like-wrapper').click(function (event) {
-        object = $(event.target)
+    $('.featurette-image').click(function (event) {
+        object = $(event.target.parentElement)
         postId = object.attr("id").substring(imgIdPrefixLike.length);
         submit(object);
     })
@@ -52,7 +53,7 @@ var submit = function(object, callback) {
         cache: false,
         dataType: "json",
         url: "/posts/" + postId + "/like/",
-        data: { "postId": postId },
+        data: { "postId": postId},
         error: handleFail,
         success: function(data){
             changeVoteImage(object, data)
@@ -62,7 +63,7 @@ var submit = function(object, callback) {
 
 var changeVoteImage = function(object, data) {
     // TODO: add cancel, after user model is created
-    object[0].style.backgroundImage="url('/static/images/liked.png')"
+    object[0].children[0].onmouseout="this.src='/static/images/liked.png'"
 };
 
 var handleFail = function(xhr, msg){

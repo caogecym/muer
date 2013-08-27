@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-      <form class="form-signin" action="" method="post">{% csrf_token %}
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" name="username" value="" class="input-block-level" placeholder="Email address">
-        <input type="password" name="password" value="" id="password" class="input-block-level" placeholder="Password">
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-        <input class="btn btn-large btn-primary" type="submit" value="login" />
-        <input type="hidden" name="next" value="/" />
-        <a id="register" href="/signup">Register</a>
-      </form>
+  <form class="form-signin" action="" method="post">{% csrf_token %}
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <input type="text" name="username" value="" class="input-block-level" placeholder="Email address">
+    <input type="password" name="password" value="" id="password" class="input-block-level" placeholder="Password">
+    <label class="checkbox">
+      <input type="checkbox" value="remember-me"> Remember me
+    </label>
+    <input class="btn btn-large btn-primary" type="submit" value="login" />
+    <input type="hidden" name="next" value="/" />
+    <a id="register" href="/signup">Register</a>
+  </form>
 {% endblock %}
