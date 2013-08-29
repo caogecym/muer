@@ -13,7 +13,10 @@ from forum.models import Post
 import random
 
 def index(request):
-    latest_post_list = random.sample(Post.objects.all(), 5)
+    if len(Post.objects.all()) >= 5:
+        latest_post_list = random.sample(Post.objects.all(), 5)
+    else:
+        latest_post_list = None
     context = {'latest_post_list': latest_post_list,
                'user': request.user,
               }

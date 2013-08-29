@@ -26,8 +26,8 @@ class Tag(models.Model):
         return self.name
 
 class Image(models.Model):
-    local_image_src     = models.CharField(max_length=1024)
-    remote_image_src    = models.CharField(max_length=1024)
+    local_image_src     = models.CharField(max_length=1024, blank=True)
+    remote_image_src    = models.CharField(max_length=1024, blank=True)
 
     class Meta:
         db_table = u'image'
