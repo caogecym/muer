@@ -5,6 +5,7 @@ import requests
 import lxml
 from lxml import html
 import time, datetime
+from bs4 import BeautifulSoup
 
 class Command(BaseCommand):
     help = 'Scrapes the sites for new dockets'
@@ -19,6 +20,7 @@ class Command(BaseCommand):
         for site, url in sites.iteritems():
             self.stdout.write('Scraping url: %s\n' % url)
             r = requests.get(url)
+            soup = BeautifulSoup(r.content)
             root = lxml.html.fromstring(r.content)
             # Find the correct table element
             for joke in root.cssselect('div[class="block untagged mb15 bs2"]'):

@@ -1,1 +1,3 @@
-.pull-left:hover{background:"static/images/liked.png"}
+.featurette-image:hover {
+    background: url('../images/liked.png') no-repeat !important;
+}

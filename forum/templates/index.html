@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load extra_tags %}
 {% load url from future %}
 
 {% block forejs %}
@@ -10,10 +11,10 @@
   {% if latest_post_list %}
     {% for post in latest_post_list %}
       <div id="post-{{ post.id }}" class="featurette">
-        <img class="featurette-image pull-left" 
-             src="{% static "images/like.png" %}" 
-             onmouseover="this.src='{% static "images/liked.png" %}'"
-             onmouseout="this.src='{% static "images/like.png" %}'">
+        <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
+            style="height: 32px; width: 32px; 
+                   background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
+            href="#"></a>
         {{ post.content }}
       </div>
       <hr class="featurette-divider">

@@ -17,6 +17,7 @@ def index(request):
         latest_post_list = random.sample(Post.objects.all(), 5)
     else:
         latest_post_list = None
+
     context = {'latest_post_list': latest_post_list,
                'user': request.user,
               }
@@ -25,6 +26,7 @@ def index(request):
 def content(request, post_id):
     return HttpResponse("You're looking at the content of post %s." % post_id)
 
+#@login_required
 def like(request, post_id):
     '''
         vote code:
@@ -39,12 +41,23 @@ def like(request, post_id):
         "message": ''
     }
 
-    liked_post = Post.objects.filter(id=post_id)[0]
-    if liked_post is not None:
-        liked_post.like_count += 1
+    post_to_like = Post.objects.filter(id=post_id)[0]
+    if post_to_like is not None:
+        # cancel
+        if post_to_like.liked_by.all().filter(username=request.user.username).count() > 0:
+            liked_user = post_to_like.liked_by.all().filter(username=request.user.username)[0]
+            post_to_like.liked_by.remove(liked_user)
+            response_data['status'] = 1
+            post_to_like.like_count -= 1
+            response_data['message'] = 'The like of post has been canceled'
+        # like
+        else:
+            post_to_like.like_count += 1
+            post_to_like.liked_by.add(request.user)
+            response_data['message'] = 'The post has been liked by user %s' % request.user.username
+
+        post_to_like.save()
         response_data['success'] = 1
-        response_data['message'] = 'The post has been liked already'
-        liked_post.save()
 
     data = simplejson.dumps(response_data)
     return HttpResponse(data, mimetype='application/json')

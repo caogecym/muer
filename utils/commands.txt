@@ -17,3 +17,8 @@ python manage.py sqlclear post
 python manage.py dbshell
 ALTER TABLE joke_joke ADD COLUMN like_count integer default 0;
 
+
+# git ignore
+git rm -r --cached .
+git add .
+git commit -m 'gitignore now worked'

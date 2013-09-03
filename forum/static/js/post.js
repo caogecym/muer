@@ -56,14 +56,19 @@ var submit = function(object, callback) {
         data: { "postId": postId},
         error: handleFail,
         success: function(data){
-            changeVoteImage(object, data)
+            updateVoteImage(object, data)
         }});
-        //success: function(data){callback(object, data)}});
 };
 
-var changeVoteImage = function(object, data) {
-    // TODO: add cancel, after user model is created
-    object[0].children[0].onmouseout="this.src='/static/images/liked.png'"
+var updateVoteImage = function(object, data) {
+    if (data.status == 1) {
+        object[0].children[0].style.background = "url('static/images/like.png') no-repeat";
+        //object[0].children[0].src = "static/images/like.png"
+    } 
+    else {
+        object[0].children[0].style.background = "url('static/images/liked.png') no-repeat";
+        //object[0].children[0].src = "static/images/liked.png"
+    }
 };
 
 var handleFail = function(xhr, msg){

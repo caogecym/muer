@@ -169,10 +169,9 @@ def get_score_badge_by_details(rep, gold, silver, bronze):
     })      
     
 @register.simple_tag
-def get_user_vote_image(dic, key, arrow):
-    if dic.has_key(key):
-        if int(dic[key]) == int(arrow):
-            return '-on'
+def get_user_like_image(users, user):
+    if user in users.all():
+        return 'd'
     return ''
         
 @register.simple_tag
