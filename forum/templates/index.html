@@ -8,18 +8,31 @@
 {% endblock %}
 
 {% block content %}
-  {% if latest_post_list %}
-    {% for post in latest_post_list %}
-      <div id="post-{{ post.id }}" class="featurette">
-        <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
-            style="height: 32px; width: 32px; 
-                   background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
-            href="#"></a>
-        {{ post.content }}
-      </div>
-      <hr class="featurette-divider">
-    {% endfor %}
-  {% else %}
-    <p>No posts are available.</p>
-  {% endif %}
+  {% for post in posts %}
+    <div id="post-{{ post.id }}" class="featurette">
+      <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
+          style="height: 32px; width: 32px; 
+                 background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
+          href="#"></a>
+      <h3 class="featurette-heading">{{ post.title }}</h3>
+      {{ post.content | safe }}
+    </div>
+    <hr class="featurette-divider">
+  {% endfor %}
+
+  <div class="pagination">
+      <span class="step-links">
+          {% if posts.has_previous %}
+              <a href="?page={{ posts.previous_page_number }}">previous</a>
+          {% endif %}
+  
+          <span class="current">
+              Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+          </span>
+  
+          {% if posts.has_next %}
+              <a href="?page={{ posts.next_page_number }}">next</a>
+          {% endif %}
+      </span>
+  </div>
 {% endblock %}

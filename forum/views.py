@@ -8,17 +8,31 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib import auth
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from forum.models import Post
 import random
 
 def index(request):
-    if len(Post.objects.all()) >= 5:
-        latest_post_list = random.sample(Post.objects.all(), 5)
+    if len(Post.objects.all()) >= 3:
+       post_list = random.sample(Post.objects.all(), 3)
     else:
-        latest_post_list = None
+       post_list = None
+    #post_list = Post.objects.all()
 
-    context = {'latest_post_list': latest_post_list,
+    paginator = Paginator(post_list, 3) # Show 5 contacts per page
+
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        posts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        posts = paginator.page(paginator.num_pages)
+
+    context = {'posts': posts,
                'user': request.user,
               }
     return render(request, 'index.html', context)
