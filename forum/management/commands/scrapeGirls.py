@@ -20,8 +20,9 @@ class Command(BaseCommand):
         admin = User.objects.all().filter(username='caogecym')[0]
         self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
         BASE_URL = 'http://184.154.128.243/'
-        sites = {'caoliu-asia': 'http://184.154.128.243/thread0806.php?fid=2',
-                 'asia-page2': 'http://184.154.128.243/thread0806.php?fid=2&search=&page=2'}
+        sites = {#'caoliu-asia': 'http://184.154.128.243/thread0806.php?fid=2',
+                 'asia-page2': 'http://184.154.128.243/thread0806.php?fid=2&search=&page=2'
+                }
         thread_addresses = []
 
         # filtering threads
@@ -63,10 +64,9 @@ class Command(BaseCommand):
             except e:
                 self.stdout.write('ERROR: %s' % e.message)
 
+            post.save()
             # load images
             thread_imgs = soup.findAll('img', {"style":"cursor:pointer"})
             for img in thread_imgs:
                 image = Image(content_object=post, remote_image_src=img['src'])
                 image.save()
-
-            post.save()
