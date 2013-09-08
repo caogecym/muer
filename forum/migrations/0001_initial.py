@@ -23,6 +23,8 @@ class Migration(SchemaMigration):
         # Adding model 'Image'
         db.create_table(u'image', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'])),
+            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
             ('local_image_src', self.gf('django.db.models.fields.CharField')(max_length=1024, blank=True)),
             ('remote_image_src', self.gf('django.db.models.fields.CharField')(max_length=1024, blank=True)),
         ))
@@ -165,8 +167,10 @@ class Migration(SchemaMigration):
         },
         u'forum.image': {
             'Meta': {'object_name': 'Image', 'db_table': "u'image'"},
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'local_image_src': ('django.db.models.fields.CharField', [], {'max_length': '1024', 'blank': 'True'}),
+            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
             'remote_image_src': ('django.db.models.fields.CharField', [], {'max_length': '1024', 'blank': 'True'})
         },
         u'forum.post': {

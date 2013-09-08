@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from forum.models import Post
+from forum.models import Post, Image
+
 import requests
 import urllib
 import lxml
@@ -19,7 +20,8 @@ class Command(BaseCommand):
         admin = User.objects.all().filter(username='caogecym')[0]
         self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
         BASE_URL = 'http://184.154.128.243/'
-        sites = {'caoliu-asia': 'http://184.154.128.243/thread0806.php?fid=2'}
+        sites = {'caoliu-asia': 'http://184.154.128.243/thread0806.php?fid=2',
+                 'asia-page2': 'http://184.154.128.243/thread0806.php?fid=2&search=&page=2'}
         thread_addresses = []
 
         # filtering threads
@@ -29,7 +31,7 @@ class Command(BaseCommand):
             r = requests.get(url)
             p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
             content = p.sub('', r.content)
-            soup = BeautifulSoup(content, fromEncoding="gb18030")
+            soup = BeautifulSoup(content, from_encoding="gb18030")
 
             # get filtered post address
             for thread in soup.findAll("tr", { "class" : "tr3 t_one" }):
@@ -49,15 +51,22 @@ class Command(BaseCommand):
             p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
             content = p.sub('', r.content)
             # solve &lt;&gt; problem
-            soup = BeautifulSoup(content, fromEncoding="gb18030")
+            soup = BeautifulSoup(content, from_encoding="gb18030")
             new_soup = soup.prettify(formatter=None)
-            soup = BeautifulSoup(new_soup, fromEncoding="gb18030")
+            soup = BeautifulSoup(new_soup, from_encoding="gb18030")
 
             thread_title = soup.h4.text
             thread_content = soup.find('div', {'class':'tpc_content'})
+
             try: 
                 post = Post(title=thread_title, content=thread_content, author=admin)
             except e:
                 self.stdout.write('ERROR: %s' % e.message)
+
+            # load images
+            thread_imgs = soup.findAll('img', {"style":"cursor:pointer"})
+            for img in thread_imgs:
+                image = Image(content_object=post, remote_image_src=img['src'])
+                image.save()
 
             post.save()

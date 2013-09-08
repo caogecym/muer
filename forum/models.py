@@ -26,6 +26,9 @@ class Tag(models.Model):
         return self.name
 
 class Image(models.Model):
+    content_type        = models.ForeignKey(ContentType)
+    object_id           = models.PositiveIntegerField()
+    content_object      = generic.GenericForeignKey('content_type', 'object_id')
     local_image_src     = models.CharField(max_length=1024, blank=True)
     remote_image_src    = models.CharField(max_length=1024, blank=True)
 

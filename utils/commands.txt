@@ -22,3 +22,7 @@ ALTER TABLE joke_joke ADD COLUMN like_count integer default 0;
 git rm -r --cached .
 git add .
 git commit -m 'gitignore now worked'
+
+# migrate db
+./manage.py syncdb
+./manage.py migrate
