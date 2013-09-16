@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load extra_tags %}
+{% load url from future %}
+
+{% block forejs %}
+  <script type='text/javascript' src="{% static "js/post.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div id="post-{{ post.id }}" class="featurette">
+    <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
+        style="height: 32px; width: 32px; 
+               background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
+        href="#"></a>
+    {{ post.content | safe }}
+  </div>
+{% endblock %}

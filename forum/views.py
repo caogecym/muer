@@ -18,7 +18,7 @@ def index(request):
        post_list = random.sample(Post.objects.all(), 3)
     else:
        post_list = None
-    #post_list = Post.objects.all()
+    #post_list = [Post.objects.all().filter(id=45)[0]]
 
     paginator = Paginator(post_list, 3) # Show 5 contacts per page
 
@@ -38,7 +38,11 @@ def index(request):
     return render(request, 'index.html', context)
 
 def content(request, post_id):
-    return HttpResponse("You're looking at the content of post %s." % post_id)
+    post = Post.objects.all().filter(id=post_id)[0]
+    context = {'post': post,
+               'user': request.user,
+              }
+    return render(request, 'post.html', context)
 
 #@login_required
 def like(request, post_id):
