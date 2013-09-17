@@ -14,18 +14,22 @@
           style="height: 32px; width: 32px; 
                  background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
           href="#"></a>
-      <h3> <a href="/posts/{{ post.id }}" class="featurette-heading">{{ post.title }}</a></h3>
+      <h3><a href="/posts/{{ post.id }}" class="featurette-heading">{{ post.title }}</a></h3>
 
       <div id="myCarousel-{{ post.id }}" class="carousel slide">
         <div class="carousel-inner">
           {% for img in post.images.all %}
             {% if forloop.first %}
               <div class="item active">
+                <a href="{{ img.remote_image_src }}">
                   <img src="{{ img.remote_image_src }}" class="post-content-image" alt="">
+                </a>
               </div>
             {% else %}
               <div class="item">
-                <img src="{{ img.remote_image_src }}" class="post-content-image" alt="">
+                <a href="{{ img.remote_image_src }}">
+                  <img src="{{ img.remote_image_src }}" class="post-content-image" alt="">
+                </a>
               </div>
             {% endif %}
           {% endfor %}
@@ -33,23 +37,24 @@
         <a class="left carousel-control" href="#myCarousel-{{ post.id }}" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#myCarousel-{{ post.id }}" data-slide="next">&rsaquo;</a>
       </div>
+      <a href="{{ post.resources.all.0.remote_resource_src }}">Click to Download Seed</a>
     </div>
     <hr class="featurette-divider">
   {% endfor %}
 
   <div class="pagination">
-      <span class="step-links">
-          {% if posts.has_previous %}
-              <a href="?page={{ posts.previous_page_number }}">previous</a>
-          {% endif %}
+    <span class="step-links">
+      {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}">previous</a>
+      {% endif %}
   
-          <span class="current">
-              Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-          </span>
-  
-          {% if posts.has_next %}
-              <a href="?page={{ posts.next_page_number }}">next</a>
-          {% endif %}
+      <span class="current">
+        Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
       </span>
+  
+      {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}">next</a>
+      {% endif %}
+    </span>
   </div>
 {% endblock %}

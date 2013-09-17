@@ -30,6 +30,16 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'forum', ['Image'])
 
+        # Adding model 'Resource'
+        db.create_table(u'resource', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'])),
+            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
+            ('local_resource_src', self.gf('django.db.models.fields.CharField')(max_length=1024, blank=True)),
+            ('remote_resource_src', self.gf('django.db.models.fields.CharField')(max_length=1024, blank=True)),
+        ))
+        db.send_create_signal(u'forum', ['Resource'])
+
         # Adding model 'Comment'
         db.create_table(u'comment', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -96,6 +106,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Image'
         db.delete_table(u'image')
+
+        # Deleting model 'Resource'
+        db.delete_table(u'resource')
 
         # Deleting model 'Comment'
         db.delete_table(u'comment')
@@ -188,6 +201,14 @@ class Migration(SchemaMigration):
             'post_source': ('django.db.models.fields.CharField', [], {'max_length': '1024'}),
             'tags': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'tagged_posts'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['forum.Tag']"}),
             'title': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '300'})
+        },
+        u'forum.resource': {
+            'Meta': {'object_name': 'Resource', 'db_table': "u'resource'"},
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'local_resource_src': ('django.db.models.fields.CharField', [], {'max_length': '1024', 'blank': 'True'}),
+            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
+            'remote_resource_src': ('django.db.models.fields.CharField', [], {'max_length': '1024', 'blank': 'True'})
         },
         u'forum.tag': {
             'Meta': {'ordering': "('-used_count', 'name')", 'object_name': 'Tag', 'db_table': "u'tag'"},

@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from forum.models import Post, Image
+from forum.models import Post, Image, Resource
 
 import requests
 import urllib
@@ -14,7 +14,6 @@ from django.db import IntegrityError
 
 class Command(BaseCommand):
     help = 'Scrapes the sites for new threads'
-
 
     def handle(self, *args, **options):
         admin = User.objects.all().filter(username='ycao')[0]
@@ -59,17 +58,45 @@ class Command(BaseCommand):
             thread_title = soup.h4.text
             thread_content = soup.find('div', {'class':'tpc_content'})
 
+
             try: 
                 post = Post(title=thread_title, content=thread_content, author=admin)
-            except e:
+                post.save()
+            except IntegrityError, e:
                 self.stdout.write('ERROR: %s' % e.message)
 
-            post.save()
-            # load images
-            thread_imgs = soup.findAll('img', {"style":"cursor:pointer"})
-            for img in thread_imgs:
-                # remove thumb imgs
-                p = re.compile(r'_thumb', flags=re.DOTALL)
-                img_src = p.sub('', img['src'])
-                image = Image(content_object=post, remote_image_src=img_src)
-                image.save()
+            else:
+                # load images
+                thread_imgs = soup.findAll('img', {"style":"cursor:pointer"})
+                for img in thread_imgs:
+                    # remove thumb imgs
+                    #p = re.compile(r'_thumb', flags=re.DOTALL)
+                    #img_src = p.sub('', img['src'])
+                    image = Image(content_object=post, remote_image_src=img['src'])
+                    image.save()
+
+                thread_resource = Resource(content_object=post, remote_resource_src=self.getResource(thread_content))
+                self.stdout.write('parsed seed %s for post: %s' % (thread_resource.remote_resource_src, post.title))
+                thread_resource.save()
+
+    def getResource(self, thread_content):
+        # rmdown
+        soup = thread_content
+        pattern = re.compile(r'rmdown')
+        src = soup.find(text=pattern)
+        if src is not None:
+            return src.strip()
+
+        # Seed Torrent
+        pattern = re.compile(r'seed')
+        txt = soup.find(text=pattern)
+        if txt is not None:
+            return txt.findNext('a')['href']
+
+        # xiazaidizhi
+        pattern = re.compile(ur'[\u4e0b\u8f7d\u5730\u5740]+', re.UNICODE)
+        txt = soup.find(text=pattern)
+        if txt is not None:
+            return txt.findNext('a')['href']
+        else:
+            return ''

@@ -4,7 +4,6 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 import django.dispatch
 import datetime
-#from libs.models.fields import ListField
 
 class Tag(models.Model):
     name                = models.CharField(max_length=255, unique=True)
@@ -35,12 +34,23 @@ class Image(models.Model):
     class Meta:
         db_table = u'image'
 
+class Resource(models.Model):
+    content_type        = models.ForeignKey(ContentType)
+    object_id           = models.PositiveIntegerField()
+    content_object      = generic.GenericForeignKey('content_type', 'object_id')
+    local_resource_src  = models.CharField(max_length=1024, blank=True)
+    remote_resource_src = models.CharField(max_length=1024, blank=True)
+
+    class Meta:
+        db_table = u'resource'
+
 class Comment(models.Model):
     content_type        = models.ForeignKey(ContentType)
     object_id           = models.PositiveIntegerField()
     content_object      = generic.GenericForeignKey('content_type', 'object_id')
     content             = models.CharField(max_length=1024)
     images              = generic.GenericRelation(Image)
+    resources           = generic.GenericRelation(Resource)
     author              = models.ForeignKey(User, related_name='comments')
 
     # status
@@ -68,6 +78,8 @@ class Post(models.Model):
     post_source         = models.CharField(max_length=1024)
     content             = models.CharField(max_length=1024)
     images              = generic.GenericRelation(Image)
+    # store useful info other than image, like seed, attachment
+    resources           = generic.GenericRelation(Resource)
     tags                = models.ManyToManyField(Tag, null=True, blank=True, related_name='tagged_posts')
 
     # status

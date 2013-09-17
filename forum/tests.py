@@ -6,7 +6,7 @@ when you run "manage.py test forum".
 from django.test import TestCase
 from django.db import IntegrityError
 from django.contrib.auth.models import User
-from forum.models import Post, Tag, Comment, Image
+from forum.models import Post, Tag, Comment, Image, Resource
 import logging
 logger = logging.getLogger(__name__)
 
@@ -46,6 +46,16 @@ class PostTestCase(TestCase):
         image2 = Image(content_object=post, remote_image_src='www.caogecym.com/img2.jpg')
         image2.save()
         self.assertEqual(len(post.images.all()), 2)
+
+    def test_resource(self):
+        logger.info('start testing test_resource...')
+        post = Post.objects.get(title='test_post')
+        user = post.author
+        resource1 = Resource(content_object=post, remote_resource_src='www.caogecym.com/img1.torrent')
+        resource1.save()
+        resource2 = Resource(content_object=post, remote_resource_src='www.caogecym.com/img2.torrent')
+        resource2.save()
+        self.assertEqual(len(post.resources.all()), 2)
 
     def test_comment(self):
         logger.info('start testing test_comment...')
