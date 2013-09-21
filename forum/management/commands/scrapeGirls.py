@@ -1,22 +1,36 @@
+import os
+import re
+
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
+from django.core.files import File
+from django.db import IntegrityError
 from forum.models import Post, Image, Resource
 
+import settings
 import requests
-import urllib
+import urllib2, urllib
 import lxml
 from lxml import html
 from lxml.etree import fromstring, tostring
 from bs4 import BeautifulSoup
-import re
 from datetime import datetime
-from django.db import IntegrityError
+
+def enum(**enums):
+    return type('Enum', (), enums)
+
+SiteType = enum(RMDOWN=1, VII=2)
+MIN_SEED_SIZE = 10000
 
 class Command(BaseCommand):
     help = 'Scrapes the sites for new threads'
 
     def handle(self, *args, **options):
-        admin = User.objects.all().filter(username='ycao')[0]
+        try:
+            admin = User.objects.all()[0]
+        except IndexError:
+            self.stdout.write('no user found')
+            
         self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
         BASE_URL = 'http://184.154.128.243/'
         sites = {'caoliu-asia': 'http://184.154.128.243/thread0806.php?fid=2',
@@ -62,6 +76,7 @@ class Command(BaseCommand):
             try: 
                 post = Post(title=thread_title, content=thread_content, author=admin)
                 post.save()
+                self.stdout.write('post %s created successfully \n' % thread_title)
             except IntegrityError, e:
                 self.stdout.write('ERROR: %s' % e.message)
 
@@ -74,9 +89,11 @@ class Command(BaseCommand):
                     #img_src = p.sub('', img['src'])
                     image = Image(content_object=post, remote_image_src=img['src'])
                     image.save()
+                self.stdout.write('post %s images recorded successfully \n' % thread_title)
 
-                thread_resource = Resource(content_object=post, remote_resource_src=self.getResource(thread_content))
-                self.stdout.write('parsed seed %s for post: %s' % (thread_resource.remote_resource_src, post.title))
+                (r_src, l_src) = self.getResource(thread_content)
+                thread_resource = Resource(content_object=post, remote_resource_src=r_src, local_resource_src=l_src)
+                self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.title))
                 thread_resource.save()
 
     def getResource(self, thread_content):
@@ -85,7 +102,9 @@ class Command(BaseCommand):
         pattern = re.compile(r'rmdown')
         src = soup.find(text=pattern)
         if src is not None:
-            return src.strip()
+            r_src = src.strip()
+            l_src = self.create_torrent(site=SiteType.RMDOWN, url=r_src)
+            return (r_src, l_src)
 
         # Seed Torrent
         pattern = re.compile(r'seed')
@@ -100,3 +119,32 @@ class Command(BaseCommand):
             return txt.findNext('a')['href']
         else:
             return ''
+
+    def create_torrent(self, site, url):
+        if site == SiteType.RMDOWN:
+            r = requests.get(url)
+            soup = BeautifulSoup(r.content, from_encoding="utf-8")
+            ref = soup.findAll('input')[0]['value']
+            reff = soup.findAll('input')[1]['value']
+            form_data = [('ref', ref),
+                         ('reff', reff),
+                        ]
+            form_data = urllib.urlencode(form_data)
+
+            path = 'http://www.rmdown.com/download.php'
+            req = urllib2.Request(path, form_data)
+            req.add_header("Content-type", "application/x-www-form-urlencoded")
+
+            seed_name = ref + '.torrent'
+            seed_path = settings.FORUM_ROOT + '/static/seeds/'
+            seed_url = seed_path + seed_name
+            torrent = urllib2.urlopen(req)
+            with open(seed_url, 'w') as f:
+                seed = File(f)
+                seed.write(torrent.read())
+                # invalid seed, remove
+                if os.stat(seed_url).st_size < MIN_SEED_SIZE:
+                    self.stdout.write('post %s seed download failed\n' % thread_title)
+                    os.remove(seed_url)
+                    return ''
+            return 'seeds/' + seed_name

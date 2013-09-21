@@ -1,5 +1,7 @@
 # remove data.db file
 rm ../data.db
+# remove seeds
+rm ../forum/static/seeds/*.torrent
 
 # run this once for creating migrate db
 ./../manage.py syncdb

@@ -1,5 +1,6 @@
 # Django settings for forum project.
 import os.path
+import forum
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -71,6 +72,9 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = ''
+
+# /home/my_site/forum
+FORUM_ROOT = os.path.abspath(forum.__path__[0])
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"

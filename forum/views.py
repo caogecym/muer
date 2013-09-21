@@ -14,13 +14,14 @@ from forum.models import Post
 import random
 
 def index(request):
-    if len(Post.objects.all()) >= 3:
-       post_list = random.sample(Post.objects.all(), 3)
-    else:
-       post_list = None
+    #if len(Post.objects.all()) >= 3:
+    #   post_list = random.sample(Post.objects.all(), 3)
+    #else:
+    #   post_list = None
     #post_list = [Post.objects.all().filter(id=45)[0]]
+    post_list = Post.objects.all()
 
-    paginator = Paginator(post_list, 3) # Show 5 contacts per page
+    paginator = Paginator(post_list, 5) # Show 5 contacts per page
 
     page = request.GET.get('page')
     try:

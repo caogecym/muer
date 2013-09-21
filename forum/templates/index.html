@@ -37,7 +37,7 @@
         <a class="left carousel-control" href="#myCarousel-{{ post.id }}" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#myCarousel-{{ post.id }}" data-slide="next">&rsaquo;</a>
       </div>
-      <a href="{{ post.resources.all.0.remote_resource_src }}">Click to Download Seed</a>
+      <a href="{% static post.resources.all.0.local_resource_src %}">Click to Download Seed</a>
     </div>
     <hr class="featurette-divider">
   {% endfor %}
