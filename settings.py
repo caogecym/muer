@@ -7,7 +7,7 @@ TEMPLATE_DEBUG = DEBUG
 
 #for OpenID auth
 ugettext = lambda s: s
-LOGIN_URL = '/%s%s' % (ugettext('account/'), ugettext('signin/'))
+LOGIN_URL = '/%s' % (ugettext('login/'))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),

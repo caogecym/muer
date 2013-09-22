@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class=row>
+    <div class="span6"> 
+      <form action="/posts/new_post" method="post">{% csrf_token %}
+        <legend>New Post</legend>
+        <div class="controls controls-row">
+          <input id="title" name="title" type="text" class="span6" placeholder="Title" required=""> 
+        </div>
+        <div class="controls">
+          <textarea id="content" name="content" class="span6" placeholder="Content" required="" rows="10"></textarea>
+        </div>
+        <div class="controls controls-row">
+          <input id="tags" name="tagnames" type="text" class="span6" placeholder="At least one tag such as (偷拍 欧美) is required" required=""> 
+        </div>
+        <div class="control-group">
+          <label class="control-label">Files</label>
+          <div class="controls">
+            <input id="files" name="files" class="input-file" type="file">
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="contact-submit" type="submit" class="btn btn-primary input-medium pull-right">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

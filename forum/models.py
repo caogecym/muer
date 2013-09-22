@@ -1,7 +1,9 @@
 from django.db import models
+from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
+from forum.managers import TagManager
 import django.dispatch
 import datetime
 
@@ -15,6 +17,8 @@ class Tag(models.Model):
     # Denormalised data
     used_count          = models.PositiveIntegerField(default=0)
     
+    objects = TagManager()
+
     # TODO: We need to figure this out
     #objects = TagManager()
 
@@ -81,6 +85,7 @@ class Post(models.Model):
     # store useful info other than image, like seed, attachment
     resources           = generic.GenericRelation(Resource)
     tags                = models.ManyToManyField(Tag, null=True, blank=True, related_name='tagged_posts')
+    tagnames            = models.CharField(max_length=255)
 
     # status
     added_at            = models.DateTimeField(default=datetime.datetime.now)
@@ -94,10 +99,34 @@ class Post(models.Model):
     comments            = generic.GenericRelation(Comment)
     comment_count       = models.PositiveIntegerField(default=0)
 
+    def save(self, **kwargs):
+        """
+        Overridden to manually manage addition of tags when the object
+        is first saved.
+
+        This is required as we're using ``tagnames`` as the sole means of
+        adding and editing tags.
+        """
+        initial_addition = (self.id is None)
+        super(Post, self).save(**kwargs)
+        if initial_addition:
+            tags = Tag.objects.get_or_create_multiple(self.tagname_list(),
+                                                      self.author)
+            self.tags.add(*tags)
+            #Tag.objects.update_use_counts(tags)
+
+    def tagname_list(self):
+        """Creates a list of Tag names from the ``tagnames`` attribute."""
+        return [name for name in self.tagnames.split(u' ')]
     def __unicode__(self):
         return self.content
     class Meta:
         db_table = u'post'
+
+#class PostForm(ModelForm):
+#    class Meta:
+#        model = Post
+#        fields = ['title', 'content', 'tags', ]#'images', 'resources', 'tags']
 
 # custom signal
 user_logged_in = django.dispatch.Signal(providing_args=["session"])

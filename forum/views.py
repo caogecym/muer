@@ -8,9 +8,11 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from forum.models import Post
+from forum.forms import PostForm
 import random
 
 def index(request):
@@ -37,6 +39,24 @@ def index(request):
                'user': request.user,
               }
     return render(request, 'index.html', context)
+
+@login_required
+def add_post(request):
+    if request.method == 'POST': # If the form has been submitted...
+        form = PostForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            post = Post(title=form.cleaned_data['title'], content=form.cleaned_data['content'],
+                        author=request.user, tagnames=form.cleaned_data['tagnames'])
+            import pdb; pdb.set_trace()
+            post.save()
+            return HttpResponseRedirect('/') 
+    else:
+        # An unbound form
+        form = PostForm() 
+
+    return render(request, 'new_post.html', {
+        'form': form,
+    })
 
 def content(request, post_id):
     post = Post.objects.all().filter(id=post_id)[0]

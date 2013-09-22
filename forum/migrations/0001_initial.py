@@ -72,6 +72,7 @@ class Migration(SchemaMigration):
             ('author', self.gf('django.db.models.fields.related.ForeignKey')(related_name='posts', to=orm['auth.User'])),
             ('post_source', self.gf('django.db.models.fields.CharField')(max_length=1024)),
             ('content', self.gf('django.db.models.fields.CharField')(max_length=1024)),
+            ('tagnames', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('added_at', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
             ('deleted', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('deleted_at', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
@@ -199,6 +200,7 @@ class Migration(SchemaMigration):
             'like_count': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
             'liked_by': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'liked_posts'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
             'post_source': ('django.db.models.fields.CharField', [], {'max_length': '1024'}),
+            'tagnames': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'tags': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'tagged_posts'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['forum.Tag']"}),
             'title': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '300'})
         },
