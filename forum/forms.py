@@ -14,8 +14,8 @@ class TitleField(forms.CharField):
         self.initial = ''
 
     def clean(self, value):
-        if len(value) < 10:
-            raise forms.ValidationError(_('title must be > 10 characters'))
+        if len(value) < 5:
+            raise forms.ValidationError(_('title must be at least 5 characters'))
 
         return value
 
@@ -27,12 +27,6 @@ class ContentField(forms.CharField):
         self.label  = _('content')
         self.help_text = _('please enter a descriptive title for your question')
         self.initial = ''
-
-    def clean(self, value):
-        if len(value) < 10:
-            raise forms.ValidationError(_('title must be > 10 characters'))
-
-        return value
 
 class TagNamesField(forms.CharField):
     def __init__(self, *args, **kwargs):

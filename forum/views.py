@@ -47,7 +47,6 @@ def add_post(request):
         if form.is_valid(): # All validation rules pass
             post = Post(title=form.cleaned_data['title'], content=form.cleaned_data['content'],
                         author=request.user, tagnames=form.cleaned_data['tagnames'])
-            import pdb; pdb.set_trace()
             post.save()
             return HttpResponseRedirect('/') 
     else:
