@@ -43,7 +43,6 @@ def index(request):
 @login_required
 def add_post(request):
     if request.method == 'POST': # If the form has been submitted...
-        import pdb; pdb.set_trace()
         form = PostForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             text = form.cleaned_data['content']
