@@ -10,7 +10,7 @@ from django.template import RequestContext
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from markdown import markdown
 from forum.models import Post
 from forum.forms import PostForm
 import random
@@ -43,9 +43,12 @@ def index(request):
 @login_required
 def add_post(request):
     if request.method == 'POST': # If the form has been submitted...
+        import pdb; pdb.set_trace()
         form = PostForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
-            post = Post(title=form.cleaned_data['title'], content=form.cleaned_data['content'],
+            text = form.cleaned_data['content']
+            html = markdown(text)
+            post = Post(title=form.cleaned_data['title'], content=html,
                         author=request.user, tagnames=form.cleaned_data['tagnames'])
             post.save()
             return HttpResponseRedirect('/') 

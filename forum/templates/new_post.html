@@ -13,25 +13,33 @@
       <form action="/posts/new_post" method="post">{% csrf_token %}
         <legend>New Post</legend>
         <div class="controls controls-row">
-            <input id="title" name="title" value="{{form.title.value}}" type="text" class="span6" placeholder="Title" required=""> 
+          <input id="title" name="title" value="{{form.title.value}}" type="text" class="span6" placeholder="Title" required=""> 
         </div>
+        <div id="notes-button-bar"></div>
         <div class="controls">
-          <textarea id="content" name="content" class="span6" placeholder="Content" rows="10">{{form.content.value}}</textarea>
+          <textarea id="notes" name="content" class="span6" placeholder="Content" rows="10">{{form.content.value}}</textarea>
         </div>
         <div class="controls controls-row">
           <input id="tags" name="tagnames" type="text" value="{{form.tagnames.value}}" class="span6" placeholder="At least one tag such as (偷拍 欧美) is required" required="">
         </div>
-        <div class="control-group">
-          <label class="control-label">Files</label>
-          <div class="controls">
-            <input id="files" name="files" class="input-file" type="file">
-          </div>
-        </div>
+        <div id="notes-preview" class="wmd-preview"></div>
 
         <div class="controls">
-          <button id="contact-submit" type="submit" class="btn btn-primary input-medium pull-right">Post</button>
+          <button id="post-submit" type="submit" class="btn btn-primary input-medium pull-right">Post</button>
         </div>
       </form>
     </div>
   </div>
+  <script type="text/javascript">
+          new WMDEditor({
+                  input: "notes",
+                  button_bar: "notes-button-bar",
+                  preview: "notes-preview",
+                  output: "copy_html",
+                  buttons: "bold italic link image  ol ul  heading",
+                  modifierKeys: false,
+                  autoFormatting: false
+          });
+  </script>
+
 {% endblock %}

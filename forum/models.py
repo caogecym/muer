@@ -80,8 +80,9 @@ class Post(models.Model):
     title               = models.CharField(max_length=300, unique=True)
     author              = models.ForeignKey(User, related_name='posts')
     post_source         = models.CharField(max_length=1024)
-    content             = models.CharField(max_length=1024)
+    content             = models.CharField(max_length=1024) # in html
     images              = generic.GenericRelation(Image)
+
     # store useful info other than image, like seed, attachment
     resources           = generic.GenericRelation(Resource)
     tags                = models.ManyToManyField(Tag, null=True, blank=True, related_name='tagged_posts')
