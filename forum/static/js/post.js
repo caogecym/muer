@@ -62,11 +62,11 @@ var submit = function(object, callback) {
 
 var updateVoteImage = function(object, data) {
     if (data.status == 1) {
-        object[0].children[0].style.background = "url('static/images/like.png') no-repeat";
+        object[0].children[2].style.background = "url('static/images/like.png') no-repeat";
         //object[0].children[0].src = "static/images/like.png"
     } 
     else {
-        object[0].children[0].style.background = "url('static/images/liked.png') no-repeat";
+        object[0].children[2].style.background = "url('static/images/liked.png') no-repeat";
         //object[0].children[0].src = "static/images/liked.png"
     }
 };

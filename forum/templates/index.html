@@ -10,11 +10,7 @@
 {% block content %}
   {% for post in posts %}
     <div id="post-{{ post.id }}" class="featurette">
-      <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
-          style="height: 32px; width: 32px; 
-                 background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
-          href="#"></a>
-      <h3><a href="/posts/{{ post.id }}" class="featurette-heading">{{ post.title }}</a></h3>
+      <h3><a href="/posts/{{ post.id }}" class="featurette-heading" style="color: #000000">{{ post.title }}</a></h3>
 
       <div id="myCarousel-{{ post.id }}" class="carousel slide">
         <div class="carousel-inner">
@@ -34,10 +30,16 @@
             {% endif %}
           {% endfor %}
         </div>
+        {% if post.images.all %}
         <a class="left carousel-control" href="#myCarousel-{{ post.id }}" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#myCarousel-{{ post.id }}" data-slide="next">&rsaquo;</a>
+        {% endif %}
       </div>
-      <a href="{% static post.resources.all.0.local_resource_src %}">Click to Download Seed</a>
+      <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
+          style="height: 32px; width: 32px; opacity: 1;
+                 background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
+          href="#"></a>
+      <a href="{% static post.resources.all.0.local_resource_src %}" class="btn btn-primary">Download</a>
     </div>
     <hr class="featurette-divider">
   {% endfor %}

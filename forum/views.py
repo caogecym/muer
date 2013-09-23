@@ -66,7 +66,7 @@ def content(request, post_id):
               }
     return render(request, 'post.html', context)
 
-#@login_required
+@login_required
 def like(request, post_id):
     '''
         vote code:

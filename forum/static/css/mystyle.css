@@ -1,5 +1,5 @@
 .featurette-image:hover {
-    background: url('../images/liked.png') no-repeat !important;
+    opacity: 0.85 !important;
 }
 
 .post-content-image {
