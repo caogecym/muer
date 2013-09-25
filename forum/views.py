@@ -66,7 +66,17 @@ def content(request, post_id):
               }
     return render(request, 'post.html', context)
 
-@login_required
+def ajax_login_required(view_func):
+    def wrap(request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return view_func(request, *args, **kwargs)
+        json = simplejson.dumps({ 'not_authenticated': 1 })
+        return HttpResponse(json, mimetype='application/json')
+    wrap.__doc__ = view_func.__doc__
+    wrap.__dict__ = view_func.__dict__
+    return wrap
+
+@ajax_login_required
 def like(request, post_id):
     '''
         vote code:
@@ -78,7 +88,8 @@ def like(request, post_id):
         "success": 1,
         "status": 0,
         "count": 0,
-        "message": ''
+        "message": '',
+        "not_authenticated": 0,
     }
 
     post_to_like = Post.objects.filter(id=post_id)[0]

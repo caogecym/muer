@@ -61,6 +61,10 @@ var submit = function(object, callback) {
 };
 
 var updateVoteImage = function(object, data) {
+    if (data.not_authenticated == 1) {
+        $('#login_modal').modal('show'); 
+        return;
+    }
     if (data.status == 1) {
         object[0].children[2].style.background = "url('static/images/like.png') no-repeat";
         //object[0].children[0].src = "static/images/like.png"
