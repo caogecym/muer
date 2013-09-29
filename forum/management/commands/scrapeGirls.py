@@ -1,3 +1,4 @@
+# coding=utf8
 import os
 import re
 
@@ -5,7 +6,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from django.core.files import File
 from django.db import IntegrityError
-from forum.models import Post, Image, Resource
+from forum.models import Post, Image, Resource, Tag
 
 import settings
 import requests
@@ -33,87 +34,153 @@ class Command(BaseCommand):
             self.stdout.write('no user found')
             
         self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
-        sub_sites = {'caoliu-asia-nomusk': 'http://184.154.128.243/thread0806.php?fid=2',
-                     'caoliu-asia-musk': 'http://184.154.128.243/thread0806.php?fid=15',
+        sub_sites = {
+                     #'caoliu-asia-no-mosaic': 'http://184.154.128.243/thread0806.php?fid=2',
+                     'caoliu-asia-with-mosaic': 'http://184.154.128.243/thread0806.php?fid=15',
                      'caoliu-eu': 'http://184.154.128.243/thread0806.php?fid=4',
                      'caoliu-cartoon': 'http://184.154.128.243/thread0806.php?fid=5',
                     }
 
+        self.initTags()
+
         # get thread addressses
-        thread_addresses = []
-        for site, url in sub_sites.iteritems():
+        for site_type, list_url in sub_sites.iteritems():
             # get page info
-            r = requests.get(url)
+            try:
+                r = requests.get(list_url)
+            except ConnectionError, e:
+                self.stdout.write('ERROR: %s' % e.message)
+                continue
+
             p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
             content = p.sub('', r.content)
             soup = BeautifulSoup(content, from_encoding="gb18030")
             page_div = soup.find("div", { "class" : "pages" }).text
-            page_count = page_div.partition('/')[-1].rpartition('total')[0].strip()
+            page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
             page = 1
-            for i in range(page_count):
-                url = url + '&search=&page=' + page
-                self.thread_addresses = self.getThreadsFrom(url)
+            # 10 -> page_count
+            for i in range(3):
+                thread_url = list_url + '&search=&page=' + str(page)
+                thread_addresses = self.getThreadsFrom(site_type, thread_url)
                 page += 1
 
-        self.createPost(self.thread_addresses, admin)
+        for thread_type, thread_sub_url in thread_addresses:
+            self.createPost(thread_sub_url, thread_type, admin)
 
-    def getThreadsFrom(self, url):
+    def initTags(self):
+        user = User.objects.all()[0]
+        try:
+            self.tag_asia = Tag.objects.get(name='asia')
+        except:
+            self.tag_asia = Tag(name='asia', author=user)
+            self.tag_asia.save()
+
+        try:
+            self.tag_no_mosaic = Tag.objects.get(name='no-mosaic')
+        except:
+            self.tag_no_mosaic = Tag(name='no-mosaic', author=user)
+            self.tag_no_mosaic.save()
+
+        try:
+            self.tag_with_mosaic = Tag.objects.get(name='with-mosaic')
+        except:
+            self.tag_with_mosaic = Tag(name='with-mosaic', author=user)
+            self.tag_with_mosaic.save()
+
+        try:
+            self.tag_eu = Tag.objects.get(name='europe')
+        except:
+            self.tag_eu = Tag(name='europe', author=user)
+            self.tag_eu.save()
+
+        try:
+            self.tag_cartoon = Tag.objects.get(name='cartoon')
+        except:
+            self.tag_cartoon = Tag(name='cartoon', author=user)
+            self.tag_cartoon.save()
+
+    def getThreadsFrom(self, site_type, url):
         thread_addresses = []
         self.stdout.write('Filtering threads in url: %s\n' % url)
 
-        r = requests.get(url)
+        try:
+            r = requests.get(url)
+        except ConnectionError, e:
+            self.stdout.write('ERROR: %s' % e.message)
+            return []
+
         p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
         content = p.sub('', r.content)
         soup = BeautifulSoup(content, from_encoding="gb18030")
 
         # get filtered post address
         for thread in soup.findAll("tr", { "class" : "tr3 t_one" }):
-            # filter by reply number and getting rid of topped topics
-            thread_time = thread.find("div", { "class" : "f10" }).text 
-            thread_year = datetime.strptime(thread_time, '%Y-%m-%d').year
-            thread_reply_count = thread.find("td", { "class" : "tal f10 y-style" }).text
-            if  thread_reply_count > 30 and datetime.now().year - thread_year < 1:
-                thread_addresses.append(thread.h3.a['href'])
+            try:
+                # filter by reply number and getting rid of topped topics
+                thread_time = thread.find("div", { "class" : "f10" }).text 
+                thread_year = datetime.strptime(thread_time, '%Y-%m-%d').year
+                thread_reply_count = thread.find("td", { "class" : "tal f10 y-style" }).text
+                if  thread_reply_count > 30 and datetime.now().year - thread_year < 1:
+                    thread_addresses.append((site_type, thread.h3.a['href']))
+            except:
+                self.stdout.write('Get thread address failed, time: %s, reply: %s\n' % (thread_time, thread_reply_count))
+                continue
         return thread_addresses
     
-    def createPost(self, thread_addresses, admin):
-        for sub_url in thread_addresses:
-            url = BASE_URL + sub_url
-            self.stdout.write('getting filtered thread content in url: %s\n' % url)
-            
+    def createPost(self, thread_sub_url, thread_type, admin):
+        url = BASE_URL + thread_sub_url
+        self.stdout.write('getting filtered thread content in url: %s\n' % url)
+        
+        try:
             r = requests.get(url)
-            p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
-            content = p.sub('', r.content)
-            # solve &lt;&gt; problem
-            soup = BeautifulSoup(content, from_encoding="gb18030")
-            new_soup = soup.prettify(formatter=None)
-            soup = BeautifulSoup(new_soup, from_encoding="gb18030")
+        except ConnectionError, e:
+            self.stdout.write('ERROR: %s' % e.message)
+            return
+        p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
+        content = p.sub('', r.content)
+        # solve &lt;&gt; problem
+        soup = BeautifulSoup(content, from_encoding="gb18030")
+        new_soup = soup.prettify(formatter=None)
+        soup = BeautifulSoup(new_soup, from_encoding="gb18030")
 
-            thread_title = soup.h4.text
-            thread_content = soup.find('div', {'class':'tpc_content'})
+        thread_title = soup.h4.text
+        thread_content = soup.find('div', {'class':'tpc_content'})
 
-            try: 
-                post = Post(title=thread_title, content=thread_content, author=admin)
-                post.save()
-                self.stdout.write('post %s created successfully \n' % thread_title)
-            except IntegrityError, e:
-                self.stdout.write('ERROR: %s' % e.message)
+        try: 
+            post = Post(title=thread_title, content=thread_content, author=admin, post_source_name='草榴社区', post_source_url=url)
+            post.save()
+            self.createTagsForPost(post.id, url, thread_type)
+            self.stdout.write('post %s created successfully \n' % post.id)
+        except IntegrityError, e:
+            self.stdout.write('ERROR: %s' % e.message)
 
-            else:
-                # load images
-                thread_imgs = soup.findAll('img', {"style":"cursor:pointer"})
-                for img in thread_imgs:
-                    # remove thumb imgs
-                    #p = re.compile(r'_thumb', flags=re.DOTALL)
-                    #img_src = p.sub('', img['src'])
-                    image = Image(content_object=post, remote_image_src=img['src'])
-                    image.save()
-                self.stdout.write('post %s images recorded successfully \n' % thread_title)
+        else:
+            # load images
+            thread_imgs = soup.findAll('img', {"style":"cursor:pointer"})
+            for img in thread_imgs:
+                # remove thumb imgs
+                #p = re.compile(r'_thumb', flags=re.DOTALL)
+                #img_src = p.sub('', img['src'])
+                image = Image(content_object=post, remote_image_src=img['src'])
+                image.save()
+            self.stdout.write('post %s images recorded successfully \n' % post.id)
 
-                (r_src, l_src) = self.getResource(thread_title, thread_content)
-                thread_resource = Resource(content_object=post, remote_resource_src=r_src, local_resource_src=l_src)
-                self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.title))
-                thread_resource.save()
+            (r_src, l_src) = self.getResource(thread_title, thread_content)
+            thread_resource = Resource(content_object=post, remote_resource_src=r_src, local_resource_src=l_src)
+            self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.title))
+            thread_resource.save()
+
+    def createTagsForPost(self, post_id, url, thread_type):
+        self.stdout.write('creating post %s tag\n' % post_id)
+        post = Post.objects.get(id=post_id)
+        if 'no-mosaic' in thread_type:
+            post.tags.add(self.tag_asia, self.tag_no_mosaic)
+        elif 'with-mosaic' in thread_type:
+            post.tags.add(self.tag_asia, self.tag_with_mosaic)
+        elif 'eu' in thread_type:
+            post.tags.add(self.tag_eu)
+        elif 'cartoon' in thread_type:
+            post.tags.add(self.tag_cartoon)
 
     def getResource(self, thread_title, thread_content):
         # rmdown
@@ -141,7 +208,11 @@ class Command(BaseCommand):
 
     def create_torrent(self, site, url, title):
         if site == SiteType.RMDOWN:
-            r = requests.get(url)
+            try:
+                r = requests.get(url)
+            except ConnectionError, e:
+                self.stdout.write('ERROR: %s' % e.message)
+                return ''
             soup = BeautifulSoup(r.content, from_encoding="utf-8")
             ref = soup.findAll('input')[0]['value']
             reff = soup.findAll('input')[1]['value']

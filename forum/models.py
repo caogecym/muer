@@ -19,9 +19,6 @@ class Tag(models.Model):
     
     objects = TagManager()
 
-    # TODO: We need to figure this out
-    #objects = TagManager()
-
     class Meta:
         db_table = u'tag'
         ordering = ('-used_count', 'name')
@@ -79,7 +76,8 @@ class Comment(models.Model):
 class Post(models.Model):
     title               = models.CharField(max_length=300, unique=True)
     author              = models.ForeignKey(User, related_name='posts')
-    post_source         = models.CharField(max_length=1024)
+    post_source_name    = models.CharField(max_length=64)
+    post_source_url     = models.CharField(max_length=1024)
     content             = models.CharField(max_length=1024) # in html
     images              = generic.GenericRelation(Image)
 
