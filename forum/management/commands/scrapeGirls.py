@@ -20,6 +20,7 @@ def enum(**enums):
     return type('Enum', (), enums)
 
 SiteType = enum(RMDOWN=1, VII=2)
+BASE_URL = 'http://184.154.128.243/'
 MIN_SEED_SIZE = 10000
 
 class Command(BaseCommand):
@@ -32,31 +33,50 @@ class Command(BaseCommand):
             self.stdout.write('no user found')
             
         self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
-        BASE_URL = 'http://184.154.128.243/'
-        sites = {'caoliu-asia': 'http://184.154.128.243/thread0806.php?fid=2',
-                 #'asia-page2': 'http://184.154.128.243/thread0806.php?fid=2&search=&page=2'
-                }
+        sub_sites = {'caoliu-asia-nomusk': 'http://184.154.128.243/thread0806.php?fid=2',
+                     'caoliu-asia-musk': 'http://184.154.128.243/thread0806.php?fid=15',
+                     'caoliu-eu': 'http://184.154.128.243/thread0806.php?fid=4',
+                     'caoliu-cartoon': 'http://184.154.128.243/thread0806.php?fid=5',
+                    }
+
+        # get thread addressses
         thread_addresses = []
-
-        # filtering threads
-        for site, url in sites.iteritems():
-            self.stdout.write('Filtering threads in url: %s\n' % url)
-
+        for site, url in sub_sites.iteritems():
+            # get page info
             r = requests.get(url)
             p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
             content = p.sub('', r.content)
             soup = BeautifulSoup(content, from_encoding="gb18030")
+            page_div = soup.find("div", { "class" : "pages" }).text
+            page_count = page_div.partition('/')[-1].rpartition('total')[0].strip()
+            page = 1
+            for i in range(page_count):
+                url = url + '&search=&page=' + page
+                self.thread_addresses = self.getThreadsFrom(url)
+                page += 1
 
-            # get filtered post address
-            for thread in soup.findAll("tr", { "class" : "tr3 t_one" }):
-                # filter by reply number and getting rid of topped topics
-                thread_time = thread.find("div", { "class" : "f10" }).text 
-                thread_year = datetime.strptime(thread_time, '%Y-%m-%d').year
-                thread_reply_count = thread.find("td", { "class" : "tal f10 y-style" }).text
-                if  thread_reply_count > 30 and datetime.now().year - thread_year < 1:
-                    thread_addresses.append(thread.h3.a['href'])
+        self.createPost(self.thread_addresses, admin)
 
-        # get title, content for filtered posts
+    def getThreadsFrom(self, url):
+        thread_addresses = []
+        self.stdout.write('Filtering threads in url: %s\n' % url)
+
+        r = requests.get(url)
+        p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
+        content = p.sub('', r.content)
+        soup = BeautifulSoup(content, from_encoding="gb18030")
+
+        # get filtered post address
+        for thread in soup.findAll("tr", { "class" : "tr3 t_one" }):
+            # filter by reply number and getting rid of topped topics
+            thread_time = thread.find("div", { "class" : "f10" }).text 
+            thread_year = datetime.strptime(thread_time, '%Y-%m-%d').year
+            thread_reply_count = thread.find("td", { "class" : "tal f10 y-style" }).text
+            if  thread_reply_count > 30 and datetime.now().year - thread_year < 1:
+                thread_addresses.append(thread.h3.a['href'])
+        return thread_addresses
+    
+    def createPost(self, thread_addresses, admin):
         for sub_url in thread_addresses:
             url = BASE_URL + sub_url
             self.stdout.write('getting filtered thread content in url: %s\n' % url)
@@ -71,7 +91,6 @@ class Command(BaseCommand):
 
             thread_title = soup.h4.text
             thread_content = soup.find('div', {'class':'tpc_content'})
-
 
             try: 
                 post = Post(title=thread_title, content=thread_content, author=admin)
@@ -91,19 +110,19 @@ class Command(BaseCommand):
                     image.save()
                 self.stdout.write('post %s images recorded successfully \n' % thread_title)
 
-                (r_src, l_src) = self.getResource(thread_content)
+                (r_src, l_src) = self.getResource(thread_title, thread_content)
                 thread_resource = Resource(content_object=post, remote_resource_src=r_src, local_resource_src=l_src)
                 self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.title))
                 thread_resource.save()
 
-    def getResource(self, thread_content):
+    def getResource(self, thread_title, thread_content):
         # rmdown
         soup = thread_content
         pattern = re.compile(r'rmdown')
         src = soup.find(text=pattern)
         if src is not None:
             r_src = src.strip()
-            l_src = self.create_torrent(site=SiteType.RMDOWN, url=r_src)
+            l_src = self.create_torrent(site=SiteType.RMDOWN, url=r_src, title=thread_title)
             return (r_src, l_src)
 
         # Seed Torrent
@@ -120,7 +139,7 @@ class Command(BaseCommand):
         else:
             return ''
 
-    def create_torrent(self, site, url):
+    def create_torrent(self, site, url, title):
         if site == SiteType.RMDOWN:
             r = requests.get(url)
             soup = BeautifulSoup(r.content, from_encoding="utf-8")
@@ -144,7 +163,7 @@ class Command(BaseCommand):
                 seed.write(torrent.read())
                 # invalid seed, remove
                 if os.stat(seed_url).st_size < MIN_SEED_SIZE:
-                    self.stdout.write('post %s seed download failed\n' % thread_title)
+                    self.stdout.write('post %s seed download failed\n' % title)
                     os.remove(seed_url)
                     return ''
             return 'seeds/' + seed_name
