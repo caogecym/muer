@@ -15,13 +15,16 @@ from forum.models import Post
 from forum.forms import PostForm
 import random
 
-def index(request):
+def index(request, tag_name=None):
     #if len(Post.objects.all()) >= 3:
     #   post_list = random.sample(Post.objects.all(), 3)
     #else:
     #   post_list = None
     #post_list = [Post.objects.all().filter(id=45)[0]]
-    post_list = Post.objects.all()
+    if tag_name is None:
+        post_list = Post.objects.all()
+    else:
+        post_list = Post.objects.all().filter(tags__name = tag_name)
 
     paginator = Paginator(post_list, 5) # Show 5 contacts per page
 
@@ -39,6 +42,15 @@ def index(request):
                'user': request.user,
               }
     return render(request, 'index.html', context)
+
+def tags(request):
+    context = {
+               'user': request.user,
+              }
+    return render(request, 'tags.html', context)
+
+def tag(request, tag):
+    return index(request, tag_name=tag)
 
 @login_required
 def add_post(request):

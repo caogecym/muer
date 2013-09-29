@@ -11,6 +11,8 @@ APP_PATH = os.path.dirname(__file__)
 urlpatterns = patterns('',
     (r'^$', forum_views.index),
     (r'^posts/', include(forum_urls, namespace="forum")),
+    #(r'^tags/', forum_views.tags),
+    (r'^tags/(?P<tag>[^/]+)/$', forum_views.tag),
     (r'^login/$', login),
     (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
     (r'^signup/$', 'forum.views.register'),

@@ -37,7 +37,7 @@
           href="#!"></a>
       <a href="{% static post.resources.all.0.local_resource_src %}" class="btn btn-primary">Download</a>
       {% for tag in post.tags.all %}
-      <a href="http://bootsnipp.com/tags/{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
+      <a href="{% static "/tags/" %}{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
       {% endfor %}
     </div>
     <hr class="featurette-divider">
