@@ -25,6 +25,9 @@
             </ul>
           </li>
         </ul>
+        <form action="/search/" method="get" class="navbar-search pull-left">{% csrf_token %}
+          <input type="text" name="q" class="search-query" placeholder="Search">
+        </form>
         {% if user.is_authenticated %}
           <p class="navbar-text pull-right">
             <a class="navbar-link" href="/users/{{ user.id }}/{{ user.username }}/">{{ user.username }}</a>   
