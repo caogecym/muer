@@ -16,19 +16,19 @@ ADMINS = (
 SEND_BROKEN_LINK_EMAILS = True
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'muer_db',                      
-        'USER': 'caogecym',
-        'PASSWORD': 'cym011011',
-        'HOST': 'muer.herokuapp.com',
-        'PORT': '5433',
-        'OPTIONS': {
-            'autocommit': True,
-        }
-    },
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'muer_db',                      
+#        'USER': 'caogecym',
+#        'PASSWORD': 'cym011011',
+#        'HOST': 'muer.herokuapp.com',
+#        'PORT': '5432',
+#        'OPTIONS': {
+#            'autocommit': True,
+#        }
+#    },
+#}
 
 # Registration regulation
 MIN_USERNAME_LENGTH = 4
@@ -178,8 +178,8 @@ LOGGING = {
 }
 
 # Parse database configuration from $DATABASE_URL
-#import dj_database_url
-#DATABASES['default'] =  dj_database_url.config()
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
