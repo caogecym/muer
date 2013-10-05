@@ -3,28 +3,31 @@ import os.path
 import forum
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = False
 
 #for OpenID auth
 ugettext = lambda s: s
 LOGIN_URL = '/%s' % (ugettext('login/'))
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Yuming Cao', 'caogecym@gmail.com'),
 )
 
+SEND_BROKEN_LINK_EMAILS = True
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/ycao/my_site/data.db',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'muer_db',                      
+        'USER': 'caogecym',
+        'PASSWORD': 'cym011011',
+        'HOST': 'localhost',
+        'PORT': '5433',
+        'OPTIONS': {
+            'autocommit': True,
+        }
+    },
 }
 
 # Registration regulation
@@ -33,7 +36,9 @@ EMAIL_UNIQUE = True
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost',
+                 '0.0.0.0',
+                ]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -117,10 +122,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'muer.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'muer.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -174,3 +179,23 @@ LOGGING = {
         },
     }
 }
+
+# Parse database configuration from $DATABASE_URL
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+#STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)

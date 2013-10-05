@@ -5,10 +5,10 @@ import re
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from django.core.files import File
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from forum.models import Post, Image, Resource, Tag
 
-import settings
+import muer.settings_production as settings
 import requests
 import urllib2, urllib
 import lxml

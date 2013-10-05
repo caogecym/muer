@@ -1,4 +1,4 @@
-{% extends "base_content.html" %}
+{% extends "base.html" %}
 <!-- template 500.html -->
 {% load i18n %}
 {% block title %}{% spaceless %}500 Error{% endspaceless %}{% endblock %}
@@ -19,14 +19,11 @@
 </div>
 <div id="main-body" class="headNormal">
     <div style="padding:5px 0px 10px 0;line-height:25px">
-        <h3>{% trans "sorry, system error" %}</h3>
+        <h3>{% trans "Sorry, system error" %}</h3>
         <br>
-        {% trans "system error log is recorded, error will be fixed as soon as possible" %}<br>
-		{% trans "please report the error to the site administrators if you wish" %}
+        {% trans "System error log is recorded, error will be fixed as soon as possible" %}<br>
+		{% trans "Please report the error to the site administrators if you wish" %}
         <ul>
-            <li><a href="#" id="linkPrevious">{% trans "back to previous page" %}</li>
-            <li><a href="/questions">{% trans "see latest questions" %}</a></li>
-            <li><a href="/tags/">{% trans "see tags" %}</a></li>
         </u>
     </div>
 
