@@ -2,7 +2,7 @@
 import os.path
 import forum
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False
 
 #for OpenID auth
@@ -22,7 +22,7 @@ DATABASES = {
         'NAME': 'muer_db',                      
         'USER': 'caogecym',
         'PASSWORD': 'cym011011',
-        'HOST': 'localhost',
+        'HOST': 'muer.herokuapp.com',
         'PORT': '5433',
         'OPTIONS': {
             'autocommit': True,
