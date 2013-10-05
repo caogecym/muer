@@ -29,7 +29,7 @@
             {% endif %}
           {% endfor %}
         </div>
-        {% if post.images.all %}
+        {% if post.images.all and post.images.all|length > 1 %}
         <a class="left carousel-control" href="#myCarousel-{{ post.id }}" data-slide="prev">&lsaquo;</a>
         <a class="right carousel-control" href="#myCarousel-{{ post.id }}" data-slide="next">&rsaquo;</a>
         {% endif %}

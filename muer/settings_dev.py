@@ -10,21 +10,23 @@ ugettext = lambda s: s
 LOGIN_URL = '/%s' % (ugettext('login/'))
 
 ADMINS = (
-    #('Yuming Cao', 'caogecym@gmail.com'),
+    ('Yuming Cao', 'caogecym@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/ycao/muer/data.db',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'muer_db',
+        'USER': 'caogecym',
+        'PASSWORD': 'cym011011',
+        'HOST': 'localhost',
+        'PORT': '5433',
+        'OPTIONS': {
+            'autocommit': True,
+        }
+    },
 }
 
 # Registration regulation
@@ -33,7 +35,7 @@ EMAIL_UNIQUE = True
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
