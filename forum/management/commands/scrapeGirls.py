@@ -35,10 +35,10 @@ class Command(BaseCommand):
             
         self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
         sub_sites = {
-                     #'caoliu-asia-no-mosaic': 'http://184.154.128.243/thread0806.php?fid=2',
-                     'caoliu-asia-with-mosaic': 'http://184.154.128.243/thread0806.php?fid=15',
-                     'caoliu-eu': 'http://184.154.128.243/thread0806.php?fid=4',
-                     'caoliu-cartoon': 'http://184.154.128.243/thread0806.php?fid=5',
+                     'caoliu-asia-no-mosaic': 'http://184.154.128.243/thread0806.php?fid=2',
+                     #'caoliu-asia-with-mosaic': 'http://184.154.128.243/thread0806.php?fid=15',
+                     #'caoliu-eu': 'http://184.154.128.243/thread0806.php?fid=4',
+                     #'caoliu-cartoon': 'http://184.154.128.243/thread0806.php?fid=5',
                     }
 
         self.initTags()
@@ -147,7 +147,7 @@ class Command(BaseCommand):
         thread_content = soup.find('div', {'class':'tpc_content'})
 
         try: 
-            post = Post(title=thread_title, content=thread_content, author=admin, post_source_name='草榴社区', post_source_url=url)
+            post = Post(title=thread_title, content='', author=admin, post_source_name='草榴社区', post_source_url=url)
             post.save()
             self.createTagsForPost(post.id, url, thread_type)
             self.stdout.write('post %s created successfully \n' % post.id)
@@ -167,8 +167,8 @@ class Command(BaseCommand):
 
             (r_src, l_src) = self.getResource(thread_title, thread_content)
             thread_resource = Resource(content_object=post, remote_resource_src=r_src, local_resource_src=l_src)
-            self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.title))
             thread_resource.save()
+            self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.title))
 
     def createTagsForPost(self, post_id, url, thread_type):
         self.stdout.write('creating post %s tag\n' % post_id)

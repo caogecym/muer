@@ -80,7 +80,7 @@ FORUM_ROOT = os.path.abspath(forum.__path__[0])
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -98,6 +98,18 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+# AMAZON S3 config
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+AWS_ACCESS_KEY_ID = 'AKIAIT3SHLUWU5QWYQ2Q'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'muer'
+AWS_PRELOAD_METADATA = True # necessary to fix manage.py collectstatic command to only upload changed files instead of all files
+
+STATIC_URL = 'https://s3.amazonaws.com/muer/static/'
+ADMIN_MEDIA_PREFIX = 'https://s3.amazonaws.com/muer/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'gseb#7@0qznk#rnie6s2+r4a1#2d7*z!-j(*=yg5c2o3g4de5_'
@@ -146,6 +158,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'forum',
     'south',
+    'storages',
 )
 
 # A sample logging configuration. The only tangible logging

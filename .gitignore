@@ -1,3 +1,4 @@
+forum/migrations/*
 venv
 staticfiles
 *.db
