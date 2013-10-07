@@ -8,7 +8,7 @@ from django.core.files import File
 from django.db import IntegrityError, transaction
 from forum.models import Post, Image, Resource, Tag
 
-import muer.settings_production as settings
+from django.conf import settings
 import requests
 import urllib2, urllib
 import lxml
@@ -16,6 +16,8 @@ from lxml import html
 from lxml.etree import fromstring, tostring
 from bs4 import BeautifulSoup
 from datetime import datetime
+import boto
+import uuid
 
 def enum(**enums):
     return type('Enum', (), enums)
@@ -48,7 +50,7 @@ class Command(BaseCommand):
             # get page info
             try:
                 r = requests.get(list_url)
-            except ConnectionError, e:
+            except requests.ConnectionError, e:
                 self.stdout.write('ERROR: %s' % e.message)
                 continue
 
@@ -59,7 +61,7 @@ class Command(BaseCommand):
             page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
             page = 1
             # 10 -> page_count
-            for i in range(3):
+            for i in range(1):
                 thread_url = list_url + '&search=&page=' + str(page)
                 thread_addresses = self.getThreadsFrom(site_type, thread_url)
                 page += 1
@@ -105,7 +107,7 @@ class Command(BaseCommand):
 
         try:
             r = requests.get(url)
-        except ConnectionError, e:
+        except requests.ConnectionError, e:
             self.stdout.write('ERROR: %s' % e.message)
             return []
 
@@ -133,7 +135,7 @@ class Command(BaseCommand):
         
         try:
             r = requests.get(url)
-        except ConnectionError, e:
+        except requests.ConnectionError, e:
             self.stdout.write('ERROR: %s' % e.message)
             return
         p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
@@ -165,10 +167,10 @@ class Command(BaseCommand):
                 image.save()
             self.stdout.write('post %s images recorded successfully \n' % post.id)
 
-            (r_src, l_src) = self.getResource(thread_title, thread_content)
+            (r_src, l_src) = self.getResource(post.id, thread_title, thread_content)
             thread_resource = Resource(content_object=post, remote_resource_src=r_src, local_resource_src=l_src)
             thread_resource.save()
-            self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.title))
+            self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.id))
 
     def createTagsForPost(self, post_id, url, thread_type):
         self.stdout.write('creating post %s tag\n' % post_id)
@@ -182,14 +184,14 @@ class Command(BaseCommand):
         elif 'cartoon' in thread_type:
             post.tags.add(self.tag_cartoon)
 
-    def getResource(self, thread_title, thread_content):
+    def getResource(self, post_id, thread_title, thread_content):
         # rmdown
         soup = thread_content
         pattern = re.compile(r'rmdown')
         src = soup.find(text=pattern)
         if src is not None:
             r_src = src.strip()
-            l_src = self.create_torrent(site=SiteType.RMDOWN, url=r_src, title=thread_title)
+            l_src = self.create_torrent(post_id=post_id, site=SiteType.RMDOWN, url=r_src, title=thread_title)
             return (r_src, l_src)
 
         # Seed Torrent
@@ -206,11 +208,11 @@ class Command(BaseCommand):
         else:
             return ''
 
-    def create_torrent(self, site, url, title):
+    def create_torrent(self, post_id, site, url, title):
         if site == SiteType.RMDOWN:
             try:
                 r = requests.get(url)
-            except ConnectionError, e:
+            except requests.ConnectionError, e:
                 self.stdout.write('ERROR: %s' % e.message)
                 return ''
             soup = BeautifulSoup(r.content, from_encoding="utf-8")
@@ -226,15 +228,16 @@ class Command(BaseCommand):
             req.add_header("Content-type", "application/x-www-form-urlencoded")
 
             seed_name = ref + '.torrent'
-            seed_path = settings.FORUM_ROOT + '/static/seeds/'
-            seed_url = seed_path + seed_name
+            seed_url = 'seeds/' + seed_name
             torrent = urllib2.urlopen(req)
-            with open(seed_url, 'w') as f:
-                seed = File(f)
-                seed.write(torrent.read())
-                # invalid seed, remove
-                if os.stat(seed_url).st_size < MIN_SEED_SIZE:
-                    self.stdout.write('post %s seed download failed\n' % title)
-                    os.remove(seed_url)
-                    return ''
-            return 'seeds/' + seed_name
+            self.upload_to_s3(post_id, torrent, seed_name)
+            return seed_url
+
+    def upload_to_s3(self, post_id, f, name):
+        self.stdout.write('post %s seed %s uploading\n' % (post_id, name))
+        s3 = boto.connect_s3()
+        bucket = s3.get_bucket('muer')
+        key = s3.get_bucket('muer').new_key('seeds/%s' % name)
+        key.set_contents_from_string(f.read())
+        key.set_acl('public-read')
+        self.stdout.write('post %s seed %s uploaded\n' % (post_id, name))

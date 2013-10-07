@@ -108,8 +108,8 @@ AWS_SECRET_ACCESS_KEY = 'MBMTiO/7cjUr6Kj0eGn4VTsfpFZghqYIkgUaozvT'
 AWS_STORAGE_BUCKET_NAME = 'muer'
 AWS_PRELOAD_METADATA = True # necessary to fix manage.py collectstatic command to only upload changed files instead of all files
 
-STATIC_URL = 'https://s3.amazonaws.com/muer/static/'
-ADMIN_MEDIA_PREFIX = 'https://s3.amazonaws.com/muer/static/admin/'
+STATIC_URL = 'https://muer.s3.amazonaws.com/static/'
+ADMIN_MEDIA_PREFIX = 'https://muer.s3.amazonaws.com/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'gseb#7@0qznk#rnie6s2+r4a1#2d7*z!-j(*=yg5c2o3g4de5_'

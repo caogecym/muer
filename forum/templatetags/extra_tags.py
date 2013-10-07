@@ -174,6 +174,12 @@ def get_user_like_image(users, user):
         return 'd'
     return ''
         
+@register.filter
+def is_liked_by(post, user):
+    if user in post.liked_by.all():
+        return True
+    return False
+
 @register.simple_tag
 def get_age(birthday):
     current_time = datetime.datetime(*time.localtime()[0:6])

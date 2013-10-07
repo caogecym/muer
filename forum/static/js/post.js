@@ -66,11 +66,11 @@ var updateVoteImage = function(object, data) {
         return;
     }
     if (data.status == 1) {
-        object[0].children[2].style.background = "url('static/images/like.png') no-repeat";
+        object[0].children[3].style.background = "url('https://muer.s3.amazonaws.com/images/like.png') no-repeat";
         //object[0].children[0].src = "static/images/like.png"
     } 
     else {
-        object[0].children[2].style.background = "url('static/images/liked.png') no-repeat";
+        object[0].children[3].style.background = "url('https://muer.s3.amazonaws.com/images/liked.png') no-repeat";
         //object[0].children[0].src = "static/images/liked.png"
     }
 };

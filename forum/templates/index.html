@@ -34,10 +34,17 @@
         <a class="right carousel-control" href="#myCarousel-{{ post.id }}" data-slide="next">&rsaquo;</a>
         {% endif %}
       </div>
+      {% if post|is_liked_by:user %}
       <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
           style="height: 32px; width: 32px; opacity: 1;
-                 background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
+          background: url('{% static "images/liked.png" %}') no-repeat;"
           href="#!"></a>
+      {% else %}
+      <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
+          style="height: 32px; width: 32px; opacity: 1;
+          background: url('{% static "images/like.png" %}') no-repeat;"
+          href="#!"></a>
+      {% endif %}
       <a href="{% static post.resources.all.0.local_resource_src %}" class="btn btn-primary">Download</a>
       {% for tag in post.tags.all %}
       <a href="{% static "/tags/" %}{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
