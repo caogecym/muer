@@ -1,5 +1,7 @@
 forum/migrations/*
 venv
+muer/settings_stage.py
+muer/settings_dev.py
 staticfiles
 *.db
 *.pyc

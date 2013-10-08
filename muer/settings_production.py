@@ -2,7 +2,7 @@
 import os.path
 import forum
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = False
 
 #for OpenID auth
@@ -32,7 +32,7 @@ DATABASES = {
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config()
 
 # Registration regulation
 MIN_USERNAME_LENGTH = 4
@@ -106,8 +106,6 @@ STATICFILES_FINDERS = (
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-AWS_ACCESS_KEY_ID = 'AKIAIT3SHLUWU5QWYQ2Q'
-AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'muer'
 AWS_PRELOAD_METADATA = True # necessary to fix manage.py collectstatic command to only upload changed files instead of all files
 
