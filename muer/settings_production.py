@@ -2,7 +2,7 @@
 import os.path
 import forum
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False
 
 #for OpenID auth
