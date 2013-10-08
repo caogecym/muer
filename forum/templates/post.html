@@ -3,16 +3,28 @@
 {% load extra_tags %}
 {% load url from future %}
 
-{% block forejs %}
-  <script type='text/javascript' src="{% static "js/post.js" %}"></script>
-{% endblock %}
-
 {% block content %}
   <div id="post-{{ post.id }}" class="featurette">
-    <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
-        style="height: 32px; width: 32px; 
-               background: url('static/images/like{% get_user_like_image post.liked_by user %}.png') no-repeat;"
-        href="#"></a>
-    {{ post.content | safe }}
+    <h3><a href="/posts/{{ post.id }}" class="featurette-heading" style="color: #000000">{{ post.title }}</a></h3>
+
+    {% for img in post.images.all %}
+      <a><img src="{{ img.remote_image_src }}" class="post-content-image" alt=""></a>
+    {% endfor %}
+    <hr class="featurette-divider">
+    {% if post|is_liked_by:user %}
+      <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
+          style="height: 32px; width: 32px; opacity: 1;
+          background: url('{% static "images/liked.png" %}') no-repeat;"
+          href="#!"></a>
+    {% else %}
+      <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
+          style="height: 32px; width: 32px; opacity: 1;
+          background: url('{% static "images/like.png" %}') no-repeat;"
+          href="#!"></a>
+    {% endif %}
+    <a href="{% static post.resources.all.0.local_resource_src %}" class="btn btn-primary">Download</a>
+    {% for tag in post.tags.all %}
+      <a href="{% static "/tags/" %}{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
+    {% endfor %}
   </div>
 {% endblock %}

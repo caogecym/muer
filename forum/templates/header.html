@@ -6,12 +6,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="#">MUER</a>
+      <a class="brand" href="/">MUER</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">Tags</a></li>
-          <li><a href="#contact">About</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
         </ul>
         <form action="/search/" method="get" class="navbar-search pull-left">{% csrf_token %}
           <input type="text" name="q" class="search-query" placeholder="Search">

@@ -52,6 +52,12 @@ def tags(request):
               }
     return render(request, 'tags.html', context)
 
+def about(request):
+    context = {
+               'user': request.user,
+              }
+    return render(request, 'about.html', context)
+
 def tag(request, tag):
     return index(request, tag_name=tag)
 
