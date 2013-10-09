@@ -10,30 +10,14 @@
       {% if post.post_source_name %}
         <a style="color: #d3d3d3">{{ post.post_source_name }}</a>
       {% endif %}
-
-      <div id="myCarousel-{{ post.id }}" class="carousel slide">
-        <div class="carousel-inner">
-          {% for img in post.images.all %}
-            {% if forloop.first %}
-              <div class="item active">
-                <a href="{{ img.remote_image_src }}">
-                  <img src="{{ img.remote_image_src }}" class="post-content-image" alt="">
-                </a>
-              </div>
-            {% else %}
-              <div class="item">
-                <a href="{{ img.remote_image_src }}">
-                  <img src="{{ img.remote_image_src }}" class="post-content-image" alt="">
-                </a>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% if post.images.all and post.images.all|length > 1 %}
-        <a class="left carousel-control" href="#myCarousel-{{ post.id }}" data-slide="prev">&lsaquo;</a>
-        <a class="right carousel-control" href="#myCarousel-{{ post.id }}" data-slide="next">&rsaquo;</a>
-        {% endif %}
-      </div>
+      </br>
+      {% with post.images.all|first as img %}
+        <a href="/posts/{{ post.id }}" id="preview-{{ post.id }}">
+          <img src="{{ img.remote_image_src }}" class="post-content-image" alt="">
+        </a>
+      {% endwith %}
+      </br>
+      </br>
       {% if post|is_liked_by:user %}
       <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
           style="height: 32px; width: 32px; opacity: 1;

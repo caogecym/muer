@@ -8,7 +8,8 @@
     <h3><a href="/posts/{{ post.id }}" class="featurette-heading" style="color: #000000">{{ post.title }}</a></h3>
 
     {% for img in post.images.all %}
-      <a><img src="{{ img.remote_image_src }}" class="post-content-image" alt=""></a>
+      <a><img src="{{ img.remote_image_src }}" alt=""></a>
+      </br>
     {% endfor %}
     <hr class="featurette-divider">
     {% if post|is_liked_by:user %}

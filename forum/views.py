@@ -29,7 +29,7 @@ def index(request, tag_name=None):
     else:
         post_list = Post.objects.all().filter(tags__name = tag_name)
 
-    paginator = Paginator(post_list, 5) # Show 5 contacts per page
+    paginator = Paginator(post_list, 10) # Show 10 contacts per page
 
     page = request.GET.get('page')
     try:

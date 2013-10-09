@@ -3,7 +3,8 @@
 }
 
 .post-content-image {
+    display: block;
     height: 450px;
-    width: auto;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
