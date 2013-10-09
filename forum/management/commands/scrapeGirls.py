@@ -38,9 +38,9 @@ class Command(BaseCommand):
         self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
         sub_sites = {
                      'caoliu-asia-no-mosaic': 'http://184.154.128.243/thread0806.php?fid=2',
-                     #'caoliu-asia-with-mosaic': 'http://184.154.128.243/thread0806.php?fid=15',
-                     #'caoliu-eu': 'http://184.154.128.243/thread0806.php?fid=4',
-                     #'caoliu-cartoon': 'http://184.154.128.243/thread0806.php?fid=5',
+                     'caoliu-asia-with-mosaic': 'http://184.154.128.243/thread0806.php?fid=15',
+                     'caoliu-eu': 'http://184.154.128.243/thread0806.php?fid=4',
+                     'caoliu-cartoon': 'http://184.154.128.243/thread0806.php?fid=5',
                     }
 
         self.initTags()
@@ -61,7 +61,7 @@ class Command(BaseCommand):
             page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
             page = 1
             # 10 -> page_count
-            for i in range(1):
+            for i in range(10):
                 thread_url = list_url + '&search=&page=' + str(page)
                 thread_addresses = self.getThreadsFrom(site_type, thread_url)
                 page += 1
