@@ -64,7 +64,10 @@ class Command(BaseCommand):
             #for i in range(int(page_count/10)):
             for i in range(10):
                 thread_url = list_url + '&search=&page=' + str(page)
-                thread_addresses = thread_addresses.extend(self.getThreadsFrom(site_type, thread_url))
+                if thread_addresses == None:
+                    thread_addresses = self.getThreadsFrom(site_type, thread_url)
+                else:
+                    thread_addresses = thread_addresses.extend(self.getThreadsFrom(site_type, thread_url))
                 page += 1
 
         for thread_type, thread_sub_url in thread_addresses:
