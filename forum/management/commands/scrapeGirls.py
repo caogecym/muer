@@ -61,7 +61,7 @@ class Command(BaseCommand):
             page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
             page = 1
             # 10 -> page_count
-            for i in range(10):
+            for i in range(int(page_count/10)):
                 thread_url = list_url + '&search=&page=' + str(page)
                 thread_addresses = self.getThreadsFrom(site_type, thread_url)
                 page += 1

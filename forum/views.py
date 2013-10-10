@@ -25,9 +25,9 @@ def index(request, tag_name=None):
     #   post_list = None
     #post_list = [Post.objects.all().filter(id=45)[0]]
     if tag_name is None:
-        post_list = Post.objects.all()
+        post_list = Post.objects.order_by('-added_at')
     else:
-        post_list = Post.objects.all().filter(tags__name = tag_name)
+        post_list = Post.objects.filter(tags__name = tag_name)
 
     paginator = Paginator(post_list, 10) # Show 10 contacts per page
 
