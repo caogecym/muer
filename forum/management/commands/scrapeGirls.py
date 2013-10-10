@@ -53,7 +53,7 @@ class Command(BaseCommand):
             except requests.ConnectionError, e:
                 self.stdout.write('ERROR: %s' % e.message)
                 continue
-
+            thread_addresses = []
             p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
             content = p.sub('', r.content)
             soup = BeautifulSoup(content, from_encoding="gb18030")
@@ -61,9 +61,10 @@ class Command(BaseCommand):
             page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
             page = 1
             # 10 -> page_count
-            for i in range(int(page_count/10)):
+            #for i in range(int(page_count/10)):
+            for i in range(10):
                 thread_url = list_url + '&search=&page=' + str(page)
-                thread_addresses = self.getThreadsFrom(site_type, thread_url)
+                thread_addresses = thread_addresses.extend(self.getThreadsFrom(site_type, thread_url))
                 page += 1
 
         for thread_type, thread_sub_url in thread_addresses:
