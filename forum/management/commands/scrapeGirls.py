@@ -60,6 +60,7 @@ class Command(BaseCommand):
         if options['debug']:
             thread_addresses = [('no-mosaic', args[0])]
         else:
+            thread_addresses = []
             for site_type, list_url in sub_sites.iteritems():
                 # get page info
                 try:
@@ -67,7 +68,6 @@ class Command(BaseCommand):
                 except requests.ConnectionError, e:
                     self.stdout.write('ERROR: %s' % e.message)
                     continue
-                thread_addresses = []
                 p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
                 content = p.sub('', r.content)
                 soup = BeautifulSoup(content, from_encoding="gb18030")
@@ -81,7 +81,7 @@ class Command(BaseCommand):
                     if thread_addresses == None:
                         thread_addresses = self.getThreadsFrom(site_type, thread_url)
                     else:
-                        thread_addresses = thread_addresses.extend(self.getThreadsFrom(site_type, thread_url))
+                        thread_addresses.extend(self.getThreadsFrom(site_type, thread_url))
                     page += 1
 
         for thread_type, thread_sub_url in thread_addresses:
