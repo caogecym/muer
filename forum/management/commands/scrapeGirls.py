@@ -81,7 +81,7 @@ class Command(BaseCommand):
                     page += 1
 
         for thread_type, thread_sub_url in thread_addresses:
-            self.createPost(thread_sub_url, thread_type, admin, *args)
+            self.createPost(thread_sub_url, thread_type, admin, *args, **options)
 
     def initTags(self):
         user = User.objects.all()[0]
@@ -143,7 +143,7 @@ class Command(BaseCommand):
                 continue
         return thread_addresses
     
-    def createPost(self, thread_sub_url, thread_type, admin, *args):
+    def createPost(self, thread_sub_url, thread_type, admin, *args, **options):
         url = BASE_URL + thread_sub_url
         self.stdout.write('getting filtered thread content in url: %s\n' % url)
         
@@ -181,7 +181,7 @@ class Command(BaseCommand):
                 image.save()
             self.stdout.write('post %s images recorded successfully \n' % post.id)
 
-            seed_src = self.getResource(post.id, thread_title, thread_content, *args)
+            seed_src = self.getResource(post.id, thread_title, thread_content, *args, **options)
             thread_resource = Resource(content_object=post, remote_resource_src=seed_src)
             thread_resource.save()
             self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.id))
@@ -198,13 +198,13 @@ class Command(BaseCommand):
         elif 'cartoon' in thread_type:
             post.tags.add(self.tag_cartoon)
 
-    def getResource(self, post_id, thread_title, thread_content, *args ):
+    def getResource(self, post_id, thread_title, thread_content, *args, **options):
         # rmdown
         soup = thread_content
         pattern = re.compile(r'rmdown')
         src = soup.find(text=pattern)
         if src is not None:
-            r_src = self.create_torrent(post_id=post_id, site=SiteType.RMDOWN, url=r_src, title=thread_title)
+            r_src = self.create_torrent(post_id, SiteType.RMDOWN, src.strip(), thread_title, *args, **options)
             return r_src
 
         # Seed Torrent
@@ -221,7 +221,7 @@ class Command(BaseCommand):
         else:
             return ''
 
-    def create_torrent(self, post_id, site, url, title, *args):
+    def create_torrent(self, post_id, site, url, title, *args, **options):
         if site == SiteType.RMDOWN:
             try:
                 r = requests.get(url)
