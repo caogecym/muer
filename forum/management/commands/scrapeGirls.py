@@ -1,6 +1,7 @@
 # coding=utf8
 import os
 import re
+from optparse import make_option
 
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
@@ -28,6 +29,12 @@ MIN_SEED_SIZE = 10000
 
 class Command(BaseCommand):
     help = 'Scrapes the sites for new threads'
+    option_list = BaseCommand.option_list + (
+        make_option('--debug',
+            action='store_true',
+            default=False,
+            help='Enter debug mode'),
+        )
 
     def handle(self, *args, **options):
         try:
@@ -46,32 +53,35 @@ class Command(BaseCommand):
         self.initTags()
 
         # get thread addressses
-        for site_type, list_url in sub_sites.iteritems():
-            # get page info
-            try:
-                r = requests.get(list_url)
-            except requests.ConnectionError, e:
-                self.stdout.write('ERROR: %s' % e.message)
-                continue
-            thread_addresses = []
-            p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
-            content = p.sub('', r.content)
-            soup = BeautifulSoup(content, from_encoding="gb18030")
-            page_div = soup.find("div", { "class" : "pages" }).text
-            page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
-            page = 1
-            # 10 -> page_count
-            #for i in range(int(page_count/10)):
-            for i in range(10):
-                thread_url = list_url + '&search=&page=' + str(page)
-                if thread_addresses == None:
-                    thread_addresses = self.getThreadsFrom(site_type, thread_url)
-                else:
-                    thread_addresses = thread_addresses.extend(self.getThreadsFrom(site_type, thread_url))
-                page += 1
+        if options['debug']:
+            thread_addresses = [('no-mosaic', args[0])]
+        else:
+            for site_type, list_url in sub_sites.iteritems():
+                # get page info
+                try:
+                    r = requests.get(list_url)
+                except requests.ConnectionError, e:
+                    self.stdout.write('ERROR: %s' % e.message)
+                    continue
+                thread_addresses = []
+                p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
+                content = p.sub('', r.content)
+                soup = BeautifulSoup(content, from_encoding="gb18030")
+                page_div = soup.find("div", { "class" : "pages" }).text
+                page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
+                page = 1
+                # 10 -> page_count
+                #for i in range(int(page_count/10)):
+                for i in range(10):
+                    thread_url = list_url + '&search=&page=' + str(page)
+                    if thread_addresses == None:
+                        thread_addresses = self.getThreadsFrom(site_type, thread_url)
+                    else:
+                        thread_addresses = thread_addresses.extend(self.getThreadsFrom(site_type, thread_url))
+                    page += 1
 
         for thread_type, thread_sub_url in thread_addresses:
-            self.createPost(thread_sub_url, thread_type, admin)
+            self.createPost(thread_sub_url, thread_type, admin, *args)
 
     def initTags(self):
         user = User.objects.all()[0]
@@ -133,7 +143,7 @@ class Command(BaseCommand):
                 continue
         return thread_addresses
     
-    def createPost(self, thread_sub_url, thread_type, admin):
+    def createPost(self, thread_sub_url, thread_type, admin, *args):
         url = BASE_URL + thread_sub_url
         self.stdout.write('getting filtered thread content in url: %s\n' % url)
         
@@ -171,8 +181,8 @@ class Command(BaseCommand):
                 image.save()
             self.stdout.write('post %s images recorded successfully \n' % post.id)
 
-            (r_src, l_src) = self.getResource(post.id, thread_title, thread_content)
-            thread_resource = Resource(content_object=post, remote_resource_src=r_src, local_resource_src=l_src)
+            seed_src = self.getResource(post.id, thread_title, thread_content, *args)
+            thread_resource = Resource(content_object=post, remote_resource_src=seed_src)
             thread_resource.save()
             self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.id))
 
@@ -188,15 +198,14 @@ class Command(BaseCommand):
         elif 'cartoon' in thread_type:
             post.tags.add(self.tag_cartoon)
 
-    def getResource(self, post_id, thread_title, thread_content):
+    def getResource(self, post_id, thread_title, thread_content, *args ):
         # rmdown
         soup = thread_content
         pattern = re.compile(r'rmdown')
         src = soup.find(text=pattern)
         if src is not None:
-            r_src = src.strip()
-            l_src = self.create_torrent(post_id=post_id, site=SiteType.RMDOWN, url=r_src, title=thread_title)
-            return (r_src, l_src)
+            r_src = self.create_torrent(post_id=post_id, site=SiteType.RMDOWN, url=r_src, title=thread_title)
+            return r_src
 
         # Seed Torrent
         pattern = re.compile(r'seed')
@@ -212,7 +221,7 @@ class Command(BaseCommand):
         else:
             return ''
 
-    def create_torrent(self, post_id, site, url, title):
+    def create_torrent(self, post_id, site, url, title, *args):
         if site == SiteType.RMDOWN:
             try:
                 r = requests.get(url)
@@ -234,7 +243,8 @@ class Command(BaseCommand):
             seed_name = ref + '.torrent'
             seed_url = 'seeds/' + seed_name
             torrent = urllib2.urlopen(req)
-            self.upload_to_s3(post_id, torrent, seed_name)
+            if not options['debug']:
+                self.upload_to_s3(post_id, torrent, seed_name)
             return seed_url
 
     def upload_to_s3(self, post_id, f, name):
