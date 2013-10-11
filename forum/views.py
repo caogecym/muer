@@ -105,12 +105,24 @@ def search(request):
         
         post_list = Post.objects.filter(entry_query).order_by('-added_at')
 
+        paginator = Paginator(post_list, 10) # Show 10 contacts per page
+
+        page = request.GET.get('page')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            posts = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            posts = paginator.page(paginator.num_pages)
+
     else:
         return HttpResponseRedirect('/')
 
     return render_to_response('index.html', { 
                               #'query_string': query_string, 
-                              'posts': post_list 
+                              'posts': posts 
                               },
                               context_instance=RequestContext(request))
 
