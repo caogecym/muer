@@ -34,6 +34,10 @@ DATABASES = {
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 
+DATABASES['default']['OPTIONS'] = {
+    'autocommit': True,
+}
+
 # Registration regulation
 MIN_USERNAME_LENGTH = 4
 EMAIL_UNIQUE = True
