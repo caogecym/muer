@@ -34,6 +34,10 @@ class Command(BaseCommand):
             action='store_true',
             default=False,
             help='Enter debug mode'),
+        make_option('--noupload',
+            action='store_true',
+            default=False,
+            help='No seed to be uploaded'),
         )
 
     def handle(self, *args, **options):
@@ -71,8 +75,8 @@ class Command(BaseCommand):
                 page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
                 page = 1
                 # 10 -> page_count
-                #for i in range(int(page_count/10)):
-                for i in range(10):
+                #for i in range(2):
+                for i in range(int(page_count/10)):
                     thread_url = list_url + '&search=&page=' + str(page)
                     if thread_addresses == None:
                         thread_addresses = self.getThreadsFrom(site_type, thread_url)
@@ -136,8 +140,11 @@ class Command(BaseCommand):
                 thread_time = thread.find("div", { "class" : "f10" }).text 
                 thread_year = datetime.strptime(thread_time, '%Y-%m-%d').year
                 thread_reply_count = thread.find("td", { "class" : "tal f10 y-style" }).text
-                if  thread_reply_count > 30 and datetime.now().year - thread_year < 1:
+                if  thread_reply_count > 20 and datetime.now().year - thread_year < 1:
                     thread_addresses.append((site_type, thread.h3.a['href']))
+                else:
+                    self.stdout.write('skip thread: %s, reply_count: %s, create_date: %s\n' 
+                            % (thread.h3.a['href'], thread_reply_count, thread_time))
             except:
                 self.stdout.write('Get thread address failed, time: %s, reply: %s\n' % (thread_time, thread_reply_count))
                 continue
@@ -243,7 +250,9 @@ class Command(BaseCommand):
             seed_name = ref + '.torrent'
             seed_url = 'seeds/' + seed_name
             torrent = urllib2.urlopen(req)
-            if not options['debug']:
+            if options['debug'] or options['noupload']:
+                pass
+            else:
                 self.upload_to_s3(post_id, torrent, seed_name)
             return seed_url
 

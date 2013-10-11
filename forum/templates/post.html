@@ -6,7 +6,13 @@
 {% block content %}
   <div id="post-{{ post.id }}" class="featurette">
     <h3><a href="/posts/{{ post.id }}" class="featurette-heading" style="color: #000000">{{ post.title }}</a></h3>
-
+    {{ post.added_at }}
+    &nbsp;
+    {% if post.post_source_name %}
+      <a style="color: #d3d3d3">{{ post.post_source_name }}</a>
+    {% endif %}
+    </br>
+    </br>
     {% for img in post.images.all %}
       <a><img src="{{ img.remote_image_src }}" alt=""></a>
       </br>
