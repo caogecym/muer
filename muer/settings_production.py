@@ -2,7 +2,7 @@
 import os.path
 import forum
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False
 
 #for OpenID auth
@@ -41,6 +41,10 @@ DATABASES['default']['OPTIONS'] = {
 # Registration regulation
 MIN_USERNAME_LENGTH = 4
 EMAIL_UNIQUE = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'app18504895@heroku.com'
+EMAIL_HOST_PASSWORD = 'Your Password'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
