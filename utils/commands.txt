@@ -23,6 +23,9 @@ git rm -r --cached .
 git add .
 git commit -m 'gitignore now worked'
 
+# untrack file but keep remote file
+git update-index --skip-worktree FILENAME
+
 # migrate db
 . reset.sh
 
