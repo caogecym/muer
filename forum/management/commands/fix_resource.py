@@ -1,4 +1,5 @@
 import urllib2
+import httplib
 import boto
 import logging
 
@@ -45,21 +46,31 @@ class Command(BaseCommand):
 
     def sanitizeImg(self, post):
         logger.info('sanitizing post(id = %s) img' % post.id)
-        for img in  post.images.all():
-            # empty src
+        for img in post.images.all():
+            # remove empty src
             if img.remote_image_src is None or img.remote_image_src == '':
                 img.delete()
-                return
+                continue
+            # remove ads
+            if 'diogio9888' in img.remote_image_src:
+                img.delete()
+                continue
             # invalid src
             try:
                 urllib2.urlopen(img.remote_image_src, timeout=5)
             except urllib2.URLError:
                 logger.info('img connection error, delete this img')
                 img.delete()
+            except urllib2.HTTPError, e:
+                checksLogger.error('HTTPError = ' + str(e.code))
+            except urllib2.URLError, e:
+                checksLogger.error('URLError = ' + str(e.reason))
+            except httplib.HTTPException, e:
+                checksLogger.error('HTTPException')
             except UnicodeEncodeError:
                 logger.info('img url not standard, delete this img')
                 img.delete()
-
-            # remove ads
-
+            except Exception:
+                import traceback
+                logger.error('generic exception: ' + traceback.format_exc())
 
