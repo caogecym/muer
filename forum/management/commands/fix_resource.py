@@ -49,10 +49,12 @@ class Command(BaseCommand):
         for img in post.images.all():
             # remove empty src
             if img.remote_image_src is None or img.remote_image_src == '':
+                logger.info('post(id = %s) has empty img src, deleting...' % post.id)
                 img.delete()
                 continue
             # remove ads
             if 'diogio9888' in img.remote_image_src:
+                logger.info('post(id = %s) has ad diogio9888, deleting...' % post.id)
                 img.delete()
                 continue
             # invalid src

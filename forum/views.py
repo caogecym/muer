@@ -18,6 +18,12 @@ from forum.models import Post
 from forum.forms import PostForm
 
 
+def home(request):
+    context = {
+               'user': request.user,
+              }
+    return render(request, 'home.html', context)
+
 def index(request, tag_name=None):
     #if len(Post.objects.all()) >= 3:
     #   post_list = random.sample(Post.objects.all(), 3)
@@ -146,7 +152,10 @@ def add_post(request):
     })
 
 def content(request, post_id):
-    post = Post.objects.all().filter(id=post_id)[0]
+    try:
+        post = Post.objects.get(id=post_id)
+    except:
+        post = None
     context = {'post': post,
                'user': request.user,
               }

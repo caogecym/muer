@@ -9,7 +9,7 @@ admin.autodiscover()
 APP_PATH = os.path.dirname(__file__)
 
 urlpatterns = patterns('',
-    (r'^$', forum_views.index),
+    (r'^$', forum_views.home),
     (r'^posts/', include(forum_urls, namespace="forum")),
     (r'^search/', forum_views.search),
     (r'^about/', forum_views.about),

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load extra_tags %}
+{% load url from future %}
+{% block content %}
+      <div class="row">
+        <div class="span4">
+          <h2>Asia</h2>
+          <a href='/tags/asia'><img class="featurette-image pull-left" src="{% static "images/asia.jpg" %}"></a>
+        </div>
+        <div class="span4">
+          <h2>Europe</h2>
+          <a href='/tags/europe'><img class="featurette-image pull-left" src="{% static "images/europe.jpg" %}"></a>
+        </div>
+        <div class="span4">
+          <h2>Cartoon</h2>
+          <a href='/tags/cartoon'><img class="featurette-image pull-left" src="{% static "images/cartoon.jpg" %}"></a>
+        </div>
+      </div>
+{% endblock %}

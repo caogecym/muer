@@ -4,6 +4,7 @@
 {% load url from future %}
 
 {% block content %}
+  {% if post %}
   <div id="post-{{ post.id }}" class="featurette">
     <h3><a href="/posts/{{ post.id }}" class="featurette-heading" style="color: #000000">{{ post.title }}</a></h3>
     {{ post.added_at }}
@@ -34,4 +35,7 @@
       <a href="{% static "/tags/" %}{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
     {% endfor %}
   </div>
+  {% else %}
+    The post doesn't exist or has been deleted.
+  {% endif %}
 {% endblock %}
