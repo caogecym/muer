@@ -181,11 +181,9 @@ class Command(BaseCommand):
             # load images
             thread_imgs = soup.findAll('img', {"style":"cursor:pointer"})
             for img in thread_imgs:
-                # remove thumb imgs
-                #p = re.compile(r'_thumb', flags=re.DOTALL)
-                #img_src = p.sub('', img['src'])
-                image = Image(content_object=post, remote_image_src=img['src'])
-                image.save()
+                if img['src']: 
+                    image = Image(content_object=post, remote_image_src=img['src'])
+                    image.save()
             self.stdout.write('post %s images recorded successfully \n' % post.id)
 
             seed_src = self.getResource(post.id, thread_title, thread_content, *args, **options)

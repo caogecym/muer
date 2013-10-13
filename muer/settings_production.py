@@ -41,10 +41,12 @@ DATABASES['default']['OPTIONS'] = {
 # Registration regulation
 MIN_USERNAME_LENGTH = 4
 EMAIL_UNIQUE = True
-EMAIL_HOST = 'smtp.sendgrid.net'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'app18504895@heroku.com'
-EMAIL_HOST_PASSWORD = 'Your Password'
+EMAIL_HOST_USER = 'caogecym@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -178,6 +180,16 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
@@ -189,12 +201,22 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
     },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        'muer': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
         },
     }
 }

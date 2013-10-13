@@ -1,4 +1,5 @@
-import urllib
+import urllib2
+import httplib
 import ImageFile
 
 def getsizes(uri):
@@ -18,5 +19,17 @@ def getsizes(uri):
     file.close()
     return size, None
 
-print getsizes("http://i0.uyl.me/files/02192514363784633354.jpg")
-#print getsizes("http://106.imagebam.com/download/lbU0CYYQzMbBIeIUszzAvA/27573/275723253/3.jpg")
+def exists(site, path):
+    conn = httplib.HTTPConnection(site)
+    conn.request('HEAD', path)
+    response = conn.getresponse()
+    conn.close()
+    return response.status == 200
+
+try:
+    #urllib2.urlopen("http://xpics.us/images/472923085915_2013825109023.jpg", timeout=5)
+    urllib2.urlopen("http://www.tu265.com/di-c3676a09d876b3c94749a248699f610f.jpg", timeout=5)
+    print 'true!'
+except urllib2.URLError:
+    print 'false'
+
