@@ -23,14 +23,17 @@ class Command(BaseCommand):
                     resource.save()
                     logger.info('res_url after correct: %s' % resource.remote_resource_src)
                 if res_url == '':
-                    post.deleted = True
-                    post.save()
+                    if resource.local_resource_src:
+                        resource.remote_resource_src = resource.local_resource_src
+                        resource.save()
+                    else:
+                        post.delete()
+                        logger.info('post has been deleted')
 
             # fix bad download for rmdown case
 
             # remove empty and invalid src
-            self.sanitizePostImg(post)
-
+            #self.sanitizePostImg(post)
 
     def sanitizePostImg(self, post):
         logger.info('sanitizing post(id = %s) img' % post.id)
@@ -77,7 +80,6 @@ class Command(BaseCommand):
                 bucket.delete_key(key)
 
             # delete post in database
-            post.deleted = True
-            post.save()
+            post.delete()
             logger.info('post has been deleted')
 

@@ -144,7 +144,7 @@ class Command(BaseCommand):
                 thread_time = thread.find("div", { "class" : "f10" }).text 
                 thread_year = datetime.strptime(thread_time, '%Y-%m-%d').year
                 thread_reply_count = thread.find("td", { "class" : "tal f10 y-style" }).text
-                if  thread_reply_count > 20 and datetime.now().year - thread_year < 1:
+                if  thread_reply_count > 30 and datetime.now().year - thread_year < 1:
                     thread_addresses.append((site_type, thread.h3.a['href']))
                 else:
                     self.stdout.write('skip thread: %s, reply_count: %s, create_date: %s\n' 
