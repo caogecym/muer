@@ -23,6 +23,10 @@ git rm -r --cached .
 git add .
 git commit -m 'gitignore now worked'
 
+# resolve dirty submodule
+cd forum/static/wmd
+git checkout .
+
 # untrack file but keep remote file
 git update-index --skip-worktree FILENAME
 
