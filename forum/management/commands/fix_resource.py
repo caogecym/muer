@@ -26,6 +26,7 @@ class Command(BaseCommand):
                     if resource.local_resource_src:
                         resource.remote_resource_src = resource.local_resource_src
                         resource.save()
+                        logger.info('post seed url has been updated')
                     else:
                         post.delete()
                         logger.info('post has been deleted')

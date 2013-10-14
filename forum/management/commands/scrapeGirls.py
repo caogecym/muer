@@ -50,7 +50,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
+        logger.info('\nScraping started at %s\n' % str(datetime.now()))
         sub_sites = {
                      'caoliu-asia-no-mosaic': 'http://184.154.128.243/thread0806.php?fid=2',
                      'caoliu-asia-with-mosaic': 'http://184.154.128.243/thread0806.php?fid=15',
@@ -70,7 +70,7 @@ class Command(BaseCommand):
                 try:
                     r = requests.get(list_url)
                 except requests.ConnectionError, e:
-                    self.stdout.write('ERROR: %s' % e.message)
+                    logger.error('ERROR: %s' % e.message)
                     continue
                 p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
                 content = p.sub('', r.content)
@@ -125,12 +125,12 @@ class Command(BaseCommand):
 
     def getThreadsFrom(self, site_type, url):
         thread_addresses = []
-        self.stdout.write('Filtering threads in url: %s\n' % url)
+        logger.info('Filtering threads in url: %s\n' % url)
 
         try:
             r = requests.get(url)
         except requests.ConnectionError, e:
-            self.stdout.write('ERROR: %s' % e.message)
+            logger.error('ERROR: %s' % e.message)
             return []
 
         p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
@@ -147,21 +147,21 @@ class Command(BaseCommand):
                 if  thread_reply_count > 30 and datetime.now().year - thread_year < 1:
                     thread_addresses.append((site_type, thread.h3.a['href']))
                 else:
-                    self.stdout.write('skip thread: %s, reply_count: %s, create_date: %s\n' 
+                    logger.info('skip thread: %s, reply_count: %s, create_date: %s\n' 
                             % (thread.h3.a['href'], thread_reply_count, thread_time))
             except:
-                self.stdout.write('Get thread address failed, time: %s, reply: %s\n' % (thread_time, thread_reply_count))
+                logger.error('Get thread address failed, time: %s, reply: %s\n' % (thread_time, thread_reply_count))
                 continue
         return thread_addresses
     
     def createPost(self, thread_url, user, thread_type=None, *args, **options):
         url = thread_url
-        self.stdout.write('getting filtered thread content in url: %s\n' % url)
+        logger.info('getting filtered thread content in url: %s\n' % url)
         
         try:
             r = requests.get(url)
         except requests.ConnectionError, e:
-            self.stdout.write('ERROR: %s' % e.message)
+            logger.error('ERROR: %s' % e.message)
             return
         p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
         content = p.sub('', r.content)
@@ -177,9 +177,9 @@ class Command(BaseCommand):
             post = Post(title=thread_title, content='', author=user, post_source_name='草榴社区', post_source_url=url)
             post.save()
             self.createTagsForPost(post.id, url, thread_type)
-            self.stdout.write('post %s created successfully \n' % post.id)
+            logger.info('post %s created successfully \n' % post.id)
         except IntegrityError, e:
-            self.stdout.write('ERROR: %s' % e.message)
+            logger.error('ERROR: %s' % e.message)
 
         else:
             # load images
@@ -191,11 +191,12 @@ class Command(BaseCommand):
                 if img['src']:
                     image = Image(content_object=post, remote_image_src=img['src'])
                     image.save()
-            self.stdout.write('post %s images recorded successfully \n' % post.id)
+            logger.info('post %s images recorded successfully \n' % post.id)
 
             # delete post without any images
             if not post.images.all():
                 post.delete()
+                logger.info('post %s has empty image, deleted \n' % post.id)
                 return
 
             seed_src = self.getResource(post.id, thread_title, thread_content, *args, **options)
@@ -207,10 +208,10 @@ class Command(BaseCommand):
                 return
             thread_resource = Resource(content_object=post, remote_resource_src=seed_src)
             thread_resource.save()
-            self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.id))
+            logger.info('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.id))
 
     def createTagsForPost(self, post_id, url, thread_type):
-        self.stdout.write('creating post %s tag\n' % post_id)
+        logger.info('creating post %s tag\n' % post_id)
         post = Post.objects.get(id=post_id)
         if 'no-mosaic' in thread_type:
             post.tags.add(self.tag_asia, self.tag_no_mosaic)
@@ -249,7 +250,7 @@ class Command(BaseCommand):
             try:
                 r = requests.get(url)
             except requests.ConnectionError, e:
-                self.stdout.write('ERROR: %s' % e.message)
+                logger.error('ERROR: %s' % e.message)
                 return ''
             soup = BeautifulSoup(r.content, from_encoding="utf-8")
             ref = soup.findAll('input')[0]['value']
@@ -267,11 +268,8 @@ class Command(BaseCommand):
             seed_url = 'seeds/' + seed_name
             try:
                 torrent = urllib2.urlopen(req)
-            except URLError:
-                logger.error('url error happened when getting seed for post: %s' % post.id)
-                return ''
             except Exception, e:
-                logger.error('unexpected error happened when getting seed for post: %s, %s' % (post.id, e))
+                logger.error('unexpected error happened when getting seed for post: %s, %s' % (post_id, e))
                 return ''
 
             if options['debug'] or options['noupload']:
@@ -281,10 +279,10 @@ class Command(BaseCommand):
             return seed_url
 
     def upload_to_s3(self, post_id, f, name):
-        self.stdout.write('post %s seed %s uploading\n' % (post_id, name))
+        logger.info('post %s seed %s uploading\n' % (post_id, name))
         s3 = boto.connect_s3()
         bucket = s3.get_bucket('muer')
         key = s3.get_bucket('muer').new_key('seeds/%s' % name)
         key.set_contents_from_string(f.read())
         key.set_acl('public-read')
-        self.stdout.write('post %s seed %s uploaded\n' % (post_id, name))
+        logger.info('post %s seed %s uploaded\n' % (post_id, name))
