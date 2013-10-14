@@ -123,7 +123,7 @@ STATIC_URL = 'https://muer.s3.amazonaws.com/static/'
 ADMIN_MEDIA_PREFIX = 'https://muer.s3.amazonaws.com/static/admin/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'gseb#7@0qznk#rnie6s2+r4a1#2d7*z!-j(*=yg5c2o3g4de5_'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
