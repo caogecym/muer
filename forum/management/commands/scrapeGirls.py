@@ -1,6 +1,10 @@
 # coding=utf8
 import os
 import re
+import uuid
+import logging
+
+import boto
 from optparse import make_option
 
 from django.core.management.base import BaseCommand
@@ -8,6 +12,7 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from django.db import IntegrityError, transaction
 from forum.models import Post, Image, Resource, Tag
+from forum.management.commands.fix_resource import ad_list
 
 from django.conf import settings
 import requests
@@ -17,8 +22,6 @@ from lxml import html
 from lxml.etree import fromstring, tostring
 from bs4 import BeautifulSoup
 from datetime import datetime
-import boto
-import uuid
 
 def enum(**enums):
     return type('Enum', (), enums)
@@ -26,9 +29,15 @@ def enum(**enums):
 SiteType = enum(RMDOWN=1, VII=2)
 BASE_URL = 'http://184.154.128.243/'
 MIN_SEED_SIZE = 10000
+logger = logging.getLogger('muer')
 
 class Command(BaseCommand):
     help = 'Scrapes the sites for new threads'
+    try:
+        user = User.objects.all()[0]
+    except IndexError:
+        logger.error('no user found')
+            
     option_list = BaseCommand.option_list + (
         make_option('--debug',
             action='store_true',
@@ -41,11 +50,6 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        try:
-            admin = User.objects.all()[0]
-        except IndexError:
-            self.stdout.write('no user found')
-            
         self.stdout.write('\nScraping started at %s\n' % str(datetime.now()))
         sub_sites = {
                      'caoliu-asia-no-mosaic': 'http://184.154.128.243/thread0806.php?fid=2',
@@ -74,9 +78,8 @@ class Command(BaseCommand):
                 page_div = soup.find("div", { "class" : "pages" }).text
                 page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
                 page = 1
-                # 10 -> page_count
-                #for i in range(2):
-                for i in range(int(page_count/10)):
+                for i in range(2):
+                #for i in range(int(page_count/10)):
                     thread_url = list_url + '&search=&page=' + str(page)
                     if thread_addresses == None:
                         thread_addresses = self.getThreadsFrom(site_type, thread_url)
@@ -85,10 +88,11 @@ class Command(BaseCommand):
                     page += 1
 
         for thread_type, thread_sub_url in thread_addresses:
-            self.createPost(thread_sub_url, thread_type, admin, *args, **options)
+            self.createPost(BASE_URL+thread_sub_url, Command.user, thread_type, *args, **options)
 
     def initTags(self):
-        user = User.objects.all()[0]
+        user = Command.user
+        #User.objects.all()[0]
         try:
             self.tag_asia = Tag.objects.get(name='asia')
         except:
@@ -150,8 +154,8 @@ class Command(BaseCommand):
                 continue
         return thread_addresses
     
-    def createPost(self, thread_sub_url, thread_type, admin, *args, **options):
-        url = BASE_URL + thread_sub_url
+    def createPost(self, thread_url, user, thread_type=None, *args, **options):
+        url = thread_url
         self.stdout.write('getting filtered thread content in url: %s\n' % url)
         
         try:
@@ -170,7 +174,7 @@ class Command(BaseCommand):
         thread_content = soup.find('div', {'class':'tpc_content'})
 
         try: 
-            post = Post(title=thread_title, content='', author=admin, post_source_name='草榴社区', post_source_url=url)
+            post = Post(title=thread_title, content='', author=user, post_source_name='草榴社区', post_source_url=url)
             post.save()
             self.createTagsForPost(post.id, url, thread_type)
             self.stdout.write('post %s created successfully \n' % post.id)
@@ -181,12 +185,26 @@ class Command(BaseCommand):
             # load images
             thread_imgs = soup.findAll('img', {"style":"cursor:pointer"})
             for img in thread_imgs:
-                if img['src']: 
+                for key in ad_list:
+                    if key in img['src']:
+                        continue
+                if img['src']:
                     image = Image(content_object=post, remote_image_src=img['src'])
                     image.save()
             self.stdout.write('post %s images recorded successfully \n' % post.id)
 
+            # delete post without any images
+            if not post.images.all():
+                post.delete()
+                return
+
             seed_src = self.getResource(post.id, thread_title, thread_content, *args, **options)
+
+            # delete post without seed
+            if not seed_src:
+                logger.warning('no seed found for post %s' % post.id)
+                post.delete()
+                return
             thread_resource = Resource(content_object=post, remote_resource_src=seed_src)
             thread_resource.save()
             self.stdout.write('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.id))
@@ -247,7 +265,15 @@ class Command(BaseCommand):
 
             seed_name = ref + '.torrent'
             seed_url = 'seeds/' + seed_name
-            torrent = urllib2.urlopen(req)
+            try:
+                torrent = urllib2.urlopen(req)
+            except URLError:
+                logger.error('url error happened when getting seed for post: %s' % post.id)
+                return ''
+            except Exception, e:
+                logger.error('unexpected error happened when getting seed for post: %s, %s' % (post.id, e))
+                return ''
+
             if options['debug'] or options['noupload']:
                 pass
             else:
