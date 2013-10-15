@@ -15,19 +15,19 @@ class Command(BaseCommand):
             # set bad download post deleted
             if post.resources.all():
                 resource = post.resources.all()[0]
-                res_url = resource.remote_resource_src
+                res_url = resource.resource_src
                 if 'rmdown' in res_url:
                     logger.info('found bad res_url: %s' % res_url)
-                    resource.remote_resource_src = ''
+                    resource.resource_src = ''
                     resource.save()
-                    logger.info('res_url after correct: %s' % resource.remote_resource_src)
+                    logger.info('res_url after correct: %s' % resource.resource_src)
                 if res_url == '':
-                    if resource.local_resource_src:
-                        resource.remote_resource_src = resource.local_resource_src
-                        resource.save()
-                        logger.info('post: %s seed url has been updated' % post.id)
-                    else:
-                        post.delete()
-                        logger.info('post has been deleted')
+                    #if resource.local_resource_src:
+                    #    resource.remote_resource_src = resource.local_resource_src
+                    #    resource.save()
+                    #    logger.info('post: %s seed url has been updated' % post.id)
+                    #else:
+                    post.delete()
+                    logger.info('post has been deleted')
 
             # fix bad download for rmdown case

@@ -20,20 +20,20 @@ class Command(BaseCommand):
         logger.info('sanitizing post(id = %s) img' % post.id)
         for img in post.images.all():
             # remove empty src
-            if img.remote_image_src is None or img.remote_image_src == '':
+            if img.image_src is None or img.image_src == '':
                 logger.info('post(id = %s) has empty img src, deleting...' % post.id)
                 img.delete()
                 continue
 
             # remove ads
             for ad_key in ad_list:
-                if ad_key in img.remote_image_src:
+                if ad_key in img.image_src:
                     logger.info('post(id = %s) has ad diogio9888, deleting...' % post.id)
                     img.delete()
                     continue
             # invalid src
             try:
-                urllib2.urlopen(img.remote_image_src, timeout=5)
+                urllib2.urlopen(img.image_src, timeout=5)
             except urllib2.URLError:
                 logger.info('img connection error, delete this img')
                 img.delete()
@@ -55,8 +55,8 @@ class Command(BaseCommand):
             s3 = boto.connect_s3()
             bucket = s3.get_bucket('muer')
             for res in post.resources.all():
-                logger.info('post %s has res %s, delete...' % (post.id, res.remote_resource_src))
-                key = res.remote_resource_src
+                logger.info('post %s has res %s, delete...' % (post.id, res.resource_src))
+                key = res.resource_src
                 # no matter key exist or not
                 bucket.delete_key(key)
 

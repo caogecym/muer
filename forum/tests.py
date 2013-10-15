@@ -40,10 +40,10 @@ class PostTestCase(TestCase):
         post = Post.objects.get(title='test_post')
         user = post.author
         # tag1 no author
-        image1 = Image(content_object=post, remote_image_src='www.caogecym.com/img1.jpg')
+        image1 = Image(content_object=post, image_src='www.caogecym.com/img1.jpg')
         image1.save()
         # tag2 with author
-        image2 = Image(content_object=post, remote_image_src='www.caogecym.com/img2.jpg')
+        image2 = Image(content_object=post, image_src='www.caogecym.com/img2.jpg')
         image2.save()
         self.assertEqual(len(post.images.all()), 2)
 
@@ -51,9 +51,9 @@ class PostTestCase(TestCase):
         logger.info('start testing test_resource...')
         post = Post.objects.get(title='test_post')
         user = post.author
-        resource1 = Resource(content_object=post, remote_resource_src='www.caogecym.com/img1.torrent')
+        resource1 = Resource(content_object=post, resource_src='www.caogecym.com/img1.torrent')
         resource1.save()
-        resource2 = Resource(content_object=post, remote_resource_src='www.caogecym.com/img2.torrent')
+        resource2 = Resource(content_object=post, resource_src='www.caogecym.com/img2.torrent')
         resource2.save()
         self.assertEqual(len(post.resources.all()), 2)
 

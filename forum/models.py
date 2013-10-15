@@ -29,8 +29,7 @@ class Image(models.Model):
     content_type        = models.ForeignKey(ContentType)
     object_id           = models.PositiveIntegerField()
     content_object      = generic.GenericForeignKey('content_type', 'object_id')
-    local_image_src     = models.CharField(max_length=1024, blank=True)
-    remote_image_src    = models.CharField(max_length=1024, blank=True)
+    image_src           = models.CharField(max_length=1024, blank=True)
 
     class Meta:
         db_table = u'image'
@@ -39,8 +38,7 @@ class Resource(models.Model):
     content_type        = models.ForeignKey(ContentType)
     object_id           = models.PositiveIntegerField()
     content_object      = generic.GenericForeignKey('content_type', 'object_id')
-    local_resource_src  = models.CharField(max_length=1024, blank=True)
-    remote_resource_src = models.CharField(max_length=1024, blank=True)
+    resource_src        = models.CharField(max_length=1024, blank=True)
 
     class Meta:
         db_table = u'resource'

@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from django.db import IntegrityError, transaction
 from forum.models import Post, Image, Resource, Tag
-from forum.management.commands.fix_resource import ad_list
+from forum.management.commands.fix_images import ad_list
 
 from django.conf import settings
 import requests
@@ -78,21 +78,54 @@ class Command(BaseCommand):
                 page_div = soup.find("div", { "class" : "pages" }).text
                 page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
                 page = 1
-                for i in range(2):
-                #for i in range(int(page_count/10)):
+                for i in range(int(page_count/10)):
                     thread_url = list_url + '&search=&page=' + str(page)
+
+                    # set threshold if givin in args
+                    threshold = int(args[0]) if len(args) > 0 else 30
+
                     if thread_addresses == None:
-                        thread_addresses = self.getThreadsFrom(site_type, thread_url)
+                        thread_addresses = self.getThreadsFrom(site_type, thread_url, threshold=threshold)
                     else:
-                        thread_addresses.extend(self.getThreadsFrom(site_type, thread_url))
+                        thread_addresses.extend(self.getThreadsFrom(site_type, thread_url, threshold=threshold))
                     page += 1
 
-        for thread_type, thread_sub_url in thread_addresses:
-            self.createPost(BASE_URL+thread_sub_url, Command.user, thread_type, *args, **options)
+        for thread_type, thread_sub_url, like_count in thread_addresses:
+            self.createPost(BASE_URL+thread_sub_url, Command.user, thread_type, like_count, *args, **options)
 
+    def getThreadsFrom(self, site_type, url, threshold):
+        thread_addresses = []
+        logger.info('Filtering threads in url: %s\n' % url)
+
+        try:
+            r = requests.get(url)
+        except requests.ConnectionError, e:
+            logger.error('ERROR: %s' % e.message)
+            return []
+
+        p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
+        content = p.sub('', r.content)
+        soup = BeautifulSoup(content, from_encoding="gb18030")
+
+        # get filtered post address
+        for thread in soup.findAll("tr", { "class" : "tr3 t_one" }):
+            try:
+                # filter by reply number and getting rid of topped topics
+                thread_time = thread.find("div", { "class" : "f10" }).text 
+                thread_year = datetime.strptime(thread_time, '%Y-%m-%d').year
+                thread_reply_count = int(thread.find("td", { "class" : "tal f10 y-style" }).text.strip())
+                if thread_reply_count > threshold and datetime.now().year - thread_year < 1:
+                    thread_addresses.append((site_type, thread.h3.a['href'], thread_reply_count))
+                else:
+                    logger.info('skip thread: %s, reply_count: %s, create_date: %s\n' 
+                            % (thread.h3.a['href'], thread_reply_count, thread_time))
+            except:
+                logger.error('Get thread address failed, time: %s, reply: %s\n' % (thread_time, thread_reply_count))
+                continue
+        return thread_addresses
+    
     def initTags(self):
         user = Command.user
-        #User.objects.all()[0]
         try:
             self.tag_asia = Tag.objects.get(name='asia')
         except:
@@ -123,38 +156,7 @@ class Command(BaseCommand):
             self.tag_cartoon = Tag(name='cartoon', author=user)
             self.tag_cartoon.save()
 
-    def getThreadsFrom(self, site_type, url):
-        thread_addresses = []
-        logger.info('Filtering threads in url: %s\n' % url)
-
-        try:
-            r = requests.get(url)
-        except requests.ConnectionError, e:
-            logger.error('ERROR: %s' % e.message)
-            return []
-
-        p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
-        content = p.sub('', r.content)
-        soup = BeautifulSoup(content, from_encoding="gb18030")
-
-        # get filtered post address
-        for thread in soup.findAll("tr", { "class" : "tr3 t_one" }):
-            try:
-                # filter by reply number and getting rid of topped topics
-                thread_time = thread.find("div", { "class" : "f10" }).text 
-                thread_year = datetime.strptime(thread_time, '%Y-%m-%d').year
-                thread_reply_count = thread.find("td", { "class" : "tal f10 y-style" }).text
-                if  thread_reply_count > 30 and datetime.now().year - thread_year < 1:
-                    thread_addresses.append((site_type, thread.h3.a['href']))
-                else:
-                    logger.info('skip thread: %s, reply_count: %s, create_date: %s\n' 
-                            % (thread.h3.a['href'], thread_reply_count, thread_time))
-            except:
-                logger.error('Get thread address failed, time: %s, reply: %s\n' % (thread_time, thread_reply_count))
-                continue
-        return thread_addresses
-    
-    def createPost(self, thread_url, user, thread_type=None, *args, **options):
+    def createPost(self, thread_url, user, thread_type=None, like_count=0, *args, **options):
         url = thread_url
         logger.info('getting filtered thread content in url: %s\n' % url)
         
@@ -174,11 +176,16 @@ class Command(BaseCommand):
         thread_content = soup.find('div', {'class':'tpc_content'})
 
         try: 
-            post = Post(title=thread_title, content='', author=user, post_source_name='草榴社区', post_source_url=url)
+            post = Post(title=thread_title, content='', author=user, post_source_name='草榴社区', 
+                        post_source_url=url, like_count = like_count)
             post.save()
             self.createTagsForPost(post.id, url, thread_type)
             logger.info('post %s created successfully \n' % post.id)
         except IntegrityError, e:
+            post = Post.objects.get(title=thread_title)
+            if post:
+                logger.info('post existed, but will update like count')
+                post.like_count = like_count
             logger.error('ERROR: %s' % e.message)
 
         else:
@@ -189,7 +196,7 @@ class Command(BaseCommand):
                     if key in img['src']:
                         continue
                 if img['src']:
-                    image = Image(content_object=post, remote_image_src=img['src'])
+                    image = Image(content_object=post, image_src=img['src'])
                     image.save()
             logger.info('post %s images recorded successfully \n' % post.id)
 
@@ -206,9 +213,9 @@ class Command(BaseCommand):
                 logger.warning('no seed found for post %s' % post.id)
                 post.delete()
                 return
-            thread_resource = Resource(content_object=post, remote_resource_src=seed_src)
+            thread_resource = Resource(content_object=post, resource_src=seed_src)
             thread_resource.save()
-            logger.info('parsed seed %s for post: %s successfully' % (thread_resource.remote_resource_src, post.id))
+            logger.info('parsed seed %s for post: %s successfully' % (thread_resource.resource_src, post.id))
 
     def createTagsForPost(self, post_id, url, thread_type):
         logger.info('creating post %s tag\n' % post_id)
