@@ -32,7 +32,7 @@
           href="#!"></a>
       {% endif %}
       <!-- this is for non existent seed compatibality-->
-      {% if 's3.amazonaws' in post.resources.all.0.remote_resource_src %}
+      {% if 'seeds/' in post.resources.all.0.remote_resource_src %}
         <a href="{% static post.resources.all.0.remote_resource_src %}" class="btn btn-primary">Download</a>
       {% else %}
         <a href="{{ post.resources.all.0.remote_resource_src }}" class="btn btn-primary">Download</a>
