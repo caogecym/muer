@@ -15,7 +15,7 @@
       </br>
       {% with post.images.all|first as img %}
         <a href="/posts/{{ post.id }}" id="preview-{{ post.id }}">
-          <img src="{{ img.remote_image_src }}" class="post-content-image" alt="">
+          <img src="{{ img.image_src }}" class="post-content-image" alt="">
         </a>
       {% endwith %}
       </br>
@@ -32,10 +32,10 @@
           href="#!"></a>
       {% endif %}
       <!-- this is for non existent seed compatibality-->
-      {% if 'seeds/' in post.resources.all.0.remote_resource_src %}
-        <a href="{% static post.resources.all.0.remote_resource_src %}" class="btn btn-primary">Download</a>
+      {% if 'seeds/' in post.resources.all.0.resource_src %}
+        <a href="{% static post.resources.all.0.resource_src %}" class="btn btn-primary">Download</a>
       {% else %}
-        <a href="{{ post.resources.all.0.remote_resource_src }}" class="btn btn-primary">Download</a>
+        <a href="{{ post.resources.all.0.resource_src }}" class="btn btn-primary">Download</a>
       {% endif %}
       {% for tag in post.tags.all %}
       <a href="/tags/{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
