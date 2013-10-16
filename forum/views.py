@@ -24,16 +24,13 @@ def home(request):
               }
     return render(request, 'home.html', context)
 
-def index(request, tag_name=None):
-    #if len(Post.objects.all()) >= 3:
-    #   post_list = random.sample(Post.objects.all(), 3)
-    #else:
-    #   post_list = None
-    #post_list = [Post.objects.all().filter(id=45)[0]]
-    if tag_name is None:
-        post_list = Post.objects.order_by('-added_at')
+def index(request, tag_name=None, order_by='-added_at'):
+    if tag_name is not None:
+        posts = Post.objects.filter(tags__name = tag_name)
     else:
-        post_list = Post.objects.filter(tags__name = tag_name)
+        posts = Post.objects
+
+    post_list = posts.order_by(order_by)
 
     paginator = Paginator(post_list, 10) # Show 10 contacts per page
 
@@ -57,6 +54,9 @@ def tags(request):
                'user': request.user,
               }
     return render(request, 'tags.html', context)
+
+def index_hottest(request):
+    return index(request, order_by='-like_count')
 
 def about(request):
     context = {
