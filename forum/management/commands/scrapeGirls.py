@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from django.db import IntegrityError, transaction
 from forum.models import Post, Image, Resource, Tag
-from forum.management.commands.fix_images import ad_list
+from forum.management.commands.fix_resource import ad_list
 
 from django.conf import settings
 import requests
