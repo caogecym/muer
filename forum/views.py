@@ -17,6 +17,12 @@ from markdown import markdown
 from forum.models import Post
 from forum.forms import PostForm
 
+def warning(request):
+    context = {
+               'user': request.user,
+              }
+    return render(request, 'warning.html', context)
+
 
 def home(request):
     context = {

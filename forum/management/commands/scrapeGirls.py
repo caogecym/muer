@@ -78,7 +78,7 @@ class Command(BaseCommand):
                 page_div = soup.find("div", { "class" : "pages" }).text
                 page_count = int(page_div.partition('/')[-1].rpartition('total')[0].strip())
                 page = 1
-                for i in range(int(page_count/10)):
+                for i in range(int(page_count/2)):
                     thread_url = list_url + '&search=&page=' + str(page)
 
                     # set threshold if givin in args
