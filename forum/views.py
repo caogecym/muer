@@ -23,7 +23,6 @@ def warning(request):
               }
     return render(request, 'warning.html', context)
 
-
 def home(request):
     context = {
                'user': request.user,
@@ -111,6 +110,10 @@ def search(request):
     query_string = ''
     found_entries = None
     if ('q' in request.GET) and request.GET['q'].strip():
+        query_url = request.GET.copy()
+        if query_url.has_key('page'):
+            del query_url['page']
+
         query_string = request.GET['q']
         
         entry_query = get_query(query_string, ['title', 'content',])
@@ -130,11 +133,11 @@ def search(request):
             posts = paginator.page(paginator.num_pages)
 
     else:
-        return HttpResponseRedirect('/')
-
+        return HttpResponseRedirect('/home')
     return render_to_response('index.html', { 
-                              #'query_string': query_string, 
-                              'posts': posts 
+                              'query_string': query_string, 
+                              'posts': posts,
+                              'query': query_url,
                               },
                               context_instance=RequestContext(request))
 

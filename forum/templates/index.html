@@ -49,7 +49,11 @@
   <div class="pagination">
     <span class="step-links">
       {% if posts.has_previous %}
-        <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% if query.urlencode %}
+          <a href="?{{query.urlencode}}&amp;page={{ posts.previous_page_number }}">previous</a>
+        {% else %}
+          <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% endif %}
       {% endif %}
   
       <span class="current">
@@ -57,7 +61,11 @@
       </span>
   
       {% if posts.has_next %}
-        <a href="?page={{ posts.next_page_number }}">next</a>
+        {% if query.urlencode %}
+          <a href="?{{query.urlencode}}&amp;page={{ posts.next_page_number }}">next</a>
+        {% else %}
+          <a href="?page={{ posts.next_page_number }}">next</a>
+        {% endif %}
       {% endif %}
     </span>
   </div>

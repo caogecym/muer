@@ -20,7 +20,7 @@
           <li><a href="/posts/hottest">Hottest</a></li>
           <li><a href="/about/">About</a></li>
         </ul>
-        <form action="/search/" method="get" class="navbar-search pull-left">{% csrf_token %}
+        <form action="/search" method="get" class="navbar-search pull-left">{% csrf_token %}
           <input type="text" name="q" class="search-query" placeholder="Search">
         </form>
         {% if user.is_authenticated %}
