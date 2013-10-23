@@ -9,12 +9,12 @@ admin.autodiscover()
 APP_PATH = os.path.dirname(__file__)
 
 urlpatterns = patterns('',
-    (r'^$', forum_views.warning),
+    (r'^$', forum_views.home),
     (r'^home/', forum_views.home),
     (r'^posts/', include(forum_urls, namespace="forum")),
     (r'^search/', forum_views.search),
     (r'^about/', forum_views.about),
-    (r'^tags/^$', forum_views.tags),
+    (r'^tags/$', forum_views.tags),
     (r'^tags/(?P<tag>[^/]+)/$', forum_views.tag),
     (r'^login/$', login),
     (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),

@@ -4,242 +4,248 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-ADMINS	./joke_site/settings.py	/^ADMINS = ($/;"	v
-ALLOWED_HOSTS	./joke_site/settings.py	/^ALLOWED_HOSTS = []$/;"	v
-Association	./django_authopenid/models.py	/^class Association(models.Model):$/;"	c
-ChangeemailForm	./django_authopenid/forms.py	/^class ChangeemailForm(forms.Form):$/;"	c
-ChangeopenidForm	./django_authopenid/forms.py	/^class ChangeopenidForm(forms.Form):$/;"	c
-ChangepwForm	./django_authopenid/forms.py	/^class ChangepwForm(forms.Form):$/;"	c
-Command	./forum/management/commands/scrapeJokes.py	/^class Command(BaseCommand):$/;"	c
-DATABASES	./joke_site/settings.py	/^DATABASES = {$/;"	v
-DEBUG	./joke_site/settings.py	/^DEBUG = True$/;"	v
-DEFAULT_NEXT	./django_authopenid/util.py	/^DEFAULT_NEXT = getattr(settings, 'OPENID_REDIRECT_NEXT', '\/')$/;"	v
-DeleteForm	./django_authopenid/forms.py	/^class DeleteForm(forms.Form):$/;"	c
-DjangoOpenIDStore	./django_authopenid/util.py	/^class DjangoOpenIDStore(OpenIDStore):$/;"	c
-EmailPasswordForm	./django_authopenid/forms.py	/^class EmailPasswordForm(forms.Form):$/;"	c
-INSTALLED_APPS	./joke_site/settings.py	/^INSTALLED_APPS = ($/;"	v
-LANGUAGE_CODE	./joke_site/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	v
-LOGGING	./joke_site/settings.py	/^LOGGING = {$/;"	v
-LOGIN_URL	./joke_site/settings.py	/^LOGIN_URL = '\/%s%s' % (ugettext('account\/'), ugettext('signin\/'))$/;"	v
-ListField	./libs/models/fields.py	/^class ListField(models.TextField):$/;"	c
-MANAGERS	./joke_site/settings.py	/^MANAGERS = ADMINS$/;"	v
-MEDIA_ROOT	./joke_site/settings.py	/^MEDIA_ROOT = ''$/;"	v
-MEDIA_URL	./joke_site/settings.py	/^MEDIA_URL = ''$/;"	v
-MIDDLEWARE_CLASSES	./joke_site/settings.py	/^MIDDLEWARE_CLASSES = ($/;"	v
-Nonce	./django_authopenid/models.py	/^class Nonce(models.Model):$/;"	c
-OpenID	./django_authopenid/util.py	/^class OpenID:$/;"	c
-OpenIDMiddleware	./django_authopenid/middleware.py	/^class OpenIDMiddleware(object):$/;"	c
-OpenidAuthForm	./django_authopenid/forms.py	/^class OpenidAuthForm(forms.Form):$/;"	c
-OpenidRegisterForm	./django_authopenid/forms.py	/^class OpenidRegisterForm(forms.Form):$/;"	c
-OpenidSigninForm	./django_authopenid/forms.py	/^class OpenidSigninForm(forms.Form):$/;"	c
-OpenidVerifyForm	./django_authopenid/forms.py	/^class OpenidVerifyForm(forms.Form):$/;"	c
-Post	./forum/models.py	/^class Post(models.Model):$/;"	c
-RESERVED_NAMES	./django_authopenid/forms.py	/^RESERVED_NAMES = (u'fuck', u'shit', u'ass', u'sex', u'add',$/;"	v
-ROOT_URLCONF	./joke_site/settings.py	/^ROOT_URLCONF = 'joke_site.urls'$/;"	v
-RegistrationForm	./django_authopenid/forms.py	/^class RegistrationForm(forms.Form):$/;"	c
-SECRET_KEY	./joke_site/settings.py	/^SECRET_KEY = 'gseb#7@0qznk#rnie6s2+r4a1#2d7*z!-j(*=yg5c2o3g4de5_'$/;"	v
-SITE_ID	./joke_site/settings.py	/^SITE_ID = 1$/;"	v
-STATICFILES_DIRS	./joke_site/settings.py	/^STATICFILES_DIRS = ($/;"	v
-STATICFILES_FINDERS	./joke_site/settings.py	/^STATICFILES_FINDERS = ($/;"	v
-STATIC_ROOT	./joke_site/settings.py	/^STATIC_ROOT = ''$/;"	v
-STATIC_URL	./joke_site/settings.py	/^STATIC_URL = '\/static\/'$/;"	v
-TEMPLATE_DEBUG	./joke_site/settings.py	/^TEMPLATE_DEBUG = DEBUG$/;"	v
-TEMPLATE_DIRS	./joke_site/settings.py	/^TEMPLATE_DIRS = ($/;"	v
-TEMPLATE_LOADERS	./joke_site/settings.py	/^TEMPLATE_LOADERS = ($/;"	v
-TIME_ZONE	./joke_site/settings.py	/^TIME_ZONE = 'America\/Los_Angeles'$/;"	v
-TestMimeParsing	./django_authopenid/mimeparse.py	/^    class TestMimeParsing(unittest.TestCase):$/;"	c
-USE_I18N	./joke_site/settings.py	/^USE_I18N = True$/;"	v
-USE_L10N	./joke_site/settings.py	/^USE_L10N = True$/;"	v
-USE_TZ	./joke_site/settings.py	/^USE_TZ = True$/;"	v
-UserAssociation	./django_authopenid/models.py	/^class UserAssociation(models.Model):$/;"	c
-UserAssociationAdmin	./django_authopenid/admin.py	/^class UserAssociationAdmin(admin.ModelAdmin):$/;"	c
-UserPasswordQueue	./django_authopenid/models.py	/^class UserPasswordQueue(models.Model):$/;"	c
-UserPasswordQueueManager	./django_authopenid/models.py	/^class UserPasswordQueueManager(models.Manager):$/;"	c
-WSGI_APPLICATION	./joke_site/settings.py	/^WSGI_APPLICATION = 'joke_site.wsgi.application'$/;"	v
-__all__	./django_authopenid/forms.py	/^__all__ = ['OpenidSigninForm', 'OpenidAuthForm', 'OpenidVerifyForm',$/;"	v
-__all__	./django_authopenid/middleware.py	/^__all__ = ["OpenIDMiddleware"]$/;"	v
-__all__	./django_authopenid/models.py	/^__all__ = ['Nonce', 'Association', 'UserAssociation', $/;"	v
-__all__	./django_authopenid/util.py	/^__all__ = ['OpenID', 'DjangoOpenIDStore', 'from_openid_response', 'clean_next']$/;"	v
-__author__	./django_authopenid/mimeparse.py	/^__author__ = 'Joe Gregorio'$/;"	v
-__credits__	./django_authopenid/mimeparse.py	/^__credits__ = ""$/;"	v
-__email__	./django_authopenid/mimeparse.py	/^__email__ = "joe@bitworking.org"$/;"	v
-__init__	./django_authopenid/forms.py	/^            initial=None, user=None):$/;"	m	class:ChangeemailForm
-__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None, $/;"	m	class:EmailPasswordForm
-__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, files=None, auto_id='id_%s',$/;"	m	class:DeleteForm
-__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, files=None, auto_id='id_%s',$/;"	m	class:OpenidAuthForm
-__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, files=None, auto_id='id_%s',$/;"	m	class:OpenidVerifyForm
-__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, user=None, *args, **kwargs):$/;"	m	class:ChangeopenidForm
-__init__	./django_authopenid/forms.py	/^    def __init__(self, data=None, user=None, *args, **kwargs):$/;"	m	class:ChangepwForm
-__init__	./django_authopenid/util.py	/^    def __init__(self):$/;"	m	class:DjangoOpenIDStore
-__init__	./django_authopenid/util.py	/^    def __init__(self, openid_, issued, attrs=None, sreg_=None):$/;"	m	class:OpenID
-__init__	./libs/models/fields.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:ListField
-__metaclass__	./libs/models/fields.py	/^    __metaclass__ = models.SubfieldBase$/;"	v	class:ListField
-__repr__	./django_authopenid/util.py	/^    def __repr__(self):$/;"	m	class:OpenID	file:
-__str__	./django_authopenid/util.py	/^    def __str__(self):$/;"	m	class:OpenID	file:
-__unicode__	./django_authopenid/models.py	/^    def __unicode__(self):$/;"	m	class:Association	file:
-__unicode__	./django_authopenid/models.py	/^    def __unicode__(self):$/;"	m	class:Nonce	file:
-__unicode__	./django_authopenid/models.py	/^    def __unicode__(self):$/;"	m	class:UserAssociation	file:
-__unicode__	./django_authopenid/models.py	/^    def __unicode__(self):$/;"	m	class:UserPasswordQueue	file:
-__unicode__	./forum/models.py	/^    def __unicode__(self):$/;"	m	class:Post	file:
-__version__	./django_authopenid/__init__.py	/^__version__ = "0.9.4"$/;"	v
-__version__	./django_authopenid/mimeparse.py	/^__version__ = "0.1.1"$/;"	v
-_send_email_key	./django_authopenid/views.py	/^def _send_email_key(user):$/;"	f
-account_settings	./django_authopenid/views.py	/^def account_settings(request):$/;"	f
-application	./joke_site/wsgi.py	/^application = get_wsgi_application()$/;"	v
-ask_openid	./django_authopenid/views.py	/^def ask_openid(request, openid_url, redirect_to, on_failure=None,$/;"	f
-assoc_type	./django_authopenid/models.py	/^    assoc_type = models.TextField(max_length=64)$/;"	v	class:Association
-attrs_dict	./django_authopenid/forms.py	/^attrs_dict = { 'class': 'required login' }$/;"	v
-attrs_dict	./django_authopenid/forms.py	/^attrs_dict = { 'class': 'required' }$/;"	v
-best_match	./django_authopenid/mimeparse.py	/^def best_match(supported, header):$/;"	f
-changeemail	./django_authopenid/views.py	/^def changeemail(request):$/;"	f
-changeopenid	./django_authopenid/views.py	/^def changeopenid(request):$/;"	f
-changeopenid_failure	./django_authopenid/views.py	/^def changeopenid_failure(request, message):$/;"	f
-changeopenid_success	./django_authopenid/views.py	/^def changeopenid_success(request, identity_url, openid_response):$/;"	f
-changepw	./django_authopenid/views.py	/^def changepw(request):$/;"	f
-clean_email	./django_authopenid/forms.py	/^    def clean_email(self):$/;"	m	class:ChangeemailForm
-clean_email	./django_authopenid/forms.py	/^    def clean_email(self):$/;"	m	class:OpenidRegisterForm
-clean_email	./django_authopenid/forms.py	/^    def clean_email(self):$/;"	m	class:RegistrationForm
-clean_next	./django_authopenid/forms.py	/^    def clean_next(self):$/;"	m	class:OpenidAuthForm
-clean_next	./django_authopenid/forms.py	/^    def clean_next(self):$/;"	m	class:OpenidSigninForm
-clean_next	./django_authopenid/util.py	/^def clean_next(next):$/;"	f
-clean_oldpw	./django_authopenid/forms.py	/^    def clean_oldpw(self):$/;"	m	class:ChangepwForm
-clean_openid_url	./django_authopenid/forms.py	/^    def clean_openid_url(self):$/;"	m	class:OpenidSigninForm
-clean_password	./django_authopenid/forms.py	/^    def clean_password(self):$/;"	m	class:ChangeemailForm
-clean_password	./django_authopenid/forms.py	/^    def clean_password(self):$/;"	m	class:DeleteForm
-clean_password	./django_authopenid/forms.py	/^    def clean_password(self):$/;"	m	class:OpenidAuthForm
-clean_password	./django_authopenid/forms.py	/^    def clean_password(self):$/;"	m	class:OpenidVerifyForm
-clean_password2	./django_authopenid/forms.py	/^    def clean_password2(self):$/;"	m	class:ChangepwForm
-clean_password2	./django_authopenid/forms.py	/^    def clean_password2(self):$/;"	m	class:RegistrationForm
-clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:EmailPasswordForm
-clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:OpenidAuthForm
-clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:OpenidRegisterForm
-clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:OpenidVerifyForm
-clean_username	./django_authopenid/forms.py	/^    def clean_username(self):$/;"	m	class:RegistrationForm
-cleanupAssociations	./django_authopenid/util.py	/^    def cleanupAssociations(self):$/;"	m	class:DjangoOpenIDStore
-cleanupNonce	./django_authopenid/util.py	/^    def cleanupNonce(self):$/;"	m	class:DjangoOpenIDStore
-clear_email_validation_message	./django_authopenid/views.py	/^def clear_email_validation_message(user):$/;"	f
-complete	./django_authopenid/views.py	/^def complete(request, on_success=None, on_failure=None, return_to=None):$/;"	f
-complete_signin	./django_authopenid/views.py	/^def complete_signin(request):$/;"	f
-confirm	./django_authopenid/forms.py	/^    confirm = forms.CharField(widget=forms.CheckboxInput(attrs=attrs_dict))$/;"	v	class:DeleteForm
-confirm_key	./django_authopenid/models.py	/^    confirm_key = models.CharField(max_length=40)$/;"	v	class:UserPasswordQueue
-confirmchangepw	./django_authopenid/views.py	/^def confirmchangepw(request):$/;"	f
-content	./forum/models.py	/^    content = models.CharField(max_length=1024)$/;"	v	class:Post
-content	./forum/views.py	/^def content(request, post_id):$/;"	f
-decorated	./django_authopenid/views.py	/^    def decorated(request, *args, **kwargs):$/;"	f	function:not_authenticated
-default_on_failure	./django_authopenid/views.py	/^def default_on_failure(request, message):$/;"	f
-default_on_success	./django_authopenid/views.py	/^def default_on_success(request, identity_url, openid_response):$/;"	f
-delete	./django_authopenid/views.py	/^def delete(request):$/;"	f
-deleteopenid_failure	./django_authopenid/views.py	/^def deleteopenid_failure(request, message):$/;"	f
-deleteopenid_success	./django_authopenid/views.py	/^def deleteopenid_success(request, identity_url, openid_response):$/;"	f
-email	./django_authopenid/forms.py	/^    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict, $/;"	v	class:ChangeemailForm
-email	./django_authopenid/forms.py	/^    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict, $/;"	v	class:OpenidRegisterForm
-email	./django_authopenid/forms.py	/^    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict,$/;"	v	class:RegistrationForm
-emailopenid_failure	./django_authopenid/views.py	/^def emailopenid_failure(request, message):$/;"	f
-emailopenid_success	./django_authopenid/views.py	/^def emailopenid_success(request, identity_url, openid_response):$/;"	f
-find_email_validation_messages	./django_authopenid/views.py	/^def find_email_validation_messages(user):$/;"	f
-from_openid_response	./django_authopenid/util.py	/^def from_openid_response(openid_response):$/;"	f
-getAssociation	./django_authopenid/util.py	/^    def getAssociation(self, server_url, handle=None):$/;"	m	class:DjangoOpenIDStore
-getAuthKey	./django_authopenid/util.py	/^    def getAuthKey(self):$/;"	m	class:DjangoOpenIDStore
-get_db_prep_value	./libs/models/fields.py	/^    def get_db_prep_value(self, value, connection, prepared=False):$/;"	m	class:ListField
-get_full_url	./django_authopenid/views.py	/^def get_full_url(request):$/;"	f
-get_new_confirm_key	./django_authopenid/models.py	/^    def get_new_confirm_key(self):$/;"	m	class:UserPasswordQueueManager
-get_url_host	./django_authopenid/views.py	/^def get_url_host(request):$/;"	f
-get_user	./django_authopenid/forms.py	/^    def get_user(self):$/;"	m	class:OpenidAuthForm
-get_user	./django_authopenid/forms.py	/^    def get_user(self):$/;"	m	class:OpenidVerifyForm
-handle	./django_authopenid/models.py	/^    handle = models.CharField(max_length=255)$/;"	v	class:Association
-handle	./forum/management/commands/scrapeJokes.py	/^    def handle(self, *args, **options):$/;"	m	class:Command
-help	./forum/management/commands/scrapeJokes.py	/^    help = 'Scrapes the sites for new dockets'$/;"	v	class:Command
-index	./forum/views.py	/^def index(request):$/;"	f
-isDumb	./django_authopenid/util.py	/^    def isDumb(self):$/;"	m	class:DjangoOpenIDStore
-is_association_exist	./django_authopenid/views.py	/^def is_association_exist(openid_url):$/;"	f
-issued	./django_authopenid/models.py	/^    issued = models.IntegerField()$/;"	v	class:Association
-label	./django_authopenid/forms.py	/^            label=_('choose a username'))$/;"	v	class:RegistrationForm
-label	./django_authopenid/forms.py	/^            label=_('choose password'))$/;"	v	class:RegistrationForm
-label	./django_authopenid/forms.py	/^            label=_('retype password'))$/;"	v	class:RegistrationForm
-lifetime	./django_authopenid/models.py	/^    lifetime = models.IntegerField()$/;"	v	class:Association
-like	./forum/views.py	/^def like(request, post_id):$/;"	f
-like_count	./forum/models.py	/^    like_count = models.IntegerField(default=0)$/;"	v	class:Post
-likedBy	./forum/models.py	/^    likedBy = ListField(null=True)$/;"	v	class:Post
-login	./django_authopenid/views.py	/^def login(request,user):$/;"	f
-name	./django_authopenid/urls.py	/^        name='user_complete_signin'),$/;"	v
-new_password	./django_authopenid/models.py	/^    new_password = models.CharField(max_length=30)$/;"	v	class:UserPasswordQueue
-next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget = forms.HiddenInput(), $/;"	v	class:OpenidVerifyForm
-next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget=forms.HiddenInput(), $/;"	v	class:OpenidAuthForm
-next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget=forms.HiddenInput(), $/;"	v	class:OpenidRegisterForm
-next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget=forms.HiddenInput(), $/;"	v	class:RegistrationForm
-next	./django_authopenid/forms.py	/^    next = forms.CharField(max_length=255, widget=forms.HiddenInput(), required=False)$/;"	v	class:OpenidSigninForm
-not_authenticated	./django_authopenid/views.py	/^def not_authenticated(func):$/;"	f
-objects	./django_authopenid/models.py	/^    objects = UserPasswordQueueManager()$/;"	v	class:UserPasswordQueue
-oldpw	./django_authopenid/forms.py	/^    oldpw = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:ChangepwForm
-openid_url	./django_authopenid/forms.py	/^    openid_url = forms.CharField(max_length=255, widget=forms.widgets.TextInput(attrs={'class': 'openid-login-input', 'size':80}))$/;"	v	class:OpenidSigninForm
-openid_url	./django_authopenid/forms.py	/^    openid_url = forms.CharField(max_length=255,$/;"	v	class:ChangeopenidForm
-openid_url	./django_authopenid/models.py	/^    openid_url = models.CharField(blank=False, max_length=255)$/;"	v	class:UserAssociation
-parse_media_range	./django_authopenid/mimeparse.py	/^def parse_media_range(range):$/;"	f
-parse_mime_type	./django_authopenid/mimeparse.py	/^def parse_mime_type(mime_type):$/;"	f
-password	./django_authopenid/forms.py	/^    password = forms.CharField(max_length=128, $/;"	v	class:OpenidAuthForm
-password	./django_authopenid/forms.py	/^    password = forms.CharField(max_length=128, $/;"	v	class:OpenidVerifyForm
-password	./django_authopenid/forms.py	/^    password = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:ChangeemailForm
-password	./django_authopenid/forms.py	/^    password = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:DeleteForm
-password1	./django_authopenid/forms.py	/^    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:ChangepwForm
-password1	./django_authopenid/forms.py	/^    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict),$/;"	v	class:RegistrationForm
-password2	./django_authopenid/forms.py	/^    password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict))$/;"	v	class:ChangepwForm
-password2	./django_authopenid/forms.py	/^    password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict),$/;"	v	class:RegistrationForm
-process_request	./django_authopenid/middleware.py	/^    def process_request(self, request):$/;"	m	class:OpenIDMiddleware
-process_response	./django_authopenid/middleware.py	/^    def process_response(self, request, response):$/;"	m	class:OpenIDMiddleware
-quality	./django_authopenid/mimeparse.py	/^def quality(mime_type, ranges):$/;"	f
-quality_parsed	./django_authopenid/mimeparse.py	/^def quality_parsed(mime_type, parsed_ranges):$/;"	f
-register	./django_authopenid/views.py	/^def register(request):$/;"	f
-removeAssociation	./django_authopenid/util.py	/^    def removeAssociation(self, server_url, handle):$/;"	m	class:DjangoOpenIDStore
-required	./django_authopenid/forms.py	/^            required=False)$/;"	v	class:OpenidAuthForm
-required	./django_authopenid/forms.py	/^            required=False)$/;"	v	class:OpenidRegisterForm
-required	./django_authopenid/forms.py	/^            required=False)$/;"	v	class:OpenidVerifyForm
-required	./django_authopenid/forms.py	/^            required=False)$/;"	v	class:RegistrationForm
-salt	./django_authopenid/models.py	/^    salt = models.CharField(max_length=40)$/;"	v	class:Nonce
-secret	./django_authopenid/models.py	/^    secret = models.TextField(max_length=255) # Stored base64 encoded$/;"	v	class:Association
-send_email_key	./django_authopenid/views.py	/^def send_email_key(request):$/;"	f
-send_new_email_key	./django_authopenid/views.py	/^def send_new_email_key(user,nomessage=False):$/;"	f
-sendpw	./django_authopenid/views.py	/^def sendpw(request):$/;"	f
-server_url	./django_authopenid/models.py	/^    server_url = models.CharField(max_length=255)$/;"	v	class:Nonce
-server_url	./django_authopenid/models.py	/^    server_url = models.TextField(max_length=2047)$/;"	v	class:Association
-set_email_validation_message	./django_authopenid/views.py	/^def set_email_validation_message(user):$/;"	f
-set_new_email	./django_authopenid/views.py	/^def set_new_email(user, new_email, nomessage=False):$/;"	f
-signin	./django_authopenid/views.py	/^def signin(request,newquestion=False,newanswer=False):$/;"	f
-signin_failure	./django_authopenid/views.py	/^def signin_failure(request, message):$/;"	f
-signin_success	./django_authopenid/views.py	/^def signin_success(request, identity_url, openid_response):$/;"	f
-signout	./django_authopenid/views.py	/^def signout(request):$/;"	f
-signup	./django_authopenid/views.py	/^def signup(request):$/;"	f
-storeAssociation	./django_authopenid/util.py	/^    def storeAssociation(self, server_url, association):$/;"	m	class:DjangoOpenIDStore
-tags	./forum/models.py	/^    tags = ListField(null=True)$/;"	v	class:Post
-test_best_match	./django_authopenid/mimeparse.py	/^        def test_best_match(self):$/;"	m	class:.TestMimeParsing
-test_parse_media_range	./django_authopenid/mimeparse.py	/^        def test_parse_media_range(self):$/;"	m	class:.TestMimeParsing
-test_rfc_2616_example	./django_authopenid/mimeparse.py	/^        def test_rfc_2616_example(self):$/;"	m	class:.TestMimeParsing
-test_support_wildcards	./django_authopenid/mimeparse.py	/^        def test_support_wildcards(self):$/;"	m	class:.TestMimeParsing
-timestamp	./django_authopenid/models.py	/^    timestamp = models.IntegerField()$/;"	v	class:Nonce
-title	./forum/models.py	/^    title = models.CharField(max_length=60, unique=True)$/;"	v	class:Post
-to_python	./libs/models/fields.py	/^    def to_python(self, value):$/;"	m	class:ListField
-ugettext	./joke_site/settings.py	/^ugettext = lambda s: s$/;"	v
-urlpatterns	./django_authopenid/urls.py	/^urlpatterns = patterns('django_authopenid.views',$/;"	v
-urlpatterns	./forum/urls.py	/^urlpatterns = patterns('',$/;"	v
-urlpatterns	./joke_site/urls.py	/^urlpatterns = patterns('',$/;"	v
-useNonce	./django_authopenid/util.py	/^    def useNonce(self, server_url, timestamp, salt):$/;"	m	class:DjangoOpenIDStore
-user	./django_authopenid/models.py	/^    user = models.ForeignKey(User, unique=True)$/;"	v	class:UserAssociation
-user	./django_authopenid/models.py	/^    user = models.ForeignKey(User, unique=True)$/;"	v	class:UserPasswordQueue
-username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30,  $/;"	v	class:OpenidAuthForm
-username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30, $/;"	v	class:OpenidRegisterForm
-username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30, $/;"	v	class:OpenidVerifyForm
-username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30,$/;"	v	class:EmailPasswordForm
-username	./django_authopenid/forms.py	/^    username = forms.CharField(max_length=30,$/;"	v	class:RegistrationForm
-username_re	./django_authopenid/forms.py	/^username_re = re.compile(r'^[\\w ]+$')$/;"	v
-username_re	./django_authopenid/forms.py	/^username_re = re.compile(r'^\\w+$')$/;"	v
-validation_email_sent	./django_authopenid/views.py	/^def validation_email_sent(request):$/;"	f
-value_to_string	./libs/models/fields.py	/^    def value_to_string(self, obj):$/;"	m	class:ListField
-verifyemail	./django_authopenid/views.py	/^def verifyemail(request,id=None,key=None):$/;"	f
-widget	./django_authopenid/forms.py	/^            widget=forms.TextInput(attrs=attrs_dict),$/;"	v	class:RegistrationForm
-widget	./django_authopenid/forms.py	/^            widget=forms.TextInput(attrs={'class': "required" }))$/;"	v	class:ChangeopenidForm
-widget	./django_authopenid/forms.py	/^            widget=forms.TextInput(attrs={'class': "required" }))$/;"	v	class:EmailPasswordForm
-widget	./django_authopenid/forms.py	/^            widget=forms.widgets.PasswordInput(attrs=attrs_dict))$/;"	v	class:OpenidAuthForm
-widget	./django_authopenid/forms.py	/^            widget=forms.widgets.PasswordInput(attrs=attrs_dict))$/;"	v	class:OpenidVerifyForm
-widget	./django_authopenid/forms.py	/^            widget=forms.widgets.TextInput(attrs=attrs_dict))$/;"	v	class:OpenidAuthForm
-widget	./django_authopenid/forms.py	/^            widget=forms.widgets.TextInput(attrs=attrs_dict))$/;"	v	class:OpenidRegisterForm
-widget	./django_authopenid/forms.py	/^            widget=forms.widgets.TextInput(attrs=attrs_dict))$/;"	v	class:OpenidVerifyForm
-xrdf	./django_authopenid/views.py	/^def xrdf(request):$/;"	f
+ADJACENT_PAGES	./templatetags/extra_tags.py	/^ADJACENT_PAGES = 2$/;"	v
+BASE_URL	./management/commands/scrapeGirls.py	/^BASE_URL = 'http:\/\/184.154.128.243\/'$/;"	v
+CLOSE_REASONS	./const.py	/^CLOSE_REASONS = ($/;"	v
+CONST	./const.py	/^CONST = {$/;"	v
+Command	./management/commands/fix_resource.py	/^class Command(BaseCommand):$/;"	c
+Command	./management/commands/scrapeGirls.py	/^class Command(BaseCommand):$/;"	c
+Command	./management/commands/scrapeJokes.py	/^class Command(BaseCommand):$/;"	c
+Comment	./models.py	/^class Comment(models.Model):$/;"	c
+ContentField	./forms.py	/^class ContentField(forms.CharField):$/;"	c
+GRAVATAR_TEMPLATE	./templatetags/extra_tags.py	/^GRAVATAR_TEMPLATE = ('<img width="%(size)s" height="%(size)s" '$/;"	v
+Image	./models.py	/^class Image(models.Model):$/;"	c
+JavascriptMinify	./static/wmd/jsmin.py	/^class JavascriptMinify(object):$/;"	c
+MAX_FONTSIZE	./templatetags/extra_tags.py	/^MAX_FONTSIZE = 18$/;"	v
+MIN_FONTSIZE	./templatetags/extra_tags.py	/^MIN_FONTSIZE = 12$/;"	v
+MIN_SEED_SIZE	./management/commands/scrapeGirls.py	/^MIN_SEED_SIZE = 10000$/;"	v
+Meta	./models.py	/^    class Meta:$/;"	c	class:Comment
+Meta	./models.py	/^    class Meta:$/;"	c	class:Image
+Meta	./models.py	/^    class Meta:$/;"	c	class:Post
+Meta	./models.py	/^    class Meta:$/;"	c	class:Resource
+Meta	./models.py	/^    class Meta:$/;"	c	class:Tag
+Migration	./migrations/0001_initial.py	/^class Migration(SchemaMigration):$/;"	c
+Migration	./migrations/0002_renaming_remote_src_delete_local_src.py	/^class Migration(SchemaMigration):$/;"	c
+Migration	./migrations/backup/0002_auto__add_rmdownresource__del_field_resource_remote_resource_src__del_.py	/^class Migration(SchemaMigration):$/;"	c
+Migration	./migrations/backup/0003_auto__del_rmdownresource__del_field_resource_resource_src__add_field_r.py	/^class Migration(SchemaMigration):$/;"	c
+Migration	./migrations/backup/0004_auto__del_field_resource_remote_resource_src__del_field_resource_local.py	/^class Migration(SchemaMigration):$/;"	c
+NUM_PAGES_OUTSIDE_RANGE	./templatetags/extra_tags.py	/^NUM_PAGES_OUTSIDE_RANGE = 1$/;"	v
+Post	./models.py	/^class Post(models.Model):$/;"	c
+PostForm	./forms.py	/^class PostForm(forms.Form):$/;"	c
+Resource	./models.py	/^class Resource(models.Model):$/;"	c
+SiteType	./management/commands/scrapeGirls.py	/^SiteType = enum(RMDOWN=1, VII=2)$/;"	v
+TYPE_ACTIVITY	./const.py	/^TYPE_ACTIVITY = ($/;"	v
+TYPE_ACTIVITY_ANSWER	./const.py	/^TYPE_ACTIVITY_ANSWER=2$/;"	v
+TYPE_ACTIVITY_ASK_QUESTION	./const.py	/^TYPE_ACTIVITY_ASK_QUESTION=1$/;"	v
+TYPE_ACTIVITY_CANCEL_VOTE	./const.py	/^TYPE_ACTIVITY_CANCEL_VOTE=11$/;"	v
+TYPE_ACTIVITY_COMMENT_ANSWER	./const.py	/^TYPE_ACTIVITY_COMMENT_ANSWER=4$/;"	v
+TYPE_ACTIVITY_COMMENT_QUESTION	./const.py	/^TYPE_ACTIVITY_COMMENT_QUESTION=3$/;"	v
+TYPE_ACTIVITY_DELETE_ANSWER	./const.py	/^TYPE_ACTIVITY_DELETE_ANSWER=13$/;"	v
+TYPE_ACTIVITY_DELETE_QUESTION	./const.py	/^TYPE_ACTIVITY_DELETE_QUESTION=12$/;"	v
+TYPE_ACTIVITY_FAVORITE	./const.py	/^TYPE_ACTIVITY_FAVORITE=16$/;"	v
+TYPE_ACTIVITY_MARK_ANSWER	./const.py	/^TYPE_ACTIVITY_MARK_ANSWER=8$/;"	v
+TYPE_ACTIVITY_MARK_OFFENSIVE	./const.py	/^TYPE_ACTIVITY_MARK_OFFENSIVE=14$/;"	v
+TYPE_ACTIVITY_PRIZE	./const.py	/^TYPE_ACTIVITY_PRIZE=7$/;"	v
+TYPE_ACTIVITY_UPDATE_ANSWER	./const.py	/^TYPE_ACTIVITY_UPDATE_ANSWER=6$/;"	v
+TYPE_ACTIVITY_UPDATE_QUESTION	./const.py	/^TYPE_ACTIVITY_UPDATE_QUESTION=5$/;"	v
+TYPE_ACTIVITY_UPDATE_TAGS	./const.py	/^TYPE_ACTIVITY_UPDATE_TAGS=15$/;"	v
+TYPE_ACTIVITY_USER_FULL_UPDATED	./const.py	/^TYPE_ACTIVITY_USER_FULL_UPDATED = 17$/;"	v
+TYPE_ACTIVITY_VOTE_DOWN	./const.py	/^TYPE_ACTIVITY_VOTE_DOWN=10$/;"	v
+TYPE_ACTIVITY_VOTE_UP	./const.py	/^TYPE_ACTIVITY_VOTE_UP=9$/;"	v
+TYPE_REPUTATION	./const.py	/^TYPE_REPUTATION = ($/;"	v
+TYPE_RESPONSE	./const.py	/^TYPE_RESPONSE = {$/;"	v
+Tag	./models.py	/^class Tag(models.Model):$/;"	c
+TagManager	./managers.py	/^class TagManager(models.Manager):$/;"	c
+TagNamesField	./forms.py	/^class TagNamesField(forms.CharField):$/;"	c
+TitleField	./forms.py	/^class TitleField(forms.CharField):$/;"	c
+UPDATE_USED_COUNTS_QUERY	./managers.py	/^    UPDATE_USED_COUNTS_QUERY = ($/;"	v	class:TagManager
+UnterminatedComment	./static/wmd/jsmin.py	/^class UnterminatedComment(Exception):$/;"	c
+UnterminatedRegularExpression	./static/wmd/jsmin.py	/^class UnterminatedRegularExpression(Exception):$/;"	c
+UnterminatedStringLiteral	./static/wmd/jsmin.py	/^class UnterminatedStringLiteral(Exception):$/;"	c
+__init__	./forms.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:ContentField
+__init__	./forms.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:TagNamesField
+__init__	./forms.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:TitleField
+__unicode__	./models.py	/^    def __unicode__(self):$/;"	m	class:Comment	file:
+__unicode__	./models.py	/^    def __unicode__(self):$/;"	m	class:Post	file:
+__unicode__	./models.py	/^    def __unicode__(self):$/;"	m	class:Tag	file:
+_action	./static/wmd/jsmin.py	/^    def _action(self, action):$/;"	m	class:JavascriptMinify
+_get	./static/wmd/jsmin.py	/^    def _get(self):$/;"	m	class:JavascriptMinify
+_jsmin	./static/wmd/jsmin.py	/^    def _jsmin(self):$/;"	m	class:JavascriptMinify
+_next	./static/wmd/jsmin.py	/^    def _next(self):$/;"	m	class:JavascriptMinify
+_outA	./static/wmd/jsmin.py	/^    def _outA(self):$/;"	m	class:JavascriptMinify
+_outB	./static/wmd/jsmin.py	/^    def _outB(self):$/;"	m	class:JavascriptMinify
+_peek	./static/wmd/jsmin.py	/^    def _peek(self):$/;"	m	class:JavascriptMinify
+about	./views.py	/^def about(request):$/;"	f
+absolute_delete	./management/commands/fix_resource.py	/^def absolute_delete(post):$/;"	f
+action	./management/commands/fix_resource.py	/^            action='store_true',$/;"	v	class:Command
+action	./management/commands/scrapeGirls.py	/^            action='store_true',$/;"	v	class:Command
+ad_list	./management/commands/fix_resource.py	/^ad_list = ['diogio9888',]$/;"	v
+add_post	./views.py	/^def add_post(request):$/;"	f
+added_at	./models.py	/^    added_at            = models.DateTimeField(default=datetime.datetime.now)$/;"	v	class:Comment
+added_at	./models.py	/^    added_at            = models.DateTimeField(default=datetime.datetime.now)$/;"	v	class:Post
+ajax_login_required	./views.py	/^def ajax_login_required(view_func):$/;"	f
+author	./models.py	/^    author              = models.ForeignKey(User, null=True, blank=True, related_name='created_tags')$/;"	v	class:Tag
+author	./models.py	/^    author              = models.ForeignKey(User, related_name='comments')$/;"	v	class:Comment
+author	./models.py	/^    author              = models.ForeignKey(User, related_name='posts')$/;"	v	class:Post
+backwards	./migrations/0001_initial.py	/^    def backwards(self, orm):$/;"	m	class:Migration
+backwards	./migrations/0002_renaming_remote_src_delete_local_src.py	/^    def backwards(self, orm):$/;"	m	class:Migration
+backwards	./migrations/backup/0002_auto__add_rmdownresource__del_field_resource_remote_resource_src__del_.py	/^    def backwards(self, orm):$/;"	m	class:Migration
+backwards	./migrations/backup/0003_auto__del_rmdownresource__del_field_resource_resource_src__add_field_r.py	/^    def backwards(self, orm):$/;"	m	class:Migration
+backwards	./migrations/backup/0004_auto__del_field_resource_remote_resource_src__del_field_resource_local.py	/^    def backwards(self, orm):$/;"	m	class:Migration
+can_accept_answer	./templatetags/extra_filters.py	/^def can_accept_answer(user, question, answer):$/;"	f
+can_add_comments	./templatetags/extra_filters.py	/^def can_add_comments(user):$/;"	f
+can_close_question	./templatetags/extra_filters.py	/^def can_close_question(user, question):$/;"	f
+can_delete_comment	./templatetags/extra_filters.py	/^def can_delete_comment(user, comment):$/;"	f
+can_delete_post	./templatetags/extra_filters.py	/^def can_delete_post(user, post):$/;"	f
+can_edit_post	./templatetags/extra_filters.py	/^def can_edit_post(user, post):$/;"	f
+can_flag_offensive	./templatetags/extra_filters.py	/^def can_flag_offensive(user):$/;"	f
+can_lock_posts	./templatetags/extra_filters.py	/^def can_lock_posts(user):$/;"	f
+can_reopen_question	./templatetags/extra_filters.py	/^def can_reopen_question(user, question):$/;"	f
+can_retag_questions	./templatetags/extra_filters.py	/^def can_retag_questions(user):$/;"	f
+can_view_offensive_flags	./templatetags/extra_filters.py	/^def can_view_offensive_flags(user):$/;"	f
+can_view_user_edit	./templatetags/extra_filters.py	/^def can_view_user_edit(request_user, target_user):$/;"	f
+can_view_user_preferences	./templatetags/extra_filters.py	/^def can_view_user_preferences(request_user, target_user):$/;"	f
+can_view_user_votes	./templatetags/extra_filters.py	/^def can_view_user_votes(request_user, target_user):$/;"	f
+can_vote_down	./templatetags/extra_filters.py	/^def can_vote_down(user):$/;"	f
+can_vote_up	./templatetags/extra_filters.py	/^def can_vote_up(user):$/;"	f
+clean	./forms.py	/^        def clean(self, value):$/;"	f	function:TagNamesField.__init__
+clean	./forms.py	/^    def clean(self, value):$/;"	m	class:TitleField
+cnprog_intword	./templatetags/extra_filters.py	/^def cnprog_intword(number):$/;"	f
+cnprog_pagesize	./templatetags/extra_tags.py	/^def cnprog_pagesize(context):$/;"	f
+cnprog_paginator	./templatetags/extra_tags.py	/^def cnprog_paginator(context):$/;"	f
+comment_count	./models.py	/^    comment_count       = models.PositiveIntegerField(default=0)$/;"	v	class:Comment
+comment_count	./models.py	/^    comment_count       = models.PositiveIntegerField(default=0)$/;"	v	class:Post
+comments	./models.py	/^    comments            = generic.GenericRelation('self')$/;"	v	class:Comment
+comments	./models.py	/^    comments            = generic.GenericRelation(Comment)$/;"	v	class:Post
+complete_apps	./migrations/0001_initial.py	/^    complete_apps = ['forum']/;"	v	class:Migration
+complete_apps	./migrations/0002_renaming_remote_src_delete_local_src.py	/^    complete_apps = ['forum']$/;"	v	class:Migration
+complete_apps	./migrations/backup/0002_auto__add_rmdownresource__del_field_resource_remote_resource_src__del_.py	/^    complete_apps = ['forum']/;"	v	class:Migration
+complete_apps	./migrations/backup/0003_auto__del_rmdownresource__del_field_resource_resource_src__add_field_r.py	/^    complete_apps = ['forum']/;"	v	class:Migration
+complete_apps	./migrations/backup/0004_auto__del_field_resource_remote_resource_src__del_field_resource_local.py	/^    complete_apps = ['forum']/;"	v	class:Migration
+content	./forms.py	/^    content = ContentField()$/;"	v	class:PostForm
+content	./models.py	/^    content             = models.CharField(max_length=1024)$/;"	v	class:Comment
+content	./models.py	/^    content             = models.CharField(max_length=4096) # in html$/;"	v	class:Post
+content	./views.py	/^def content(request, post_id):$/;"	f
+content_object	./models.py	/^    content_object      = generic.GenericForeignKey('content_type', 'object_id')$/;"	v	class:Comment
+content_object	./models.py	/^    content_object      = generic.GenericForeignKey('content_type', 'object_id')$/;"	v	class:Image
+content_object	./models.py	/^    content_object      = generic.GenericForeignKey('content_type', 'object_id')$/;"	v	class:Resource
+content_type	./models.py	/^    content_type        = models.ForeignKey(ContentType)$/;"	v	class:Comment
+content_type	./models.py	/^    content_type        = models.ForeignKey(ContentType)$/;"	v	class:Image
+content_type	./models.py	/^    content_type        = models.ForeignKey(ContentType)$/;"	v	class:Resource
+convert2tagname_list	./templatetags/extra_tags.py	/^def convert2tagname_list(question):$/;"	f
+createPost	./management/commands/scrapeGirls.py	/^    def createPost(self, thread_url, user, thread_type=None, like_count=0, *args, **options):$/;"	m	class:Command
+createTagsForPost	./management/commands/scrapeGirls.py	/^    def createTagsForPost(self, post_id, url, thread_type):$/;"	m	class:Command
+create_torrent	./management/commands/scrapeGirls.py	/^    def create_torrent(self, post_id, site, url, title, *args, **options):$/;"	m	class:Command
+db_table	./models.py	/^        db_table = u'comment'$/;"	v	class:Comment.Meta
+db_table	./models.py	/^        db_table = u'image'$/;"	v	class:Image.Meta
+db_table	./models.py	/^        db_table = u'post'$/;"	v	class:Post.Meta
+db_table	./models.py	/^        db_table = u'resource'$/;"	v	class:Resource.Meta
+db_table	./models.py	/^        db_table = u'tag'$/;"	v	class:Tag.Meta
+default	./management/commands/fix_resource.py	/^            default=False,$/;"	v	class:Command
+default	./management/commands/scrapeGirls.py	/^            default=False,$/;"	v	class:Command
+delete_bad_download_post	./management/commands/fix_resource.py	/^def delete_bad_download_post(post):$/;"	f
+delete_non_popular_post	./management/commands/fix_resource.py	/^def delete_non_popular_post(post):$/;"	f
+deleted	./models.py	/^    deleted             = models.BooleanField(default=False)$/;"	v	class:Comment
+deleted	./models.py	/^    deleted             = models.BooleanField(default=False)$/;"	v	class:Post
+deleted	./models.py	/^    deleted             = models.BooleanField(default=False)$/;"	v	class:Tag
+deleted_at	./models.py	/^    deleted_at          = models.DateTimeField(null=True, blank=True)$/;"	v	class:Comment
+deleted_at	./models.py	/^    deleted_at          = models.DateTimeField(null=True, blank=True)$/;"	v	class:Post
+deleted_at	./models.py	/^    deleted_at          = models.DateTimeField(null=True, blank=True)$/;"	v	class:Tag
+deleted_by	./models.py	/^    deleted_by          = models.ForeignKey(User, null=True, blank=True, related_name='deleted_comments')$/;"	v	class:Comment
+deleted_by	./models.py	/^    deleted_by          = models.ForeignKey(User, null=True, blank=True, related_name='deleted_posts')$/;"	v	class:Post
+deleted_by	./models.py	/^    deleted_by          = models.ForeignKey(User, null=True, blank=True, related_name='deleted_tags')$/;"	v	class:Tag
+diff_date	./templatetags/extra_tags.py	/^def diff_date(date, limen=2):$/;"	f
+enum	./management/commands/scrapeGirls.py	/^def enum(**enums):$/;"	f
+format_number	./templatetags/extra_tags.py	/^def format_number(value):$/;"	f
+forwards	./migrations/0001_initial.py	/^    def forwards(self, orm):$/;"	m	class:Migration
+forwards	./migrations/0002_renaming_remote_src_delete_local_src.py	/^    def forwards(self, orm):$/;"	m	class:Migration
+forwards	./migrations/backup/0002_auto__add_rmdownresource__del_field_resource_remote_resource_src__del_.py	/^    def forwards(self, orm):$/;"	m	class:Migration
+forwards	./migrations/backup/0003_auto__del_rmdownresource__del_field_resource_resource_src__add_field_r.py	/^    def forwards(self, orm):$/;"	m	class:Migration
+forwards	./migrations/backup/0004_auto__del_field_resource_remote_resource_src__del_field_resource_local.py	/^    def forwards(self, orm):$/;"	m	class:Migration
+getResource	./management/commands/scrapeGirls.py	/^    def getResource(self, post_id, thread_title, thread_content, *args, **options):$/;"	m	class:Command
+getThreadsFrom	./management/commands/scrapeGirls.py	/^    def getThreadsFrom(self, site_type, url, threshold):$/;"	m	class:Command
+get_age	./templatetags/extra_tags.py	/^def get_age(birthday):$/;"	f
+get_latest_changed_timestamp	./templatetags/extra_tags.py	/^def get_latest_changed_timestamp():$/;"	f
+get_or_create_multiple	./managers.py	/^    def get_or_create_multiple(self, names, user):$/;"	m	class:TagManager
+get_query	./views.py	/^def get_query(query_string, search_fields):$/;"	f
+get_score_badge	./templatetags/extra_tags.py	/^def get_score_badge(user):$/;"	f
+get_score_badge_by_details	./templatetags/extra_tags.py	/^def get_score_badge_by_details(rep, gold, silver, bronze):$/;"	f
+get_tags_by_posts	./managers.py	/^    def get_tags_by_posts(self, posts):$/;"	m	class:TagManager
+get_total_count	./templatetags/extra_tags.py	/^def get_total_count(up_count, down_count):$/;"	f
+get_user_like_image	./templatetags/extra_tags.py	/^def get_user_like_image(users, user):$/;"	f
+get_valid_tags	./managers.py	/^    def get_valid_tags(self, page_size):$/;"	m	class:TagManager
+gravatar	./templatetags/extra_tags.py	/^def gravatar(user, size):$/;"	f
+handle	./management/commands/fix_resource.py	/^    def handle(self, *args, **options):$/;"	m	class:Command
+handle	./management/commands/scrapeGirls.py	/^    def handle(self, *args, **options):$/;"	m	class:Command
+handle	./management/commands/scrapeJokes.py	/^    def handle(self, *args, **options):$/;"	m	class:Command
+help	./management/commands/fix_resource.py	/^            help='delete not popular posts',$/;"	v	class:Command
+help	./management/commands/fix_resource.py	/^            help='delete posts with bad download links',$/;"	v	class:Command
+help	./management/commands/fix_resource.py	/^            help='remove bad imgs, including ad imgs',$/;"	v	class:Command
+help	./management/commands/fix_resource.py	/^    help = 'Fix invalid download links'$/;"	v	class:Command
+help	./management/commands/scrapeGirls.py	/^            help='Enter debug mode'),$/;"	v	class:Command
+help	./management/commands/scrapeGirls.py	/^            help='No seed to be uploaded'),$/;"	v	class:Command
+help	./management/commands/scrapeGirls.py	/^    help = 'Scrapes the sites for new threads'$/;"	v	class:Command
+help	./management/commands/scrapeJokes.py	/^    help = 'Scrapes the sites for new dockets'$/;"	v	class:Command
+home	./views.py	/^def home(request):$/;"	f
+image_src	./models.py	/^    image_src           = models.CharField(max_length=1024, blank=True)$/;"	v	class:Image
+images	./models.py	/^    images              = generic.GenericRelation(Image)$/;"	v	class:Comment
+images	./models.py	/^    images              = generic.GenericRelation(Image)$/;"	v	class:Post
+index	./views.py	/^def index(request, tag_name=None, order_by='-added_at'):$/;"	f
+index_hottest	./views.py	/^def index_hottest(request):$/;"	f
+initTags	./management/commands/scrapeGirls.py	/^    def initTags(self):$/;"	m	class:Command
+isAlphanum	./static/wmd/jsmin.py	/^def isAlphanum(c):$/;"	f
+is_liked_by	./templatetags/extra_tags.py	/^def is_liked_by(post, user):$/;"	f
+is_user_self	./templatetags/extra_filters.py	/^def is_user_self(request_user, target_user):$/;"	f
+jsm	./static/wmd/jsmin.py	/^    jsm = JavascriptMinify()$/;"	v
+jsmin	./static/wmd/jsmin.py	/^def jsmin(js):$/;"	f
+like	./views.py	/^def like(request, post_id):$/;"	f
+like_count	./models.py	/^    like_count          = models.PositiveIntegerField(default=0)$/;"	v	class:Comment
+like_count	./models.py	/^    like_count          = models.PositiveIntegerField(default=0)$/;"	v	class:Post
+liked_by	./models.py	/^    liked_by            = models.ManyToManyField(User, null=True, blank=True, related_name='liked_comments')$/;"	v	class:Comment
+liked_by	./models.py	/^    liked_by            = models.ManyToManyField(User, null=True, blank=True, related_name='liked_posts')$/;"	v	class:Post
+logger	./management/commands/fix_resource.py	/^logger = logging.getLogger('muer')$/;"	v
+logger	./management/commands/scrapeGirls.py	/^logger = logging.getLogger('muer')$/;"	v
+minify	./static/wmd/jsmin.py	/^    def minify(self, instream, outstream):$/;"	m	class:JavascriptMinify
+models	./migrations/0001_initial.py	/^    models = {$/;"	v	class:Migration
+models	./migrations/0002_renaming_remote_src_delete_local_src.py	/^    models = {$/;"	v	class:Migration
+models	./migrations/backup/0002_auto__add_rmdownresource__del_field_resource_remote_resource_src__del_.py	/^    models = {$/;"	v	class:Migration
+models	./migrations/backup/0003_auto__del_rmdownresource__del_field_resource_resource_src__add_field_r.py	/^    models = {$/;"	v	class:Migration
+models	./migrations/backup/0004_auto__del_field_resource_remote_resource_src__del_field_resource_local.py	/^    models = {$/;"	v	class:Migration
+name	./models.py	/^    name                = models.CharField(max_length=255, unique=True)$/;"	v	class:Tag
+normalize_query	./views.py	/^def normalize_query(query_string,$/;"	f
+object_id	./models.py	/^    object_id           = models.PositiveIntegerField()$/;"	v	class:Comment
+object_id	./models.py	/^    object_id           = models.PositiveIntegerField()$/;"	v	class:Image
+object_id	./models.py	/^    object_id           = models.PositiveIntegerField()$/;"	v	class:Resource
+objects	./models.py	/^    objects = TagManager()$/;"	v	class:Tag
+option_list	./management/commands/fix_resource.py	/^    option_list = BaseCommand.option_list + ($/;"	v	class:Command
+option_list	./management/commands/scrapeGirls.py	/^    option_list = BaseCommand.option_list + ($/;"	v	class:Command
+ordering	./models.py	/^        ordering = ('-added_at',)$/;"	v	class:Comment.Meta
+ordering	./models.py	/^        ordering = ('-used_count', 'name')$/;"	v	class:Tag.Meta
+post_source_name	./models.py	/^    post_source_name    = models.CharField(max_length=64)$/;"	v	class:Post
+post_source_url	./models.py	/^    post_source_url     = models.CharField(max_length=1024)$/;"	v	class:Post
+register	./templatetags/extra_filters.py	/^register = template.Library()$/;"	v
+register	./templatetags/extra_tags.py	/^register = template.Library()$/;"	v
+register	./views.py	/^def register(request):$/;"	f
+resource_src	./models.py	/^    resource_src        = models.CharField(max_length=1024, blank=True)$/;"	v	class:Resource
+resources	./models.py	/^    resources           = generic.GenericRelation(Resource)$/;"	v	class:Comment
+resources	./models.py	/^    resources           = generic.GenericRelation(Resource)$/;"	v	class:Post
+sanitizePostImg	./management/commands/fix_resource.py	/^def sanitizePostImg(post):$/;"	f
+save	./models.py	/^    def save(self, **kwargs):$/;"	m	class:Post
+search	./views.py	/^def search(request):$/;"	f
+tag	./views.py	/^def tag(request, tag):$/;"	f
+tag_font_size	./templatetags/extra_tags.py	/^def tag_font_size(max_size, min_size, current_size):$/;"	f
+tagname_list	./models.py	/^    def tagname_list(self):$/;"	m	class:Post
+tagnames	./forms.py	/^    tagnames = TagNamesField()$/;"	v	class:PostForm
+tagnames	./models.py	/^    tagnames            = models.CharField(max_length=255)$/;"	v	class:Post
+tags	./models.py	/^    tags                = models.ManyToManyField(Tag, null=True, blank=True, related_name='tagged_posts')$/;"	v	class:Post
+tags	./views.py	/^def tags(request):$/;"	f
+title	./forms.py	/^    title = TitleField()$/;"	v	class:PostForm
+title	./models.py	/^    title               = models.CharField(max_length=300, unique=True)$/;"	v	class:Post
+update_use_counts	./managers.py	/^    def update_use_counts(self, tags):$/;"	m	class:TagManager
+upload_to_s3	./management/commands/scrapeGirls.py	/^    def upload_to_s3(self, post_id, f, name):$/;"	m	class:Command
+urlpatterns	./urls.py	/^urlpatterns = patterns('',$/;"	v
+used_count	./models.py	/^    used_count          = models.PositiveIntegerField(default=0)$/;"	v	class:Tag
+user	./management/commands/scrapeGirls.py	/^        user = User.objects.all()[0]$/;"	v	class:Command
+user_logged_in	./models.py	/^user_logged_in = django.dispatch.Signal(providing_args=["session"])$/;"	v
+warning	./views.py	/^def warning(request):$/;"	f
+wrap	./views.py	/^    def wrap(request, *args, **kwargs):$/;"	f	function:ajax_login_required

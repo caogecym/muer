@@ -35,3 +35,9 @@ git update-index --skip-worktree FILENAME
 
 # migrate db
 . migrate.sh 
+
+# heroku stop app
+heroku ps:scale web=0
+
+# heroku restart
+heroku ps:scale web=1
