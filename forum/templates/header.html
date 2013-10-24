@@ -22,16 +22,24 @@
         <form action="/search" method="get" class="navbar-search pull-left">{% csrf_token %}
           <input type="text" name="q" class="search-query" placeholder="Search">
         </form>
+
+        <form action="/posts/new_post" class="navbar-form pull-right">
+          <button type="submit" class="btn">Post</button>
+        </form>
+
         {% if user.is_authenticated %}
           <p class="navbar-text pull-right">
             <a class="navbar-link" href="/users/{{ user.id }}/{{ user.username }}/">{{ user.username }}</a>   
+            &nbsp;&nbsp;
             <a class="navbar-link" href="/logout/">logout</a>
+            &nbsp;&nbsp;
           </p>
         {% else %}
           <p class="navbar-text pull-right">
             <a class="navbar-link" href="/signup/">Sign Up</a>
             &nbsp;&nbsp;
             <a class="navbar-link" href="/login/">Login</a>
+            &nbsp;&nbsp;
           </p>
         {% endif %}
       </div><!--/.nav-collapse -->
