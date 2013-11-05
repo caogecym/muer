@@ -21,7 +21,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'muer_db',                      
         'USER': 'caogecym',
-        'PASSWORD': 'cym011011',
+        'PASSWORD': '',
         'HOST': 'muer.herokuapp.com',
         'PORT': '5432',
         'OPTIONS': {
