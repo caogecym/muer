@@ -1,4 +1,5 @@
 venv
+forum/management/commands/scrapeGirls.py
 muer/settings_stage.py
 muer/settings_dev.py
 staticfiles
