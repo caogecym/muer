@@ -6,13 +6,20 @@ import lxml
 from lxml import html
 import time, datetime
 from bs4 import BeautifulSoup
+import logging
+
+logger = logging.getLogger('muer')
 
 class Command(BaseCommand):
     help = 'Scrapes the sites for new dockets'
 
 
     def handle(self, *args, **options):
-        admin = User.objects.all().filter(username='caogecym')[0]
+        try:
+            user = User.objects.all()[0]
+        except IndexError:
+            logger.error('no user found')
+
         self.stdout.write('\nScraping started at %s\n' % str(datetime.datetime.now()))
 
         sites = {'qiushibaike': 'http://www.qiushibaike.com'}
@@ -30,5 +37,5 @@ class Command(BaseCommand):
 
                 # create joke object
                 if joke_upvote > 500:
-                    jokeObject = Post(title=joke_title, content=joke_content, author=admin)
+                    jokeObject = Post(title=joke_title, content=joke_content, author=user)
                     jokeObject.save()

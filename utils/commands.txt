@@ -41,3 +41,9 @@ heroku ps:scale web=0
 
 # heroku restart
 heroku ps:scale web=1
+
+# push to dropbox
+git push dropbox master
+
+# push to github
+git push origin master

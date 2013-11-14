@@ -5,7 +5,7 @@ postgresql postgresql-contrib python-psycopg2 libpq-dev
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 # install python packages
 sudo pip install Django markdown requests lxml beautifulsoup4 south virtualenv gunicorn dj-database-url dj-static
-django-toolbelt django-storages boto
+django-toolbelt django-storages boto cssselect
 
 # set git color output
 git config --global color.ui true
