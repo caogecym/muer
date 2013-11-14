@@ -66,7 +66,7 @@ class Command(BaseCommand):
                 except requests.ConnectionError, e:
                     logger.error('ERROR: %s' % e.message)
                     continue
-                page_count = 10
+                page_count = 100
                 page = 1
                 for i in range(page_count):
                     page_url = list_url + 'page/' + str(page)
