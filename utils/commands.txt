@@ -47,3 +47,7 @@ git push dropbox master
 
 # push to github
 git push origin master
+
+
+# south db migration
+we should keep record of migration files, keep them in git
