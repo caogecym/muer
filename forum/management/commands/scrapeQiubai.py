@@ -1,5 +1,7 @@
 # coding=utf8
 import os
+import sys
+import getopt
 import re
 import uuid
 import logging
@@ -45,6 +47,12 @@ class Command(BaseCommand):
             action='store_true',
             default=False,
             help='No seed to be uploaded'),
+        make_option('-p', '--page',
+            action='store',
+            type='int',
+            default=1,
+            dest='page_count',
+            help='number of page to parse',)
         )
 
     def handle(self, *args, **options):
@@ -66,7 +74,8 @@ class Command(BaseCommand):
                 except requests.ConnectionError, e:
                     logger.error('ERROR: %s' % e.message)
                     continue
-                page_count = 100
+
+                page_count = options['page_count']
                 page = 1
                 for i in range(page_count):
                     page_url = list_url + 'page/' + str(page)

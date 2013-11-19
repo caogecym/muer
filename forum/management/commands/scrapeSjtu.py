@@ -43,6 +43,12 @@ class Command(BaseCommand):
             action='store_true',
             default=False,
             help='No seed to be uploaded'),
+        make_option('-p', '--page',
+            action='store',
+            type='int',
+            default=1,
+            dest='page_count',
+            help='number of page to parse',)
         )
 
     def handle(self, *args, **options):
@@ -66,7 +72,7 @@ class Command(BaseCommand):
                 p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
                 content = p.sub('', r.content)
                 soup = BeautifulSoup(content, from_encoding="gb18030")
-                page_count = 1
+                page_count = options['page_count']
                 for i in range(page_count):
                     thread_url = 'http://bbs.sjtu.edu.cn/bbstdoc,board,joke,page,' + str(i) + '.html'
 

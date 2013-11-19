@@ -14,9 +14,11 @@
       {% if post.post_source_name %}
         <a style="color: #d3d3d3">{{ post.post_source_name }}</a>
       {% endif %}
+
       </br></br>
-      <font size="3">{{ post.content }}</font>
+      <pre><span class="inner-pre" style="font-size: 18px">{{ post.content }}</span></pre>
       </br></br>
+
       {% for img in post.images.all %}
         <a href="/posts/{{ post.id }}" id="preview-{{ post.id }}">
           <img src="{{ img.image_src }}" class="post-content-image" alt="">
