@@ -90,7 +90,7 @@ class Command(BaseCommand):
         logger.info('Creating jokes in url: %s\n' % url)
 
         try:
-            r = requests.get(url)
+            r = requests.get(url, timeout=30)
         except requests.ConnectionError, e:
             logger.error('ERROR: %s' % e.message)
             return []

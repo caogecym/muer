@@ -35,7 +35,7 @@ class Command(BaseCommand):
         logger.error('no user found')
             
     option_list = BaseCommand.option_list + (
-        make_option('--debug',
+        make_option('-d', '--debug',
             action='store_true',
             default=False,
             help='Enter debug mode'),
@@ -59,13 +59,13 @@ class Command(BaseCommand):
 
         # get thread addressses
         if options['debug']:
-            thread_addresses = [('no-mosaic', args[0])]
+            thread_addresses = [('no-mosaic', args[0], 0)]
         else:
             thread_addresses = []
             for site_type, list_url in sub_sites.iteritems():
                 # get page info
                 try:
-                    r = requests.get(list_url)
+                    r = requests.get(list_url, timeout=30)
                 except requests.ConnectionError, e:
                     logger.error('ERROR: %s' % e.message)
                     continue
@@ -92,7 +92,7 @@ class Command(BaseCommand):
         logger.info('Filtering threads in url: %s\n' % url)
 
         try:
-            r = requests.get(url)
+            r = requests.get(url, timeout=30)
         except requests.ConnectionError, e:
             logger.error('ERROR: %s' % e.message)
             return []
@@ -122,29 +122,34 @@ class Command(BaseCommand):
         logger.info('getting filtered thread content in url: %s\n' % url)
         
         try:
-            r = requests.get(url)
+            r = requests.get(url, timeout=30)
         except requests.ConnectionError, e:
             logger.error('ERROR: %s' % e.message)
             return
-        p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
-        content = p.sub('', r.content)
-        # solve &lt;&gt; problem
-        soup = BeautifulSoup(content, from_encoding="gb18030")
-        new_soup = soup.prettify(formatter=None)
-        soup = BeautifulSoup(new_soup, from_encoding="gb18030")
 
-        body = soup.pre
-        # extract title
-        start = u'\n\u6807  \u9898: '
-        end = u'\n'
-        thread_title = find_between(body.text, start, end)
+        try:
+            p = re.compile(r'<head.*?/head>', flags=re.DOTALL)
+            content = p.sub('', r.content)
+            # solve &lt;&gt; problem
+            soup = BeautifulSoup(content, from_encoding="gb18030")
+            new_soup = soup.prettify(formatter=None)
+            soup = BeautifulSoup(new_soup, from_encoding="gb18030")
 
-        # split header and content and signature
-        start = u'\n\u53d1\u4fe1\u7ad9: '
-        end = u'\n'
-        thread_header_spliter = find_between(body.text, start, end, inclusive=True)
+            body = soup.pre
+            # extract title
+            start = u'\n\u6807  \u9898: '
+            end = u'\n'
+            thread_title = find_between(body.text, start, end)
 
-        thread_content = body.text.split(thread_header_spliter)[-1].split(u'\n--\n')[0]
+            # split header and content and signature
+            start = u'\n\u53d1\u4fe1\u7ad9: '
+            end = u'\n'
+            thread_header_spliter = find_between(body.text, start, end, inclusive=True)
+
+            thread_content = body.text.split(thread_header_spliter)[-1].split(u'\n--\n')[0]
+        except Exception, e:
+            logger.error('ERROR: parsing content failed, skip...')
+            return
 
         try: 
             post = Post(title=thread_title, content=thread_content, author=user, post_source_name='饮水思源', 
