@@ -13,4 +13,8 @@ urlpatterns = patterns('',
     url(r'^(?P<post_id>\d+)/$', views.content, name='content'),
     # ex: /posts/17/like
     url(r'^(?P<post_id>\d+)/like/$', views.like, name='like'),
+    # ex: /posts/17/delete
+    url(r'^(?P<post_id>\d+)/delete/$', views.delete_post, name='delete_post'),
+    # ex: /posts/17/comment
+    url(r'^(?P<post_id>\d+)/comment/$', views.comment_post, name='comment_post'),
 )

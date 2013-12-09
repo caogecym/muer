@@ -14,7 +14,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from markdown import markdown
-from forum.models import Post
+from forum.models import Post, Comment
 from forum.forms import PostForm
 
 def warning(request):
@@ -179,6 +179,51 @@ def ajax_login_required(view_func):
     wrap.__doc__ = view_func.__doc__
     wrap.__dict__ = view_func.__dict__
     return wrap
+
+@login_required
+def delete_post(request, post_id):
+    response_data = {
+        "allowed": 1,
+        "success": 1,
+        "status": 0,
+        "message": '',
+        "not_authenticated": 0,
+    }
+
+    if request.user.username != 'caogecym':
+        response_data['message'] = 'Non-admin cannot delete post'
+        response_data['success'] = 0
+        data = simplejson.dumps(response_data)
+        return HttpResponse(data, mimetype='application/json')
+
+    post_to_delete = Post.objects.get(id=post_id)
+    if post_to_delete is not None:
+        post_to_delete.deleted = True
+        response_data['message'] = 'The post has been deleted by user %s' % request.user.username
+
+        post_to_delete.save()
+        response_data['success'] = 1
+
+    data = simplejson.dumps(response_data)
+    return HttpResponse(data, mimetype='application/json')
+
+def comment_post(request, post_id):
+    '''We should assume that comment_data is valid, if it comes to this step'''
+    response_data = {
+        "allowed": 1,
+        "success": 1,
+        "message": '',
+    }
+    post_to_comment = Post.objects.get(id=post_id)
+    if post_to_comment is not None:
+        comment = Comment(content_object=post_to_comment, author=request.user, content=request.POST['comment_data'])
+        comment.save()
+        response_data['message'] = 'Comment has been added to post %s by user %s' % (post_id, request.user.username)
+        response_data['success'] = 1
+
+    data = simplejson.dumps(response_data)
+    return HttpResponse(data, mimetype='application/json')
+        
 
 @ajax_login_required
 def like(request, post_id):

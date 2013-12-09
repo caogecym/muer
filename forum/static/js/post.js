@@ -1,5 +1,5 @@
 /*
-Scripts for voting post
+Scripts for voting, deleting post
 Project Name: Elephant
 All Rights Resevred 2013. 
 */
@@ -45,8 +45,36 @@ $(function () {
         postId = object.attr("id").substring(imgIdPrefixLike.length);
         submit(object);
     })
+    $('.post-delete').click(function (event) {
+        object = $(event.target.parentElement)
+        postId = object.attr("id").substring(imgIdPrefixLike.length);
+        delete_post(object);
+    })
 })
 
+$(document).ready(function() {
+    $('.commentarea').keydown(function(event) {
+        if (event.keyCode == 13) {
+            this.form.submit()
+            //redirect_url = "/posts/" + postId
+            window.location.replace("/posts/" + postId + "/");
+            return false;
+        }
+    });
+});
+
+var delete_post = function(object, callback) {
+    $.ajax({
+        type: "DELETE",
+        cache: false,
+        dataType: "json",
+        url: "/posts/" + postId + "/delete/",
+        data: { "postId": postId},
+        error: handleFail,
+        success: function(data){
+            goToHomePage(object, data)
+        }});
+}
 var submit = function(object, callback) {
     $.ajax({
         type: "POST",
@@ -60,6 +88,9 @@ var submit = function(object, callback) {
         }});
 };
 
+var goToHomePage = function(object, data) {
+    window.location.replace("/home/");
+}
 var updateVoteImage = function(object, data) {
     if (data.not_authenticated == 1) {
         $('#login_modal').modal('show'); 
