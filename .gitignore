@@ -1,3 +1,4 @@
+muer_db
 venv
 forum/management/commands/scrapeGirls.py
 muer/settings_stage.py
@@ -5,4 +6,3 @@ staticfiles
 *.db
 *.pyc
 .DS_Store
-*.torrent
