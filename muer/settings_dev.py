@@ -110,14 +110,15 @@ STATICFILES_FINDERS = (
 )
 
 # AMAZON S3 config
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-AWS_STORAGE_BUCKET_NAME = 'muer'
-AWS_PRELOAD_METADATA = True # necessary to fix manage.py collectstatic command to only upload changed files instead of all files
+#AWS_STORAGE_BUCKET_NAME = 'muer'
+#AWS_PRELOAD_METADATA = True # necessary to fix manage.py collectstatic command to only upload changed files instead of all files
 
-STATIC_URL = 'https://muer.s3.amazonaws.com/static/'
-ADMIN_MEDIA_PREFIX = 'https://muer.s3.amazonaws.com/static/admin/'
+#STATIC_URL = 'https://muer.s3.amazonaws.com/static/'
+STATIC_URL = '/static/'
+#ADMIN_MEDIA_PREFIX = 'https://muer.s3.amazonaws.com/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'm&f!1!7g&*5b*!77x(&1!ksv-=yl!+zh@1e6x3y%&zs$p_5ffo'
