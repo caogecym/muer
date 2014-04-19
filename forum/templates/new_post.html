@@ -15,8 +15,13 @@
         {{form.tags.errors.as_text}}
       </div>
       {% endif %}
-      <form action="/posts/new_post" method="post">{% csrf_token %}
+      {% if post_id %}
+        <form action="/posts/{{post_id}}/submit-edit/" method="post">{% csrf_token %}
+        <legend>Edit Post</legend>
+      {% else %}
+        <form action="/posts/new_post/" method="post">{% csrf_token %}
         <legend>New Post</legend>
+      {% endif %}
         <div class="controls controls-row">
           <input id="title" name="title" value="{{form.title.value}}" type="text" class="span6" placeholder="Title" required=""> 
         </div>
@@ -30,7 +35,11 @@
         <div id="notes-preview" class="wmd-preview"></div>
 
         <div class="controls">
-          <button id="post-submit" type="submit" class="btn btn-primary input-medium pull-right">Post</button>
+          {% if post_id %}
+            <button id="post-submit" type="submit" class="btn btn-primary input-medium pull-right">Save</button>
+          {% else %}
+            <button id="post-submit" type="submit" class="btn btn-primary input-medium pull-right">Post</button>
+          {% endif %}
         </div>
       </form>
     </div>
