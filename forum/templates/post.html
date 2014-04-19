@@ -46,7 +46,7 @@
       <a href="{% static "/tags/" %}{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
     {% endfor %}
     <a href="/posts/{{ post.id }}/edit/">edit</a>
-    <a id="delete-post-{{ post.id }}" class="post-delete" href='#!'>Delete</a>
+    <a href="/posts/{{ post.id }}/delete/">delete</a>
   </div>
   </br>
   </br>

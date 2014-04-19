@@ -198,18 +198,16 @@ def delete_post(request, post_id):
         "not_authenticated": 0,
     }
 
-    if request.user.username != 'caogecym':
-        response_data['message'] = 'Non-admin cannot delete post'
-        response_data['success'] = 0
-        data = simplejson.dumps(response_data)
-        return HttpResponse(data, mimetype='application/json')
+    post = Post.objects.get(id=post_id)
 
-    post_to_delete = Post.objects.get(id=post_id)
-    if post_to_delete is not None:
-        post_to_delete.deleted = True
+    if post.author != request.user:
+        return HttpResponseForbidden("Only owner of this post is allowed to delete")
+
+    if post is not None:
+        post.deleted = True
         response_data['message'] = 'The post has been deleted by user %s' % request.user.username
 
-        post_to_delete.save()
+        post.save()
         response_data['success'] = 1
 
     data = simplejson.dumps(response_data)
