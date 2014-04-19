@@ -45,6 +45,7 @@
     {% for tag in post.tags.all %}
       <a href="{% static "/tags/" %}{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
     {% endfor %}
+    <a href="/posts/{{ post.id }}/edit/">edit</a>
     <a id="delete-post-{{ post.id }}" class="post-delete" href='#!'>Delete</a>
   </div>
   </br>
@@ -52,6 +53,7 @@
   <form action="/posts/{{ post.id }}/comment/" method="post">{% csrf_token %}
     <textarea id="comment_data" name="comment_data" placeholder="Enter comment here..." class="commentarea"></textarea>
   </form>
+
   {% else %}
     The post doesn't exist or has been deleted.
   {% endif %}

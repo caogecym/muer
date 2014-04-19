@@ -58,8 +58,7 @@ class TagNamesField(forms.CharField):
                                 list_temp.append(tag)
                 return u' '.join(list_temp)
 
-class PostForm(forms.Form):
-    title = TitleField()
-    content = ContentField()
-    tagnames = TagNamesField()
-
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields=('title', 'content', 'tagnames')

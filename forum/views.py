@@ -5,8 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from django.shortcuts import render
 from django.utils import simplejson
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -142,22 +141,31 @@ def search(request):
                               context_instance=RequestContext(request))
 
 @login_required
-def add_post(request):
+def add_post(request, post_id=None):
+    if post_id:
+        post = get_object_or_404(Post, pk=post_id)
+        if post.author != request.user:
+            return HttpResponseForbidden()
+    else:
+        post = Post(author=request.user)
+
     if request.method == 'POST': # If the form has been submitted...
-        form = PostForm(request.POST) # A form bound to the POST data
+        form = PostForm(request.POST, instance=post) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             text = form.cleaned_data['content']
             html = markdown(text)
-            post = Post(title=form.cleaned_data['title'], content=html,
-                        author=request.user, tagnames=form.cleaned_data['tagnames'])
+            post.title = form.cleaned_data['title']
+            post.content = html
+            post.tagnames=form.cleaned_data['tagnames']
             post.save()
             return HttpResponseRedirect('/') 
     else:
         # An unbound form
-        form = PostForm() 
+        form = PostForm(instance=post) 
 
     return render(request, 'new_post.html', {
         'form': form,
+        'post_id': post_id,
     })
 
 def content(request, post_id):
