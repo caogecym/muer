@@ -10,6 +10,7 @@ from forum.models import Post, Tag, Comment, Image, Resource
 import logging
 logger = logging.getLogger(__name__)
 
+
 class PostTestCase(TestCase):
     def setUp(self):
         logger.info('Initializing post test...')
