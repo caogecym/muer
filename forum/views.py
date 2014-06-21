@@ -1,5 +1,7 @@
 import random
 import re
+import hashlib
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
@@ -12,6 +14,8 @@ from django.template import RequestContext
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import View
+
 from markdown import markdown
 from forum.models import Post, Comment
 from forum.forms import PostForm
@@ -279,3 +283,24 @@ def register(request):
     return render(request, "registration/register.html", {
         'form': form,
     })
+
+class Weixin(View):
+    token = 'muer_awesome'
+     
+    def validate(self, request):
+        signature = request.REQUEST.get('signature', '')
+        timestamp = request.REQUEST.get('timestamp', '')
+        nonce = request.REQUEST.get('nonce',  '')
+         
+        print 'wechat server info: %s %s %s' % (signature, timestamp, nonce)
+        tmp_str = hashlib.sha1(''.join(sorted([self.token, timestamp, nonce]))).hexdigest()
+        if tmp_str == signature:
+            return True
+ 
+        return False
+     
+    def get(self, request):
+        if self.validate(request):
+            return HttpResponse(request.REQUEST.get('echostr', ''))
+ 
+        return HttpResponseForbidden('Wechat handshake failed, please use official testing portal')
