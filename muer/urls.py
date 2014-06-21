@@ -20,6 +20,9 @@ urlpatterns = patterns('',
     (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
     (r'^signup/$', 'forum.views.register'),
 
+    # wechat interface
+    (r'^wechat/', forum_views.Weixin.as_view()),
+
     # following commets are for openid
     #(r'^account/', include('django_authopenid.urls')),
     #url(r'^signin/$', 'django_authopenid.views.signin'),
