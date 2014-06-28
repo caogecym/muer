@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% block forejs %}
   <script type="text/javascript" src="{% static "wmd/wmd.js" %}"></script>
@@ -17,28 +18,28 @@
       {% endif %}
       {% if post_id %}
         <form action="/posts/{{post_id}}/submit-edit/" method="post">{% csrf_token %}
-        <legend>Edit Post</legend>
+        <legend>{% trans "Edit Post" %}</legend>
       {% else %}
         <form action="/posts/new_post/" method="post">{% csrf_token %}
-        <legend>New Post</legend>
+        <legend>{% trans "New Post" %}</legend>
       {% endif %}
         <div class="controls controls-row">
-          <input id="title" name="title" value="{{form.title.value}}" type="text" class="span6" placeholder="Title" required=""> 
+          <input id="title" name="title" value="{{form.title.value}}" type="text" class="span6" placeholder="{% trans "Title" %}" required=""> 
         </div>
         <div id="notes-button-bar"></div>
         <div class="controls">
-          <textarea id="notes" name="content" class="span6" placeholder="Content" rows="10">{{form.content.value}}</textarea>
+          <textarea id="notes" name="content" class="span6" placeholder="{% trans "Content" %}" rows="10">{{form.content.value}}</textarea>
         </div>
         <div class="controls controls-row">
-          <input id="tags" name="tagnames" type="text" value="{{form.tagnames.value}}" class="span6" placeholder="At least one tag such as (冷笑话 内涵) is required" required="">
+          <input id="tags" name="tagnames" type="text" value="{{form.tagnames.value}}" class="span6" placeholder="{% trans "At least one tag is required" %}" required="">
         </div>
         <div id="notes-preview" class="wmd-preview"></div>
 
         <div class="controls">
           {% if post_id %}
-            <button id="post-submit" type="submit" class="btn btn-primary input-medium pull-right">Save</button>
+            <button id="post-submit" type="submit" class="btn btn-primary input-medium pull-right">{% trans "Save" %}</button>
           {% else %}
-            <button id="post-submit" type="submit" class="btn btn-primary input-medium pull-right">Post</button>
+            <button id="post-submit" type="submit" class="btn btn-primary input-medium pull-right">{% trans "Post" %}</button>
           {% endif %}
         </div>
       </form>

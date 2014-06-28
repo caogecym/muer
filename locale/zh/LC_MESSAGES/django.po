@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-28 06:27+0000\n"
+"POT-Creation-Date: 2014-06-28 18:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,64 +62,48 @@ msgstr ""
 
 #: forum/templates/500.html:22
 msgid "Sorry, system error"
-msgstr ""
+msgstr "对不起，系统出错"
 
 #: forum/templates/500.html:24
 msgid "System error log is recorded, error will be fixed as soon as possible"
-msgstr ""
+msgstr "错误已被记录，我们会尽快修复"
 
 #: forum/templates/500.html:25
 msgid "Please report the error to the site administrators if you wish"
-msgstr ""
+msgstr "请向系统管理员:caogecym@gmail.com报告此问题"
 
-#: forum/templates/close.html:6 forum/templates/close.html.py:16
-msgid "Close question"
-msgstr ""
+#: forum/templates/about.html:9
+msgid "MUER makes your life interesting everyday."
+msgstr "MUER，让生活更精彩"
 
-#: forum/templates/close.html:19
-msgid "Close the question"
+#: forum/templates/about.html:11
+msgid ""
+"Muer is a joke site aims at collecting best jokes from all types of websites "
+"and gathering people all around the world to vote, appreciate, and "
+"contribute to this joke pool. The site is developed in django web framework. "
+"Joke resource is scraped from internet using BeautifulSoup, a python html "
+"parsing tool."
 msgstr ""
+"MUER，是一个娱乐资源集送站，人们在此用图片，文字的形式分享生活中遇到的有趣事"
+"件。人们通过审阅，投票的形式进行信息筛选，从而达到资源优化的效果。"
 
-#: forum/templates/close.html:25
-msgid "Reasons"
-msgstr ""
+#: forum/templates/about.html:14
+msgid ""
+"I'm open sourcing this repo in hope of all joke enthusiastics will "
+"collaborate with each other and make this web based joke application an fun, "
+"efficient place to get the joke people enjoy."
+msgstr "MUER是开源互联网应用，致力于向人们呈现最有价值的娱乐资源。"
 
-#: forum/templates/close.html:28
-msgid "OK to close"
+#: forum/templates/about.html:16
+msgid ""
+"Check <a href='https://github.com/caogecym/muer'>https://github.com/caogecym/"
+"muer</a> for the open source repo, if you are interested in developing this "
+"site, or have any good suggestions, please do, feel free to contact me at <a "
+"href='mailto:caogecym@gmail.com'>caogecym@gmail.com."
 msgstr ""
-
-#: forum/templates/close.html:29
-#: forum/templates/authopenid/changeemail.html:34
-msgid "Cancel"
-msgstr ""
-
-#: forum/templates/footer.html:7
-msgid "about"
-msgstr ""
-
-#: forum/templates/footer.html:8
-msgid "faq"
-msgstr ""
-
-#: forum/templates/footer.html:9
-msgid "blog"
-msgstr ""
-
-#: forum/templates/footer.html:10
-msgid "contact us"
-msgstr ""
-
-#: forum/templates/footer.html:11
-msgid "privacy policy"
-msgstr ""
-
-#: forum/templates/footer.html:12
-msgid "give feedback"
-msgstr ""
-
-#: forum/templates/footer.html:18
-msgid "current revision"
-msgstr ""
+"如有合作意向，请访问 <a href='https://github.com/caogecym/muer'>https://"
+"github.com/caogecym/muer</a>，或直接联系负责人<a href='mailto:caogecym@gmail."
+"com'>caogecym@gmail.com."
 
 #: forum/templates/header.html:15
 msgid "Categories"
@@ -145,7 +129,7 @@ msgstr "关于"
 msgid "Search"
 msgstr ""
 
-#: forum/templates/header.html:29
+#: forum/templates/header.html:29 forum/templates/new_post.html:42
 msgid "Post"
 msgstr "发帖"
 
@@ -157,10 +141,17 @@ msgstr "退出"
 msgid "Sign Up"
 msgstr "注册"
 
-#: forum/templates/header.html:43 forum/templates/authopenid/signin.html:112
-#: forum/templates/authopenid/signin.html:139
+#: forum/templates/header.html:43
 msgid "Login"
 msgstr "登录"
+
+#: forum/templates/index.html:14
+msgid "Votes"
+msgstr "热度"
+
+#: forum/templates/index.html:61
+msgid "Page"
+msgstr ""
 
 #: forum/templates/logout.html:6 forum/templates/logout.html.py:17
 msgid "Logout"
@@ -176,655 +167,63 @@ msgstr ""
 msgid "Logout now"
 msgstr ""
 
+#: forum/templates/new_post.html:21
+msgid "Edit Post"
+msgstr "编辑内容"
+
+#: forum/templates/new_post.html:24
+msgid "New Post"
+msgstr "发布新内容"
+
+#: forum/templates/new_post.html:27
+msgid "Title"
+msgstr "标题"
+
+#: forum/templates/new_post.html:31
+msgid "Content"
+msgstr "内容"
+
+#: forum/templates/new_post.html:34
+msgid "At least one tag is required"
+msgstr "请提供内容分类"
+
+#: forum/templates/new_post.html:40
+msgid "Save"
+msgstr "保存"
+
 #: forum/templates/pagesize.html:6
 msgid "posts per page"
 msgstr ""
 
-#: forum/templates/authopenid/changeemail.html:7
-#: forum/templates/authopenid/changeemail.html:33
-msgid "Change email"
-msgstr ""
+#: forum/templates/registration/login.html:7
+msgid "Please sign in"
+msgstr "请登录"
 
-#: forum/templates/authopenid/changeemail.html:10
-#, python-format
-msgid "change %(email)s info"
-msgstr ""
+#: forum/templates/registration/login.html:8
+msgid "Email address"
+msgstr "用户名"
 
-#: forum/templates/authopenid/changeemail.html:13
-#: forum/templates/authopenid/changeopenid.html:14
-#: forum/templates/authopenid/changepw.html:19
-#: forum/templates/authopenid/delete.html:15
-#: forum/templates/authopenid/delete.html:25
-msgid "Please correct errors below:"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:30
-msgid "Your new Email"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:31
-#: forum/templates/authopenid/signin.html:138
+#: forum/templates/registration/login.html:9
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
-#: forum/templates/authopenid/changeemail.html:42
-msgid "Validate email"
-msgstr ""
+#: forum/templates/registration/login.html:11
+msgid "Remember me"
+msgstr "记住我"
 
-#: forum/templates/authopenid/changeemail.html:45
-#, python-format
-msgid "validate %(email)s info"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:50
-msgid "Email not changed"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:53
-#, python-format
-msgid "old %(email)s kept"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:58
-msgid "Email changed"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:61
-#, python-format
-msgid "your current %(email)s can be used for this"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:66
-msgid "Email verified"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:69
-msgid "thanks for verifying email"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:74
-msgid "email key not sent"
-msgstr ""
-
-#: forum/templates/authopenid/changeemail.html:77
-#, python-format
-msgid "email key not sent %(email)s change email here %(change_link)s"
-msgstr ""
-
-#: forum/templates/authopenid/changeopenid.html:8
-msgid "Account: change OpenID URL"
-msgstr ""
-
-#: forum/templates/authopenid/changeopenid.html:12
-msgid ""
-"This is where you can change your OpenID URL. Make sure you remember it!"
-msgstr ""
-
-#: forum/templates/authopenid/changeopenid.html:29
-msgid "OpenID URL:"
-msgstr ""
-
-#: forum/templates/authopenid/changeopenid.html:30
-msgid "Change OpenID"
-msgstr ""
-
-#: forum/templates/authopenid/changepw.html:14
-msgid "Account: change password"
-msgstr ""
-
-#: forum/templates/authopenid/changepw.html:17
-msgid "This is where you can change your password. Make sure you remember it!"
-msgstr ""
-
-#: forum/templates/authopenid/changepw.html:27
-msgid "Current password"
-msgstr ""
-
-#: forum/templates/authopenid/changepw.html:28
-msgid "New password"
-msgstr ""
-
-#: forum/templates/authopenid/changepw.html:29
-msgid "New password again"
-msgstr ""
-
-#: forum/templates/authopenid/changepw.html:30
-#: forum/templates/authopenid/settings.html:29
-msgid "Change password"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:5
-msgid "Connect your OpenID with this site"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:8
-msgid "Connect your OpenID with your account on this site"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:12
-#, python-format
-msgid "register new %(provider)s account info"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:14
-msgid "This account already exists, please use another."
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:19
-#: forum/templates/authopenid/complete.html:32
-#: forum/templates/authopenid/signin.html:121
-msgid "Sorry, looks like we have some errors:"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:47
-msgid "Screen name label"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:48
-msgid "Email address label"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:49
-msgid "create account"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:56
-msgid "Existing account"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:57
-msgid "user name"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:58
-msgid "password"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:61
-msgid "Register"
-msgstr ""
-
-#: forum/templates/authopenid/complete.html:62
-#: forum/templates/authopenid/signin.html:140
-msgid "Forgot your password?"
-msgstr ""
-
-#: forum/templates/authopenid/confirm_email.txt:2
-msgid "Thank you for registering at our Q&A forum!"
-msgstr ""
-
-#: forum/templates/authopenid/confirm_email.txt:4
-msgid "Your account details are:"
-msgstr ""
-
-#: forum/templates/authopenid/confirm_email.txt:6
-#: forum/templates/authopenid/sendpw_email.txt:7
-msgid "Username:"
-msgstr ""
-
-#: forum/templates/authopenid/confirm_email.txt:7
-#: forum/templates/authopenid/delete.html:20
-msgid "Password:"
-msgstr ""
-
-#: forum/templates/authopenid/confirm_email.txt:9
-msgid "Please sign in here:"
-msgstr ""
-
-#: forum/templates/authopenid/confirm_email.txt:10
-#: utils/django_authopenid/urls.py:9 utils/django_authopenid/urls.py:10
-#: utils/django_authopenid/urls.py:11 utils/django_authopenid/urls.py:13
-msgid "signin/"
-msgstr ""
-
-#: forum/templates/authopenid/confirm_email.txt:12
-#: forum/templates/authopenid/email_validation.txt:14
-#: forum/templates/authopenid/sendpw_email.txt:13
-msgid ""
-"Sincerely,\n"
-"Forum Administrator"
-msgstr ""
-
-#: forum/templates/authopenid/delete.html:9
-msgid "Account: delete account"
-msgstr ""
-
-#: forum/templates/authopenid/delete.html:13
-msgid ""
-"Note: After deleting your account, anyone will be able to register this "
-"username."
-msgstr ""
-
-#: forum/templates/authopenid/delete.html:17
-msgid "Check confirm box, if you want delete your account."
-msgstr ""
-
-#: forum/templates/authopenid/delete.html:32
-msgid "I am sure I want to delete my account."
-msgstr ""
-
-#: forum/templates/authopenid/delete.html:33
-msgid "Password/OpenID URL"
-msgstr ""
-
-#: forum/templates/authopenid/delete.html:33
-msgid "(required for your security)"
-msgstr ""
-
-#: forum/templates/authopenid/delete.html:35
-msgid "Delete account permanently"
-msgstr ""
-
-#: forum/templates/authopenid/email_validation.txt:2
-msgid "Greetings from the Q&A forum"
-msgstr ""
-
-#: forum/templates/authopenid/email_validation.txt:4
-msgid "To make use of the Forum, please follow the link below:"
-msgstr ""
-
-#: forum/templates/authopenid/email_validation.txt:8
-msgid "Following the link above will help us verify your email address."
-msgstr ""
-
-#: forum/templates/authopenid/email_validation.txt:10
-msgid ""
-"If you beleive that this message was sent in mistake - \n"
-"no further action is needed. Just ingore this email, we apologize\n"
-"for any inconvenience"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw.html:4
-#: forum/templates/authopenid/sendpw.html:8
-msgid "Send new password"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw.html:12
-msgid "Lost your password? No problem - here you can reset it."
-msgstr ""
-
-#: forum/templates/authopenid/sendpw.html:13
-msgid ""
-"Please enter your username below and new password will be sent to your "
-"registered e-mail"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw.html:28
-msgid "User name"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw.html:30
-msgid "Reset password"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw.html:30
-msgid "return to login"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw.html:33
-msgid ""
-"Note: your new password will be activated only after you click the "
-"activation link in the email message"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw_email.txt:2
-#, python-format
-msgid ""
-"Someone has requested to reset your password on %(site_url)s.\n"
-"If it were not you, it is safe to ignore this email."
-msgstr ""
-
-#: forum/templates/authopenid/sendpw_email.txt:5
-msgid "Your new account details are:"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw_email.txt:8
-msgid "New password:"
-msgstr ""
-
-#: forum/templates/authopenid/sendpw_email.txt:10
-msgid "To confirm that you wanted to reset your password please visit:"
-msgstr ""
-
-#: forum/templates/authopenid/settings.html:21
-msgid "Profile"
-msgstr ""
-
-#: forum/templates/authopenid/settings.html:30
-msgid "Give your  account a new password."
-msgstr ""
-
-#: forum/templates/authopenid/settings.html:31
-msgid "Change email "
-msgstr ""
-
-#: forum/templates/authopenid/settings.html:32
-msgid "Add or update the email address associated with your account."
-msgstr ""
-
-#: forum/templates/authopenid/settings.html:35
-msgid "Change openid associated to your account"
-msgstr ""
-
-#: forum/templates/authopenid/settings.html:38
-msgid "Delete account"
-msgstr ""
-
-#: forum/templates/authopenid/settings.html:39
-msgid "Erase your username and all your data from website"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:4
-#: forum/templates/authopenid/signin.html:21
-msgid "User login"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:28
-#, python-format
-msgid ""
-"\n"
-"                Your answer to %(title)s %(summary)s will be posted once you "
-"log in\n"
-"                "
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:35
-#, python-format
-msgid ""
-"Your question \n"
-"                %(title)s %(summary)s will be posted once you log in\n"
-"                "
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:40
-msgid "Click to sign in through any of these services."
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:103
-msgid "Enter your <span id=\"enter_your_what\">Provider user name</span>"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:110
-msgid ""
-"Enter your <a class=\"openid_logo\" href=\"http://openid.net\">OpenID</a> "
-"web address"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:116
-msgid "we support two login modes"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:136
-msgid "Use login name and password"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:137
-msgid "Login name"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:141
-msgid "Create new account"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:150
-msgid "Why use OpenID?"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:154
-msgid "with openid it is easier"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:157
-msgid "reuse openid"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:160
-msgid "openid is widely adopted"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:163
-msgid "openid is supported open standard"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:167
-msgid "Find out more"
-msgstr ""
-
-#: forum/templates/authopenid/signin.html:168
-msgid "Get OpenID"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:4
-#: forum/templates/authopenid/signup.html:8
-msgid "Signup"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:12
-msgid ""
-"We support two types of user registration: conventional username/password, "
-"and"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:12
-msgid "the OpenID method"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:17
-msgid "Sorry, looks like we have some errors"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:35
-msgid "Conventional registration"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:36
-msgid "choose a user name"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:38
-#: utils/django_authopenid/forms.py:257
-msgid "your email address"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:39
-#: utils/django_authopenid/forms.py:259
-msgid "choose password"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:40
-#: utils/django_authopenid/forms.py:261
-msgid "retype password"
-msgstr ""
-
-#: forum/templates/authopenid/signup.html:41
+#: forum/templates/registration/login.html:13
 msgid "login"
-msgstr ""
+msgstr "登录"
 
-#: forum/templates/authopenid/signup.html:42
-msgid "back to login"
-msgstr ""
+#: forum/templates/registration/login.html:15
+msgid "Register"
+msgstr "注册"
 
-#: forum/templates/authopenid/signup.html:48
-msgid "Register with your OpenID"
-msgstr ""
+#: forum/templates/registration/register.html:5
+#: forum/templates/registration/register.html:8
+msgid "Create an account"
+msgstr "创建新帐号"
 
-#: forum/templates/authopenid/signup.html:51
-msgid "Login with your OpenID"
-msgstr ""
-
-#: muer/settings_dev.py:10 muer/settings_production.py:10
-msgid "login/"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:67 utils/django_authopenid/views.py:102
-msgid "i-names are not supported"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:102
-msgid ""
-"Usernames can only contain                     letters, numbers and "
-"underscores"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:109
-msgid ""
-"This username does not exist                     in our database. Please "
-"choose another."
-msgstr ""
-
-#: utils/django_authopenid/forms.py:126 utils/django_authopenid/forms.py:233
-msgid ""
-"Please enter a valid                     username and password. Note that "
-"both fields are                     case-sensitive."
-msgstr ""
-
-#: utils/django_authopenid/forms.py:130 utils/django_authopenid/forms.py:237
-msgid "This account is inactive."
-msgstr ""
-
-#: utils/django_authopenid/forms.py:158 utils/django_authopenid/forms.py:210
-msgid "invalid user name"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:160
-msgid "sorry, this name can not be used, please try another"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:162
-msgid "username too short"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:170 utils/django_authopenid/forms.py:171
-msgid "this name is already in use - please try anoter"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:185
-msgid ""
-"This email is already                         registered in our database. "
-"Please choose another."
-msgstr ""
-
-#: utils/django_authopenid/forms.py:216
-msgid ""
-"This username don't exist.                         Please choose another."
-msgstr ""
-
-#: utils/django_authopenid/forms.py:255
-msgid "choose a username"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:335
-msgid ""
-"Old password is incorrect.                     Please enter the correct "
-"password."
-msgstr ""
-
-#: utils/django_authopenid/forms.py:347
-msgid "new passwords do not match"
-msgstr ""
-
-#: utils/django_authopenid/forms.py:442
-msgid "Incorrect username."
-msgstr ""
-
-#: utils/django_authopenid/urls.py:10
-msgid "newquestion/"
-msgstr ""
-
-#: utils/django_authopenid/urls.py:11
-msgid "newanswer/"
-msgstr ""
-
-#: utils/django_authopenid/urls.py:12
-msgid "signout/"
-msgstr ""
-
-#: utils/django_authopenid/urls.py:13
-msgid "complete/"
-msgstr ""
-
-#: utils/django_authopenid/urls.py:15
-msgid "register/"
-msgstr ""
-
-#: utils/django_authopenid/urls.py:16
-msgid "signup/"
-msgstr ""
-
-#: utils/django_authopenid/urls.py:18
-msgid "sendpw/"
-msgstr ""
-
-#: utils/django_authopenid/urls.py:29
-msgid "delete/"
-msgstr ""
-
-#: utils/django_authopenid/views.py:108
-#, python-format
-msgid "OpenID %(openid_url)s is invalid"
-msgstr ""
-
-#: utils/django_authopenid/views.py:417 utils/django_authopenid/views.py:544
-msgid "Welcome"
-msgstr ""
-
-#: utils/django_authopenid/views.py:507
-msgid "Password changed."
-msgstr ""
-
-#: utils/django_authopenid/views.py:519 utils/django_authopenid/views.py:524
-msgid "your email needs to be validated"
-msgstr ""
-
-#: utils/django_authopenid/views.py:681 utils/django_authopenid/views.py:833
-#, python-format
-msgid "No OpenID %s found associated in our database"
-msgstr ""
-
-#: utils/django_authopenid/views.py:685 utils/django_authopenid/views.py:840
-#, python-format
-msgid "The OpenID %s isn't associated to current user logged in"
-msgstr ""
-
-#: utils/django_authopenid/views.py:693
-msgid "Email Changed."
-msgstr ""
-
-#: utils/django_authopenid/views.py:768
-msgid "This OpenID is already associated with another account."
-msgstr ""
-
-#: utils/django_authopenid/views.py:773
-#, python-format
-msgid "OpenID %s is now associated with your account."
-msgstr ""
-
-#: utils/django_authopenid/views.py:843
-msgid "Account deleted."
-msgstr ""
-
-#: utils/django_authopenid/views.py:883
-msgid "Request for new password"
-msgstr ""
-
-#: utils/django_authopenid/views.py:896
-msgid "A new password has been sent to your email address."
-msgstr ""
-
-#: utils/django_authopenid/views.py:926
-#, python-format
-msgid ""
-"Could not change password. Confirmation key '%s'                is not "
-"registered."
-msgstr ""
-
-#: utils/django_authopenid/views.py:935
-msgid ""
-"Can not change password. User don't exist anymore                 in our "
-"database."
-msgstr ""
-
-#: utils/django_authopenid/views.py:944
-#, python-format
-msgid "Password changed for %s. You may now sign in."
-msgstr ""
+#: forum/templates/registration/register.html:12
+msgid "Create the account"
+msgstr "点此注册"
