@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-28 18:34+0000\n"
+"POT-Creation-Date: 2014-06-28 21:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,26 +145,12 @@ msgstr "注册"
 msgid "Login"
 msgstr "登录"
 
-#: forum/templates/index.html:14
+#: forum/templates/index.html:14 forum/templates/post.html:13
 msgid "Votes"
 msgstr "热度"
 
 #: forum/templates/index.html:61
 msgid "Page"
-msgstr ""
-
-#: forum/templates/logout.html:6 forum/templates/logout.html.py:17
-msgid "Logout"
-msgstr "退出"
-
-#: forum/templates/logout.html:20
-msgid ""
-"As a registered user you can login with your OpenID, log out of the site or "
-"permanently remove your account."
-msgstr ""
-
-#: forum/templates/logout.html:21
-msgid "Logout now"
 msgstr ""
 
 #: forum/templates/new_post.html:21
@@ -191,9 +177,25 @@ msgstr "请提供内容分类"
 msgid "Save"
 msgstr "保存"
 
-#: forum/templates/pagesize.html:6
-msgid "posts per page"
-msgstr ""
+#: forum/templates/post.html:28
+msgid "Comments"
+msgstr "回复"
+
+#: forum/templates/post.html:49
+msgid "Edit"
+msgstr "编辑"
+
+#: forum/templates/post.html:50
+msgid "Delete"
+msgstr "删除"
+
+#: forum/templates/post.html:55
+msgid "Enter comment here"
+msgstr "在此回复"
+
+#: forum/templates/post.html:59
+msgid "The post doesn't exist or has been deleted."
+msgstr "文章不存在"
 
 #: forum/templates/registration/login.html:7
 msgid "Please sign in"
@@ -227,3 +229,11 @@ msgstr "创建新帐号"
 #: forum/templates/registration/register.html:12
 msgid "Create the account"
 msgstr "点此注册"
+
+#: muer/settings_dev.py:10 muer/settings_production.py:10
+#, fuzzy
+msgid "login/"
+msgstr "登录"
+
+#~ msgid "Logout"
+#~ msgstr "退出"
