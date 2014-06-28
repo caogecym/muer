@@ -61,7 +61,13 @@ TIME_ZONE = 'America/Los_Angeles'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh'
+
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+
+LOCALE_PATHS = (
+    '%s/locale' % PROJECT_PATH,
+)
 
 SITE_ID = 1
 

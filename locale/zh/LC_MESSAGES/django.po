@@ -1,0 +1,229 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-28 18:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forum/forms.py:12
+msgid "title"
+msgstr ""
+
+#: forum/forms.py:13 forum/forms.py:28
+msgid "please enter a descriptive title for your question"
+msgstr ""
+
+#: forum/forms.py:18
+msgid "title must be at least 5 characters"
+msgstr ""
+
+#: forum/forms.py:27
+msgid "content"
+msgstr ""
+
+#: forum/forms.py:36
+msgid "tags"
+msgstr ""
+
+#: forum/forms.py:37
+msgid ""
+"Tags are short keywords, with no spaces within. Up to five tags can be used."
+msgstr ""
+
+#: forum/forms.py:44
+msgid "tags are required"
+msgstr ""
+
+#: forum/forms.py:48
+msgid "please use 5 tags or less"
+msgstr ""
+
+#: forum/forms.py:51
+msgid "tags must be shorter than 20 characters"
+msgstr ""
+
+#: forum/forms.py:55
+msgid ""
+"please use following characters in tags: letters 'a-z', numbers, and "
+"characters '    .-_#'"
+msgstr ""
+
+#: forum/templates/500.html:22
+msgid "Sorry, system error"
+msgstr "对不起，系统出错"
+
+#: forum/templates/500.html:24
+msgid "System error log is recorded, error will be fixed as soon as possible"
+msgstr "错误已被记录，我们会尽快修复"
+
+#: forum/templates/500.html:25
+msgid "Please report the error to the site administrators if you wish"
+msgstr "请向系统管理员:caogecym@gmail.com报告此问题"
+
+#: forum/templates/about.html:9
+msgid "MUER makes your life interesting everyday."
+msgstr "MUER，让生活更精彩"
+
+#: forum/templates/about.html:11
+msgid ""
+"Muer is a joke site aims at collecting best jokes from all types of websites "
+"and gathering people all around the world to vote, appreciate, and "
+"contribute to this joke pool. The site is developed in django web framework. "
+"Joke resource is scraped from internet using BeautifulSoup, a python html "
+"parsing tool."
+msgstr ""
+"MUER，是一个娱乐资源集送站，人们在此用图片，文字的形式分享生活中遇到的有趣事"
+"件。人们通过审阅，投票的形式进行信息筛选，从而达到资源优化的效果。"
+
+#: forum/templates/about.html:14
+msgid ""
+"I'm open sourcing this repo in hope of all joke enthusiastics will "
+"collaborate with each other and make this web based joke application an fun, "
+"efficient place to get the joke people enjoy."
+msgstr "MUER是开源互联网应用，致力于向人们呈现最有价值的娱乐资源。"
+
+#: forum/templates/about.html:16
+msgid ""
+"Check <a href='https://github.com/caogecym/muer'>https://github.com/caogecym/"
+"muer</a> for the open source repo, if you are interested in developing this "
+"site, or have any good suggestions, please do, feel free to contact me at <a "
+"href='mailto:caogecym@gmail.com'>caogecym@gmail.com."
+msgstr ""
+"如有合作意向，请访问 <a href='https://github.com/caogecym/muer'>https://"
+"github.com/caogecym/muer</a>，或直接联系负责人<a href='mailto:caogecym@gmail."
+"com'>caogecym@gmail.com."
+
+#: forum/templates/header.html:15
+msgid "Categories"
+msgstr "分类"
+
+#: forum/templates/header.html:17
+msgid "Cold Jokes"
+msgstr "冷笑话"
+
+#: forum/templates/header.html:18
+msgid "More"
+msgstr "更多"
+
+#: forum/templates/header.html:21
+msgid "Hottest"
+msgstr "热门"
+
+#: forum/templates/header.html:22
+msgid "About"
+msgstr "关于"
+
+#: forum/templates/header.html:25
+msgid "Search"
+msgstr ""
+
+#: forum/templates/header.html:29 forum/templates/new_post.html:42
+msgid "Post"
+msgstr "发帖"
+
+#: forum/templates/header.html:36
+msgid "logout"
+msgstr "退出"
+
+#: forum/templates/header.html:41
+msgid "Sign Up"
+msgstr "注册"
+
+#: forum/templates/header.html:43
+msgid "Login"
+msgstr "登录"
+
+#: forum/templates/index.html:14
+msgid "Votes"
+msgstr "热度"
+
+#: forum/templates/index.html:61
+msgid "Page"
+msgstr ""
+
+#: forum/templates/logout.html:6 forum/templates/logout.html.py:17
+msgid "Logout"
+msgstr "退出"
+
+#: forum/templates/logout.html:20
+msgid ""
+"As a registered user you can login with your OpenID, log out of the site or "
+"permanently remove your account."
+msgstr ""
+
+#: forum/templates/logout.html:21
+msgid "Logout now"
+msgstr ""
+
+#: forum/templates/new_post.html:21
+msgid "Edit Post"
+msgstr "编辑内容"
+
+#: forum/templates/new_post.html:24
+msgid "New Post"
+msgstr "发布新内容"
+
+#: forum/templates/new_post.html:27
+msgid "Title"
+msgstr "标题"
+
+#: forum/templates/new_post.html:31
+msgid "Content"
+msgstr "内容"
+
+#: forum/templates/new_post.html:34
+msgid "At least one tag is required"
+msgstr "请提供内容分类"
+
+#: forum/templates/new_post.html:40
+msgid "Save"
+msgstr "保存"
+
+#: forum/templates/pagesize.html:6
+msgid "posts per page"
+msgstr ""
+
+#: forum/templates/registration/login.html:7
+msgid "Please sign in"
+msgstr "请登录"
+
+#: forum/templates/registration/login.html:8
+msgid "Email address"
+msgstr "用户名"
+
+#: forum/templates/registration/login.html:9
+msgid "Password"
+msgstr "密码"
+
+#: forum/templates/registration/login.html:11
+msgid "Remember me"
+msgstr "记住我"
+
+#: forum/templates/registration/login.html:13
+msgid "login"
+msgstr "登录"
+
+#: forum/templates/registration/login.html:15
+msgid "Register"
+msgstr "注册"
+
+#: forum/templates/registration/register.html:5
+#: forum/templates/registration/register.html:8
+msgid "Create an account"
+msgstr "创建新帐号"
+
+#: forum/templates/registration/register.html:12
+msgid "Create the account"
+msgstr "点此注册"
