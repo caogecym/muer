@@ -47,28 +47,6 @@
     {% endif %}
   {% endfor %}
 
-  <div class="pagination">
-    <span class="step-links">
-      {% if posts.has_previous %}
-        {% if query.urlencode %}
-          <a href="?{{query.urlencode}}&amp;page={{ posts.previous_page_number }}">previous</a>
-        {% else %}
-          <a href="?page={{ posts.previous_page_number }}">previous</a>
-        {% endif %}
-      {% endif %}
-  
-      <span class="current">
-        {% trans "Page" %} {{ posts.number }} of {{ posts.paginator.num_pages }}.
-      </span>
-  
-      {% if posts.has_next %}
-        {% if query.urlencode %}
-          <a href="?{{query.urlencode}}&amp;page={{ posts.next_page_number }}">next</a>
-        {% else %}
-          <a href="?page={{ posts.next_page_number }}">next</a>
-        {% endif %}
-      {% endif %}
-    </span>
-  </div>
- 
+  {% load paginator %}{% paginator 3 %}
+
 {% endblock %}
