@@ -15,8 +15,6 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import View
-#from django.views.generic.list_detail import object_list
-#from django.views.generic.list import ListView
 
 from markdown import markdown
 from forum.models import Post, Comment
@@ -42,7 +40,7 @@ def index(request, tag_name=None, order_by='-added_at'):
 
     post_list = posts.order_by(order_by).filter(deleted=False)
 
-    paginator = Paginator(post_list, 1) # Show 10 contacts per page
+    paginator = Paginator(post_list, 10) # Show 10 contacts per page
 
     page = request.GET.get('page')
     try:
