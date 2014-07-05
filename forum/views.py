@@ -38,7 +38,7 @@ def index(request, tag_name=None, order_by='-added_at'):
     else:
         posts = Post.objects
 
-    post_list = posts.order_by(order_by)
+    post_list = posts.order_by(order_by).filter(deleted=False)
 
     paginator = Paginator(post_list, 10) # Show 10 contacts per page
 

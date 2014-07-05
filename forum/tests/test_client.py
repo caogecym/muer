@@ -27,6 +27,12 @@ class ClientTestCase(TestCase):
     def test_register(self):
         pass
 
+    def test_empty(self):
+        Post.objects.all().delete()
+        c = Client()
+        res = c.get('/')
+        self.assertTrue('<span class="current">1</span>' in res.content)
+        
     def test_new_post_success(self):
         c = Client()
         c.login(username='caogecym', password='42')
