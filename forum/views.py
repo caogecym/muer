@@ -40,7 +40,7 @@ def index(request, tag_name=None, order_by='-added_at'):
 
     post_list = posts.order_by(order_by).filter(deleted=False)
 
-    paginator = Paginator(post_list, 10) # Show 10 contacts per page
+    paginator = Paginator(post_list, 5) # Show 5 contacts per page
 
     page = request.GET.get('page')
     try:

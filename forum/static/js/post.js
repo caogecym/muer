@@ -4,9 +4,6 @@ Project Name: Elephant
 All Rights Resevred 2013. 
 */
 
-var imgIdPrefixLike = 'post-';
-var postId;
-
 // For adding csrf token within internal url calls
 var csrftoken = $.cookie('csrftoken');
 function csrfSafeMethod(method) {
@@ -40,11 +37,6 @@ $.ajaxSetup({
 
 
 $(function () {
-    $('.featurette-image').click(function (event) {
-        object = $(event.target.parentElement)
-        postId = object.attr("id").substring(imgIdPrefixLike.length);
-        submit(object);
-    })
     $('.post-delete').click(function (event) {
         object = $(event.target.parentElement)
         postId = object.attr("id").substring(imgIdPrefixLike.length);
@@ -75,7 +67,7 @@ var delete_post = function(object, callback) {
             goToHomePage(object, data)
         }});
 }
-var submit = function(object, callback) {
+var submit = function(postId, callback) {
     $.ajax({
         type: "POST",
         cache: false,
@@ -83,26 +75,50 @@ var submit = function(object, callback) {
         url: "/posts/" + postId + "/like/",
         data: { "postId": postId},
         error: handleFail,
-        success: function(data){
-            updateVoteImage(object, data)
-        }});
+        });
 };
+
+$(function()
+{
+        // initialize kudos
+        $.getScript("static/kudo/kudos.js", function(){
+            $("figure.kudoable").kudoable();
+        });
+
+	// when kudoing
+	$("figure.kudo").bind("kudo:active", function(e)
+	{
+		console.log("kudoing active");
+	});
+
+	// when not kudoing
+	$("figure.kudo").bind("kudo:inactive", function(e)
+	{
+		console.log("kudoing inactive");
+	});
+
+	// after kudo'd
+	$("figure.kudo").bind("kudo:added", function(e)
+	{
+            var element = $(this);
+            postId = element.data('id');
+            // like
+            submit(postId);
+	});
+
+	// after removing a kudo
+	$("figure.kudo").bind("kudo:removed", function(e)
+	{
+            var element = $(this);
+            postId = element.data('id');
+            // unlike
+            submit(postId);
+	});
+});
 
 var goToHomePage = function(object, data) {
     window.location.replace("/home/");
 }
-var updateVoteImage = function(object, data) {
-    if (data.not_authenticated == 1) {
-        $('#login_modal').modal('show'); 
-        return;
-    }
-    if (data.status == 1) {
-        $(object[0]).find('[id^=post-like]')[0].style.background = "url('https://muer.s3.amazonaws.com/images/like.png') no-repeat";
-    } 
-    else {
-        $(object[0]).find('[id^=post-like]')[0].style.background = "url('https://muer.s3.amazonaws.com/images/liked.png') no-repeat";
-    }
-};
 
 var handleFail = function(xhr, msg){
     alert("Callback invoke error: " + msg)

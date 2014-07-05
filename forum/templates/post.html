@@ -10,8 +10,6 @@
     <h3><a href="/posts/{{ post.id }}" class="featurette-heading" style="color: #000000">{{ post.title }}</a></h3>
     {{ post.added_at }}
     &nbsp;
-    {% trans "Votes" %}: {{ post.like_count }}
-    &nbsp;
     {% if post.post_source_name %}
       <a style="color: #d3d3d3">{{ post.post_source_name }}</a>
     {% endif %}
@@ -20,37 +18,38 @@
     <pre><span class="inner-pre" style="font-size: 18px">{{ post.content|safe}}</span></pre>
     </br></br>
 
-    {% for img in post.images.all %}
-      <a><img src="{{ img.image_src }}" alt=""></a>
-      </br>
-    {% endfor %}
-
-    <h3><a style="color: #000000">{% trans "Comments" %}</a></h3>
-    {% for comment in post.comments.all %}
-      <span class="inner-pre" style="font-size: 18px">{{ comment.content }}</span>
-      </br>
-    {% endfor %}
-    </br>
-
-    {% if post|is_liked_by:user %}
-      <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
-          style="height: 32px; width: 32px; opacity: 1;
-          background: url('{% static "images/liked.png" %}') no-repeat;"
-          href="#!"></a>
-    {% else %}
-      <a id="post-like-img-{{ post.id }}" class="featurette-image pull-left" 
-          style="height: 32px; width: 32px; opacity: 1;
-          background: url('{% static "images/like.png" %}') no-repeat;"
-          href="#!"></a>
-    {% endif %}
     {% for tag in post.tags.all %}
       <a href="{% static "/tags/" %}{{tag.name}}"><span class="label label-info">{{tag.name}}</span></a>
     {% endfor %}
-    <a href="/posts/{{ post.id }}/edit/">{% trans "Edit" %}</a>
-    <a href="/posts/{{ post.id }}/delete/">{% trans "Delete" %}</a>
+
+    {% if post|is_liked_by:user %}
+      <figure class="kudo kudoable complete" data-id="{{ post.id }}">
+    {% else %}
+      <figure class="kudo kudoable" data-id="{{ post.id }}">
+    {% endif %}
+        <a class="kudobject">
+            <div class="opening">
+                <div class="circle">&nbsp;</div>
+            </div>
+        </a>
+        <a href="#kudo" class="count">
+            <span class="num">{{ post.like_count }}</span>
+        </a>
+    </figure>
   </div>
+
+  <h4><a style="color: #000000">{% trans "Comments" %}</a></h3>
+  {% for comment in post.comments.all %}
+    <span class="inner-pre" style="font-size: 18px">{{ comment.content }}</span>
+    </br>
+  {% endfor %}
+  </br>
+
+  <a href="/posts/{{ post.id }}/edit/">{% trans "Edit" %}</a>
+  <a href="/posts/{{ post.id }}/delete/">{% trans "Delete" %}</a>
   </br>
   </br>
+
   <form action="/posts/{{ post.id }}/comment/" method="post">{% csrf_token %}
     <textarea id="comment_data" name="comment_data" placeholder="{% trans "Enter comment here" %}..." class="commentarea"></textarea>
   </form>
