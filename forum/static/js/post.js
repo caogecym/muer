@@ -80,40 +80,40 @@ var submit = function(postId, callback) {
 
 $(function()
 {
-        // initialize kudos
-        $.getScript("static/kudo/kudos.js", function(){
-            $("figure.kudoable").kudoable();
-        });
-
-	// when kudoing
-	$("figure.kudo").bind("kudo:active", function(e)
-	{
-		console.log("kudoing active");
-	});
-
-	// when not kudoing
-	$("figure.kudo").bind("kudo:inactive", function(e)
-	{
-		console.log("kudoing inactive");
-	});
-
-	// after kudo'd
-	$("figure.kudo").bind("kudo:added", function(e)
-	{
-            var element = $(this);
-            postId = element.data('id');
-            // like
-            submit(postId);
-	});
-
-	// after removing a kudo
-	$("figure.kudo").bind("kudo:removed", function(e)
-	{
-            var element = $(this);
-            postId = element.data('id');
-            // unlike
-            submit(postId);
-	});
+    // initialize kudos
+    $.getScript("/static/kudo/kudos.js", function(){
+        $("figure.kudoable").kudoable();
+    });
+    
+    // when kudoing
+    $("figure.kudo").bind("kudo:active", function(e)
+    {
+    	console.log("kudoing active");
+    });
+    
+    // when not kudoing
+    $("figure.kudo").bind("kudo:inactive", function(e)
+    {
+    	console.log("kudoing inactive");
+    });
+    
+    // after kudo'd
+    $("figure.kudo").bind("kudo:added", function(e)
+    {
+        var element = $(this);
+        postId = element.data('id');
+        // like
+        submit(postId);
+    });
+    
+    // after removing a kudo
+    $("figure.kudo").bind("kudo:removed", function(e)
+    {
+        var element = $(this);
+        postId = element.data('id');
+        // unlike
+        submit(postId);
+    });
 });
 
 var goToHomePage = function(object, data) {
