@@ -1,3 +1,8 @@
 .featurette-image:hover {
     opacity: 0.85 !important;
 }
+
+pre {
+  background-color: #FFFFFF;
+  border: 0px;
+}
