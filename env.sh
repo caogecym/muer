@@ -1,1 +1,1 @@
-export DEV_MODE=true
+export APP_MODE=DEV
