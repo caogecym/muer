@@ -125,7 +125,7 @@ STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_STORAGE_BUCKET_NAME = 'muer-stage'
 AWS_PRELOAD_METADATA = True # necessary to fix manage.py collectstatic command to only upload changed files instead of all files
 
-STATIC_URL = 'https://muer-stage.s3.amazonaws.com/static/'
+STATIC_URL = 'https://muer-stage.s3.amazonaws.com/'
 ADMIN_MEDIA_PREFIX = 'https://muer-stage.s3.amazonaws.com/static/admin/'
 
 # Make this unique, and don't share it with anybody.
