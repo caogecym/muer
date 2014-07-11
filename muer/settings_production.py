@@ -168,8 +168,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    #'django_authopenid',
-    #'bootstrap_toolkit',
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',

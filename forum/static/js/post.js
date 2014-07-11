@@ -81,7 +81,7 @@ var submit = function(postId, callback) {
 $(function()
 {
     // initialize kudos
-    $.getScript("/static/kudo/kudos.js", function(){
+    $.getScript(STATIC_URL+"kudo/kudos.js", function(){
         $("figure.kudoable").kudoable();
     });
     
