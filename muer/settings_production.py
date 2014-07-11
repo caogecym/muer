@@ -107,7 +107,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(PROJECT_PATH, 'forum/static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -125,7 +125,7 @@ STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_STORAGE_BUCKET_NAME = 'muer'
 AWS_PRELOAD_METADATA = True # necessary to fix manage.py collectstatic command to only upload changed files instead of all files
 
-STATIC_URL = 'https://muer.s3.amazonaws.com/static/'
+STATIC_URL = 'https://muer.s3.amazonaws.com/'
 ADMIN_MEDIA_PREFIX = 'https://muer.s3.amazonaws.com/static/admin/'
 
 # Make this unique, and don't share it with anybody.
