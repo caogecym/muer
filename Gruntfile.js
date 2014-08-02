@@ -5,7 +5,7 @@ var jsFilePath = [
     
 module.exports = function(grunt) {
     nconf.argv().env().defaults({
-        'karma-config': 'public/karma/karma.conf.js'
+        'karma-config': 'public/karma.conf.js'
     });
 
     // Project configuration.

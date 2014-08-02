@@ -9,8 +9,6 @@ define(function (require) {
 
     var $ = require('jquery');
     var ns = {};
-    // For adding csrf token within internal url calls
-    var csrftoken = $.cookie('csrftoken');
 
     ns.csrfSafeMethod = function(method) {
         // these HTTP methods do not require CSRF protection
@@ -98,9 +96,11 @@ define(function (require) {
             // unlike
             ns.submit(postId);
         });
-    });
+    };
 
     ns.initialize = function () {
+        // For adding csrf token within internal url calls
+        var csrftoken = $.cookie('csrftoken');
 
         // csrf setup
         $.ajaxSetup({
@@ -132,7 +132,7 @@ define(function (require) {
         });
 
         ns.initKudo();
-    };
+    }; // initialize //
 
     return ns;
 });

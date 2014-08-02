@@ -1,6 +1,6 @@
 define(function (require) {
     'use strict';
-    var muer = require('js/muer');
+    var muer = require('muer');
 
     describe("muer", function() {
         beforeEach(function() {
