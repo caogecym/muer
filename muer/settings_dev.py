@@ -96,7 +96,8 @@ FORUM_ROOT = os.path.abspath(forum.__path__[0])
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.abspath(os.path.dirname(__name__))
 #STATIC_ROOT = 'staticfiles'
 
 # URL prefix for static files.
@@ -104,7 +105,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'public'),
 )
 
 # List of finder classes that know how to find static files in

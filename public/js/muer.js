@@ -42,8 +42,8 @@ define(function (require) {
             type: "DELETE",
             cache: false,
             dataType: "json",
-            url: "/posts/" + postId + "/delete/",
-            data: { "postId": postId},
+            url: "/posts/" + ns.postId + "/delete/",
+            data: { "postId": ns.postId},
             error: ns.handleFail,
             success: function(data){
                 ns.goToHomePage(object, data)
@@ -55,15 +55,15 @@ define(function (require) {
             type: "POST",
             cache: false,
             dataType: "json",
-            url: "/posts/" + postId + "/like/",
-            data: { "postId": postId},
+            url: "/posts/" + ns.postId + "/like/",
+            data: { "postId": ns.postId},
             error: ns.handleFail,
             });
     };
 
     ns.initKudo = function () {
         // initialize kudos
-        $.getScript(STATIC_URL+"kudo/kudos.js", function(){
+        $.getScript(STATIC_URL+"libs/kudo/kudos.js", function(){
             $("figure.kudoable").kudoable();
         });
         
@@ -83,18 +83,18 @@ define(function (require) {
         $("figure.kudo").bind("kudo:added", function(e)
         {
             var element = $(this);
-            postId = element.data('id');
+            ns.postId = element.data('id');
             // like
-            ns.submit(postId);
+            ns.submit(ns.postId);
         });
         
         // after removing a kudo
         $("figure.kudo").bind("kudo:removed", function(e)
         {
             var element = $(this);
-            postId = element.data('id');
+            ns.postId = element.data('id');
             // unlike
-            ns.submit(postId);
+            ns.submit(ns.postId);
         });
     };
 
@@ -116,7 +116,7 @@ define(function (require) {
 
         $('.post-delete').click(function (event) {
             object = $(event.target.parentElement)
-            postId = object.attr("id").substring(imgIdPrefixLike.length);
+            ns.postId = object.attr("id").substring(imgIdPrefixLike.length);
             ns.delete_post(object);
         })
 
@@ -125,7 +125,7 @@ define(function (require) {
                 if (event.keyCode == 13) {
                     this.form.submit()
                     //redirect_url = "/posts/" + postId
-                    window.location.replace("/posts/" + postId + "/");
+                    window.location.replace("/posts/" + ns.postId + "/");
                     return false;
                 }
             });
