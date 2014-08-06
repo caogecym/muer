@@ -29,7 +29,7 @@ define(function (require) {
             !(/^(\/\/|http:|https:).*/.test(url));
     };
 
-    ns.goToHomePage = function(object, data) {
+    ns.goToHomePage = function(data) {
         window.location.replace("/home/");
     }
 
@@ -37,28 +37,27 @@ define(function (require) {
         alert("Callback invoke error: " + msg)
     };
 
-    ns.delete_post = function(object, callback) {
+    ns.delete_post = function(postId) {
         $.ajax({
             type: "DELETE",
             cache: false,
             dataType: "json",
-            url: "/posts/" + ns.postId + "/delete/",
-            data: { "postId": ns.postId},
-            error: ns.handleFail,
+            url: "/posts/" + postId + "/delete/",
             success: function(data){
-                ns.goToHomePage(object, data)
-            }});
+                ns.goToHomePage(data)
+            },
+            error: ns.handleFail,
+        });
     }
 
-    ns.submit = function(postId, callback) {
+    ns.submit = function(postId) {
         $.ajax({
             type: "POST",
             cache: false,
             dataType: "json",
-            url: "/posts/" + ns.postId + "/like/",
-            data: { "postId": ns.postId},
+            url: "/posts/" + postId + "/like/",
             error: ns.handleFail,
-            });
+        });
     };
 
     ns.initKudo = function () {
@@ -67,34 +66,18 @@ define(function (require) {
             $("figure.kudoable").kudoable();
         });
         
-        // when kudoing
-        $("figure.kudo").bind("kudo:active", function(e)
-        {
-            console.log("kudoing active");
-        });
-        
-        // when not kudoing
-        $("figure.kudo").bind("kudo:inactive", function(e)
-        {
-            console.log("kudoing inactive");
-        });
-        
-        // after kudo'd
+        // like after kudo'd
         $("figure.kudo").bind("kudo:added", function(e)
         {
-            var element = $(this);
-            ns.postId = element.data('id');
-            // like
-            ns.submit(ns.postId);
+            var postId = $(this).data('id');
+            ns.submit(postId);
         });
         
-        // after removing a kudo
+        // unlike after removing a kudo
         $("figure.kudo").bind("kudo:removed", function(e)
         {
-            var element = $(this);
-            ns.postId = element.data('id');
-            // unlike
-            ns.submit(ns.postId);
+            var postId = $(this).data('id');
+            ns.submit(postId);
         });
     };
 
@@ -115,9 +98,8 @@ define(function (require) {
         });
 
         $('.post-delete').click(function (event) {
-            object = $(event.target.parentElement)
-            ns.postId = object.attr("id").substring(imgIdPrefixLike.length);
-            ns.delete_post(object);
+            var postId = $(event.target.parentElement).attr("id").substring(imgIdPrefixLike.length);
+            ns.delete_post(postId);
         })
 
         $(document).ready(function() {
