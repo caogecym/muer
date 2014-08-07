@@ -34,15 +34,13 @@ define(function (require) {
     }
 
     ns.handleFail = function(xhr, msg){
-        alert("Callback invoke error: " + msg)
+        alert(xhr.responseText);
     };
 
     ns.delete_post = function(postId) {
         $.ajax({
             type: "DELETE",
-            cache: false,
-            dataType: "json",
-            url: "/posts/" + postId + "/delete/",
+            url: "/api/posts/" + postId,
             success: function(data){
                 ns.goToHomePage(data)
             },
@@ -50,12 +48,24 @@ define(function (require) {
         });
     }
 
-    ns.submit = function(postId) {
+    ns.like = function(postId) {
         $.ajax({
             type: "POST",
-            cache: false,
-            dataType: "json",
-            url: "/posts/" + postId + "/like/",
+            url: "/api/posts/" + postId + "/like/",
+            success: function(){
+                console.log('like successful');
+            },
+            error: ns.handleFail,
+        });
+    };
+
+    ns.unlike = function(postId) {
+        $.ajax({
+            type: "POST",
+            url: "/api/posts/" + postId + "/unlike/",
+            success: function(){
+                console.log('unlike successful');
+            },
             error: ns.handleFail,
         });
     };
@@ -70,14 +80,14 @@ define(function (require) {
         $("figure.kudo").bind("kudo:added", function(e)
         {
             var postId = $(this).data('id');
-            ns.submit(postId);
+            ns.like(postId);
         });
         
         // unlike after removing a kudo
         $("figure.kudo").bind("kudo:removed", function(e)
         {
             var postId = $(this).data('id');
-            ns.submit(postId);
+            ns.unlike(postId);
         });
     };
 

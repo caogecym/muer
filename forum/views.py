@@ -182,16 +182,6 @@ def content(request, post_id):
               }
     return render(request, 'post.html', context)
 
-def ajax_login_required(view_func):
-    def wrap(request, *args, **kwargs):
-        if request.user.is_authenticated():
-            return view_func(request, *args, **kwargs)
-        json = simplejson.dumps({ 'not_authenticated': 1 })
-        return HttpResponse(json, mimetype='application/json')
-    wrap.__doc__ = view_func.__doc__
-    wrap.__dict__ = view_func.__dict__
-    return wrap
-
 @login_required
 def delete_post(request, post_id):
     response_data = {
@@ -234,43 +224,6 @@ def comment_post(request, post_id):
     data = simplejson.dumps(response_data)
     return HttpResponse(data, mimetype='application/json')
         
-
-@ajax_login_required
-def like(request, post_id):
-    '''
-        vote code:
-            status  =  0, By default
-                       1, Cancel
-    '''
-    response_data = {
-        "allowed": 1,
-        "success": 1,
-        "status": 0,
-        "count": 0,
-        "message": '',
-        "not_authenticated": 0,
-    }
-
-    post_to_like = Post.objects.filter(id=post_id)[0]
-    if post_to_like is not None:
-        # cancel
-        if post_to_like.liked_by.all().filter(username=request.user.username).count() > 0:
-            liked_user = post_to_like.liked_by.all().filter(username=request.user.username)[0]
-            post_to_like.liked_by.remove(liked_user)
-            response_data['status'] = 1
-            post_to_like.like_count -= 1
-            response_data['message'] = 'The like of post has been canceled'
-        # like
-        else:
-            post_to_like.like_count += 1
-            post_to_like.liked_by.add(request.user)
-            response_data['message'] = 'The post has been liked by user %s' % request.user.username
-
-        post_to_like.save()
-        response_data['success'] = 1
-
-    data = simplejson.dumps(response_data)
-    return HttpResponse(data, mimetype='application/json')
 
 def register(request):
     if request.method == 'POST':
