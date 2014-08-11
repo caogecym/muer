@@ -10,9 +10,9 @@ import datetime
 class Tag(models.Model):
     name                = models.CharField(max_length=255, unique=True)
     author              = models.ForeignKey(User, null=True, blank=True, related_name='created_tags')
+    added_at            = models.DateTimeField(auto_now_add=True)
+    updated_at          = models.DateTimeField(auto_now=True)
     deleted             = models.BooleanField(default=False)
-    deleted_at          = models.DateTimeField(null=True, blank=True)
-    deleted_by          = models.ForeignKey(User, null=True, blank=True, related_name='deleted_tags')
 
     # Denormalised data
     used_count          = models.PositiveIntegerField(default=0)
@@ -53,10 +53,9 @@ class Comment(models.Model):
     author              = models.ForeignKey(User, related_name='comments')
 
     # status
-    added_at            = models.DateTimeField(default=datetime.datetime.now)
+    added_at            = models.DateTimeField(auto_now_add=True)
+    updated_at          = models.DateTimeField(auto_now=True)
     deleted             = models.BooleanField(default=False)
-    deleted_at          = models.DateTimeField(null=True, blank=True)
-    deleted_by          = models.ForeignKey(User, null=True, blank=True, related_name='deleted_comments')
 
     # user preference 
     liked_by            = models.ManyToManyField(User, null=True, blank=True, related_name='liked_comments')
@@ -74,8 +73,6 @@ class Comment(models.Model):
 class Post(models.Model):
     title               = models.CharField(max_length=300, unique=True)
     author              = models.ForeignKey(User, related_name='posts')
-    post_source_name    = models.CharField(max_length=64)
-    post_source_url     = models.CharField(max_length=1024)
     content             = models.CharField(max_length=8192) # in html
     images              = generic.GenericRelation(Image)
 
@@ -85,10 +82,9 @@ class Post(models.Model):
     tagnames            = models.CharField(max_length=255)
 
     # status
-    added_at            = models.DateTimeField(default=datetime.datetime.now)
+    added_at            = models.DateTimeField(auto_now_add=True)
+    updated_at          = models.DateTimeField(auto_now=True)
     deleted             = models.BooleanField(default=False)
-    deleted_at          = models.DateTimeField(null=True, blank=True)
-    deleted_by          = models.ForeignKey(User, null=True, blank=True, related_name='deleted_posts')
 
     # user preference 
     liked_by            = models.ManyToManyField(User, null=True, blank=True, related_name='liked_posts')
