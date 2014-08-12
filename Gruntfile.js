@@ -1,6 +1,8 @@
 var nconf = require('nconf');
 
 var jsFilePath = [
+    'public/js/*.js',
+    'public/js/spec/*.js',
 ];
     
 module.exports = function(grunt) {
@@ -22,12 +24,18 @@ module.exports = function(grunt) {
           //    configFile: nconf.get('karma-coverage'),
           //},
       },
+      eslint: {
+          target: jsFilePath
+      },
     });
 
-    // Default task(s).
-    grunt.registerTask('test', '', function () {
-        grunt.task.loadNpmTasks('grunt-karma');
-        grunt.task.run(['karma:unit']);
+    grunt.task.loadNpmTasks('grunt-karma');
+    grunt.task.loadNpmTasks('grunt-eslint');
+
+    grunt.registerTask('browser-test', '', function () {
+        grunt.task.run('karma', ['karma:unit']);
     });
+
+    grunt.registerTask('lint', ['eslint']);
 
 };
