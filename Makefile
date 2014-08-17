@@ -1,4 +1,4 @@
-SENV=. ./env.sh
+SENV=. ./env.sh;
 HIDE=@
 
 flake8:
