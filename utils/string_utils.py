@@ -1,6 +1,6 @@
 def find_between(s, start, end, inclusive=False):
     try:
-        start_idx = s.index(start) + len(start) 
+        start_idx = s.index(start) + len(start)
         end_idx = s.index(end, start_idx)
 
         if inclusive:

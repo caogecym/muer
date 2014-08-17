@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 
 from forum import views
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     # ex: /posts
     url(r'^$', views.index, name='index'),
     # ex: /posts/hottest

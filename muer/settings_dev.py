@@ -5,7 +5,7 @@ import forum
 DEBUG = True
 TEMPLATE_DEBUG = False
 
-#for OpenID auth
+# for OpenID auth
 ugettext = lambda s: s
 LOGIN_URL = '/%s' % (ugettext('login/'))
 
@@ -19,7 +19,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'muer_db',                      
+        'NAME': 'muer_db',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -28,12 +28,12 @@ DATABASES = {
 }
 
 # Parse database configuration from $DATABASE_URL
-#import dj_database_url
-#DATABASES['default'] = dj_database_url.config()
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config()
 #
-#DATABASES['default']['OPTIONS'] = {
+# DATABASES['default']['OPTIONS'] = {
 #    'autocommit': True,
-#}
+# }
 
 # Registration regulation
 MIN_USERNAME_LENGTH = 4
@@ -42,8 +42,6 @@ EMAIL_UNIQUE = True
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'caogecym@gmail.com'
-#EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -81,7 +79,6 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-#MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -96,9 +93,7 @@ FORUM_ROOT = os.path.abspath(forum.__path__[0])
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 import os
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.abspath(os.path.dirname(__name__))
-#STATIC_ROOT = 'staticfiles'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -113,19 +108,9 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# AMAZON S3 config
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-#AWS_STORAGE_BUCKET_NAME = 'muer'
-#AWS_PRELOAD_METADATA = True # necessary to fix manage.py collectstatic command to only upload changed files instead of all files
-
-#STATIC_URL = 'https://muer.s3.amazonaws.com/static/'
 STATIC_URL = '/static/'
-#ADMIN_MEDIA_PREFIX = 'https://muer.s3.amazonaws.com/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'm&f!1!7g&*5b*!77x(&1!ksv-=yl!+zh@1e6x3y%&zs$p_5ffo'
@@ -134,7 +119,6 @@ SECRET_KEY = 'm&f!1!7g&*5b*!77x(&1!ksv-=yl!+zh@1e6x3y%&zs$p_5ffo'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -157,7 +141,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+    os.path.join(os.path.dirname(__file__), 'templates').replace('\\', '/'),
 )
 
 INSTALLED_APPS = (
@@ -168,8 +152,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    #'django_authopenid',
-    #'bootstrap_toolkit',
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
@@ -205,7 +187,7 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
-        'console':{
+        'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'

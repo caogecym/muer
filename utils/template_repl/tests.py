@@ -18,9 +18,11 @@ class TestREPL(TestCase):
     def test_simple(self):
         output = mock_interaction(['textnode'])
         self.assertEqual(output, 'textnode\n')
+
     def test_var(self):
         output = mock_interaction(['{{ a }}'], {'a': 'testvar'})
         self.assertEqual(output, 'testvar\n')
+
     def test_loop(self):
         output = mock_interaction(
             ['{% for thing in things %}', '{{ thing }}', '{% endfor %}'],
@@ -31,7 +33,7 @@ class TestREPL(TestCase):
 class TestCompletion(TestCase):
     def setUp(self):
         self.repl = TemplateREPL(
-            context = Context({
+            context=Context({
                 'food': ['tacos', 'ice cream', 'sushi'],
                 'folly': 'fail',
                 'banana': 'nomnom!banana!',

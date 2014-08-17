@@ -9,6 +9,7 @@ class REPLNode(Node):
     def __init__(self, use_pdb, *args, **kwargs):
         self.use_pdb = use_pdb
         return super(REPLNode, self).__init__(*args, **kwargs)
+
     def render(self, context):
         if self.use_pdb:
             pdb_with_context(context)

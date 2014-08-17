@@ -1,9 +1,8 @@
 from django.test import TestCase
-from django.test.client import Client
-from django.template import Context, Template, TemplateSyntaxError
+from django.template import Context, Template
 from django.contrib.auth.models import User
 
-from forum.models import Post, Comment
+from forum.models import Post
 from django.core.paginator import Paginator
 
 
@@ -27,7 +26,7 @@ class TempTagTestCase(TestCase):
 
     def test_paginator_empty(self):
         post_list = Post.objects.filter(deleted=False)
-        paginator = Paginator(post_list, 1) # Show 10 contacts per page
+        paginator = Paginator(post_list, 1)  # Show 10 contacts per page
         posts = paginator.page(1)
 
         rendered = self.render_template(
@@ -37,10 +36,10 @@ class TempTagTestCase(TestCase):
         self.assertTrue('<span class="current">1</span>' in rendered)
 
     def test_paginator_multi(self):
-        for index in range(0,31):
+        for index in range(0, 31):
             Post.objects.create(title='title_%s' % index, content='title_%s' % index, author=self.user)
         post_list = Post.objects.filter(deleted=False)
-        paginator = Paginator(post_list, 10) # Show 10 contacts per page
+        paginator = Paginator(post_list, 10)  # Show 10 contacts per page
         posts = paginator.page(1)
 
         rendered = self.render_template(

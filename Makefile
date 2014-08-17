@@ -1,5 +1,11 @@
+SENV=. ./env.sh
+HIDE=@
+
 flake8:
-	flake8 --config config/flake8 .
+	$(HIDE)flake8 --config config/flake8 .
 
 eslint:
-	grunt lint
+	$(HIDE)grunt lint
+
+test:
+	$(HIDE)$(SENV)python manage.py test forum
