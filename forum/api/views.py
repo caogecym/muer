@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 
 from django.contrib.auth.models import User
-from forum.api.permissions import PostViewPermission
+from forum.api.permissions import PostViewPermission, TagViewPermission, CommentViewPermission, UserViewPermission
 from forum.models import Post, Tag, Comment
 from forum.api.serializers import PostSerializer, TagSerializer, CommentSerializer, UserSerializer
 
@@ -50,6 +50,7 @@ class TagViewSet(viewsets.ModelViewSet):
     """
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    permission_classes= [TagViewPermission]
 
 class CommentViewSet(viewsets.ModelViewSet):
     """
@@ -57,6 +58,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes= [CommentViewPermission]
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -64,3 +66,4 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes= [UserViewPermission]
