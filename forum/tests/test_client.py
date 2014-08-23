@@ -61,20 +61,6 @@ class ClientTestCase(TestCase):
                      'tagnames':'needs-to-be-fixed'})
         self.assertEqual(res.status_code, 403)
 
-    def test_delete_post(self):
-        c = Client()
-        c.login(username='caogecym', password='42')
-        post = Post.objects.filter(title="test_post")[0]
-        c.post('/posts/{}/delete/'.format(post.id))
-        self.assertTrue(Post.objects.filter(title='test_post')[0].deleted)
-
-    def test_delete_post_owner_only(self):
-        c = Client()
-        c.login(username='ycao', password='42')
-        post = Post.objects.filter(title="test_post")[0]
-        c.post('/posts/{}/delete/'.format(post.id))
-        self.assertFalse(Post.objects.filter(title='test_post')[0].deleted)
-
     def test_like_post(self):
         pass
 

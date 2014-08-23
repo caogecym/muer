@@ -1,42 +1,15 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action, permission_classes
 from rest_framework.response import Response
-from rest_framework import permissions
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 
 from django.contrib.auth.models import User
+from forum.api.permissions import PostViewPermission
 from forum.models import Post, Tag, Comment
 from forum.api.serializers import PostSerializer, TagSerializer, CommentSerializer, UserSerializer
 
 
-class PostViewPermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        '''
-        Handles list level url permissions
-        '''
-        # unlogged in users can only GET
-        if request.user and not request.user.is_authenticated():
-            return request.method == 'GET'
-        # logged in users can GET and POST
-        else:
-            return True
-
-    def has_object_permission(self, request, view, obj):
-        '''
-        Handles object level url permissions
-        '''
-        # any user can GET a detail of a post
-        if request.method in ['GET']:
-            return True
-        # staff have all permissions
-        elif request.user and request.user.is_staff:
-            return True
-        # only logged in user can self PUT, DELETE
-        else:
-            return request.user == obj.author
-        
-            
 class PostViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
