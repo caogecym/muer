@@ -43,33 +43,6 @@ class Resource(models.Model):
     class Meta:
         db_table = u'resource'
 
-class Comment(models.Model):
-    content_type        = models.ForeignKey(ContentType)
-    object_id           = models.PositiveIntegerField()
-    content_object      = generic.GenericForeignKey('content_type', 'object_id')
-    content             = models.CharField(max_length=1024)
-    images              = generic.GenericRelation(Image)
-    resources           = generic.GenericRelation(Resource)
-    author              = models.ForeignKey(User, related_name='comments')
-
-    # status
-    added_at            = models.DateTimeField(auto_now_add=True)
-    updated_at          = models.DateTimeField(auto_now=True)
-    deleted             = models.BooleanField(default=False)
-
-    # user preference 
-    liked_by            = models.ManyToManyField(User, null=True, blank=True, related_name='liked_comments')
-    like_count          = models.PositiveIntegerField(default=0)
-    comments            = generic.GenericRelation('self')
-    comment_count       = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        ordering = ('-added_at',)
-        db_table = u'comment'
-
-    def __unicode__(self):
-        return self.content
-
 class Post(models.Model):
     title               = models.CharField(max_length=300, unique=True)
     author              = models.ForeignKey(User, related_name='posts')
@@ -89,8 +62,6 @@ class Post(models.Model):
     # user preference 
     liked_by            = models.ManyToManyField(User, null=True, blank=True, related_name='liked_posts')
     like_count          = models.PositiveIntegerField(default=0)
-    comments            = generic.GenericRelation(Comment)
-    comment_count       = models.PositiveIntegerField(default=0)
 
     def save(self, **kwargs):
         """
@@ -116,10 +87,28 @@ class Post(models.Model):
     class Meta:
         db_table = u'post'
 
-#class PostForm(ModelForm):
-#    class Meta:
-#        model = Post
-#        fields = ['title', 'content', 'tags', ]#'images', 'resources', 'tags']
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name='post_comments')
+    content = models.CharField(max_length=1024)
+    images = generic.GenericRelation(Image)
+    resources = generic.GenericRelation(Resource)
+    author = models.ForeignKey(User, related_name='user_comments')
+
+    # status
+    added_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted = models.BooleanField(default=False)
+
+    # user preference 
+    liked_by = models.ManyToManyField(User, null=True, blank=True, related_name='liked_comments')
+    like_count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ('-added_at',)
+        db_table = u'comment'
+
+    def __unicode__(self):
+        return self.content
 
 # custom signal
 user_logged_in = django.dispatch.Signal(providing_args=["session"])
