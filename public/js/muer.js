@@ -1,8 +1,9 @@
 /*
-Scripts for voting, deleting post
+Scripts for muer platform initialization
 Project Name: Elephant
 All Rights Resevred 2014. 
 */
+/* global define document window alert STATIC_URL require */
 
 define(function (require) {
     'use strict';
@@ -20,62 +21,60 @@ define(function (require) {
         // url could be relative or scheme relative or absolute
         var host = document.location.host; // host + port
         var protocol = document.location.protocol;
-        var sr_origin = '//' + host;
-        var origin = protocol + sr_origin;
+        var srOrigin = '//' + host;
+        var origin = protocol + srOrigin;
         // Allow absolute or scheme relative URLs to same origin
-        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+        return (url === origin || url.slice(0, origin.length + 1) === origin + '/') ||
+            (url === srOrigin || url.slice(0, srOrigin.length + 1) === srOrigin + '/') ||
             // or any other URL that isn't scheme relative or absolute i.e relative.
             !(/^(\/\/|http:|https:).*/.test(url));
     };
 
-    ns.goToHomePage = function(data) {
-        window.location.replace("/home/");
-    }
-
-    ns.handleFail = function(xhr, msg){
-        alert("Callback invoke error: " + msg)
+    ns.goToHomePage = function() {
+        window.location.replace('/home/');
     };
 
-    ns.delete_post = function(postId) {
+    ns.handleFail = function(xhr, msg){
+        alert('Callback invoke error: ' + msg);
+    };
+
+    ns.deletePost = function(postId) {
         $.ajax({
-            type: "DELETE",
+            type: 'DELETE',
             cache: false,
-            dataType: "json",
-            url: "/posts/" + postId + "/delete/",
+            dataType: 'json',
+            url: '/posts/' + postId + '/delete/',
             success: function(data){
-                ns.goToHomePage(data)
+                ns.goToHomePage(data);
             },
             error: ns.handleFail,
         });
-    }
+    };
 
     ns.submit = function(postId) {
         $.ajax({
-            type: "POST",
+            type: 'POST',
             cache: false,
-            dataType: "json",
-            url: "/posts/" + postId + "/like/",
+            dataType: 'json',
+            url: '/posts/' + postId + '/like/',
             error: ns.handleFail,
         });
     };
 
     ns.initKudo = function () {
         // initialize kudos
-        $.getScript(STATIC_URL+"libs/kudo/kudos.js", function(){
-            $("figure.kudoable").kudoable();
+        $.getScript(STATIC_URL + 'libs/kudo/kudos.js', function() {
+            $('figure.kudoable').kudoable();
         });
         
         // like after kudo'd
-        $("figure.kudo").bind("kudo:added", function(e)
-        {
+        $('figure.kudo').bind('kudo:added', function() {
             var postId = $(this).data('id');
             ns.submit(postId);
         });
         
         // unlike after removing a kudo
-        $("figure.kudo").bind("kudo:removed", function(e)
-        {
+        $('figure.kudo').bind('kudo:removed', function() {
             var postId = $(this).data('id');
             ns.submit(postId);
         });
@@ -92,22 +91,22 @@ define(function (require) {
                     // Send the token to same-origin, relative URLs only.
                     // Send the token only if the method warrants CSRF protection
                     // Using the CSRFToken value acquired earlier
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    xhr.setRequestHeader('X-CSRFToken', csrftoken);
                 }
             }
         });
 
         $('.post-delete').click(function (event) {
-            var postId = $(event.target.parentElement).attr("id").substring(imgIdPrefixLike.length);
-            ns.delete_post(postId);
-        })
+            var postId = $(event.target.parentElement).attr('id').substring(imgIdPrefixLike.length);
+            ns.deletePost(postId);
+        });
 
         $(document).ready(function() {
             $('.commentarea').keydown(function(event) {
-                if (event.keyCode == 13) {
-                    this.form.submit()
-                    //redirect_url = "/posts/" + postId
-                    window.location.replace("/posts/" + ns.postId + "/");
+                if (event.keyCode === 13) {
+                    this.form.submit();
+                    //redirect_url = '/posts/' + postId
+                    window.location.replace('/posts/' + ns.postId + '/');
                     return false;
                 }
             });

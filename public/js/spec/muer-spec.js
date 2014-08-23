@@ -1,3 +1,5 @@
+/* global define describe beforeEach it spyOn expect xit */
+
 define(function (require) {
     'use strict';
     var muer = require('muer');

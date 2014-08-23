@@ -12,21 +12,24 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
-      pkg: grunt.file.readJSON('package.json'),
-      karma: {
-          unit: {
-              configFile: nconf.get('karma-config'),
-          },
-          //debug: {
-          //    configFile: nconf.get('karma-debug'),
-          //},
-          //coverage: {
-          //    configFile: nconf.get('karma-coverage'),
-          //},
-      },
-      eslint: {
-          target: jsFilePath
-      },
+        pkg: grunt.file.readJSON('package.json'),
+        karma: {
+            unit: {
+                configFile: nconf.get('karma-config'),
+            },
+            //debug: {
+            //    configFile: nconf.get('karma-debug'),
+            //},
+            //coverage: {
+            //    configFile: nconf.get('karma-coverage'),
+            //},
+        },
+        eslint: {
+            options: {
+                config: 'config/eslint.json',
+            },
+            target: jsFilePath
+        },
     });
 
     grunt.task.loadNpmTasks('grunt-karma');

@@ -1,0 +1,11 @@
+{
+    'rules': {
+        'quotes': [2, 'single'],
+        'complexity': [2, 5],
+        'max-depth': [2, 3],
+        'strict': 2,
+        'no-underscore-dangle': 0,
+        'no-comma-dangle': 0,
+    }
+
+}
