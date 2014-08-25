@@ -107,8 +107,8 @@ define(function (require) {
             }
         });
 
-        $('.post-delete').click(function (event) {
-            var postId = $(event.target.parentElement).attr("id").substring(imgIdPrefixLike.length);
+        $('.post-delete').click(function () {
+            var postId = $(this).data('postid');
             ns.delete_post(postId);
         })
 
