@@ -6,7 +6,7 @@
 
 {% block content %}
   {% if post %}
-  <div id="post-{{ post.id }}" class="featurette">
+  <div id="post-{{ post.id }}" data-postid="{{ post.id }}" class="post-content featurette">
     <h3><a href="/posts/{{ post.id }}" class="featurette-heading" style="color: #000000">{{ post.title }}</a></h3>
     {{ post.added_at }}
     &nbsp;
@@ -39,20 +39,14 @@
   </div>
 
   <h4><a style="color: #000000">{% trans "Comments" %}</a></h3>
-  {% for comment in post.comments.all %}
-    <span class="inner-pre" style="font-size: 18px">{{ comment.content }}</span>
-    </br>
-  {% endfor %}
-  </br>
+  <ul class="post-comments"></ul>
 
   <a href="/posts/{{ post.id }}/edit/">{% trans "Edit" %}</a>
   <a class="post-delete" data-postid="{{ post.id }}">{% trans "Delete" %}</a>
   </br>
   </br>
 
-  <form action="/posts/{{ post.id }}/comment/" method="post">{% csrf_token %}
-    <textarea id="comment_data" name="comment_data" placeholder="{% trans "Enter comment here" %}..." class="commentarea"></textarea>
-  </form>
+  <textarea id="comment_data" name="comment_data" placeholder="{% trans "Enter comment here" %}..." class="commentarea"></textarea>
 
   {% else %}
     {% trans "The post doesn't exist or has been deleted." %}

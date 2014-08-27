@@ -8,7 +8,9 @@ define(function (require) {
     'use strict';
 
     var $ = require('jquery');
-    var ns = {};
+    var ns = {
+        curUser: $('.user-label').data('userid')
+    };
 
     ns.csrfSafeMethod = function(method) {
         // these HTTP methods do not require CSRF protection
@@ -115,16 +117,31 @@ define(function (require) {
         $(document).ready(function() {
             $('.commentarea').keydown(function(event) {
                 if (event.keyCode == 13) {
-                    this.form.submit()
-                    //redirect_url = "/posts/" + postId
-                    window.location.replace("/posts/" + ns.postId + "/");
-                    return false;
+                    var postId = $('.post-content').data('postid');
+                    $.ajax({
+                        type: 'POST',
+                        data: {
+                            content: $(this).val(),
+                            post: postId,
+                            author: ns.curUser,
+                        },
+                        url: '/api/comments/',
+                        success: ns.onCommentSuccess,
+                    });
                 }
             });
         });
 
+        // TODO: pull comments info during init
+
         ns.initKudo();
     }; // initialize //
+
+    ns.onCommentSuccess = function (response) {
+        // TODO: add notification: 'Comment success!'
+        $('.post-comments').append('<li class="inner-pre">' + response.content + '</li>');
+        $('.commentarea').val('');
+    };
 
     return ns;
 });

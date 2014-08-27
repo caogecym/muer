@@ -149,7 +149,7 @@ def add_post(request, post_id=None):
     if post_id:
         post = get_object_or_404(Post, pk=post_id)
         if post.author != request.user:
-            return HttpResponseForbidden()
+            return HttpResponseForbidden("Only owner of this post is allowed to edit")
     else:
         post = Post(author=request.user)
 

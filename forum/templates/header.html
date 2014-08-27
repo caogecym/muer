@@ -31,7 +31,7 @@
 
         {% if user.is_authenticated %}
           <p class="navbar-text pull-right">
-            <a class="navbar-link" href="/users/{{ user.id }}/{{ user.username }}/">{{ user.username }}</a>   
+            <a class="user-label navbar-link" href="/users/{{ user.id }}/" data-userid="{{ user.id }}">{{ user.username }}</a>   
             &nbsp;&nbsp;
             <a class="navbar-link" href="/logout/">{% trans "logout" %}</a>
             &nbsp;&nbsp;

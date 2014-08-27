@@ -2,6 +2,10 @@
     opacity: 0.85 !important;
 }
 
+.post-delete:hover {
+    cursor: pointer;
+}
+
 pre {
   background-color: #FFFFFF;
   border: 0px;
