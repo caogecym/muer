@@ -127,6 +127,7 @@ define(function (require) {
                         },
                         url: '/api/comments/',
                         success: ns.onCommentSuccess,
+                        error: ns.onCommentFail,
                     });
                 }
             });
@@ -138,10 +139,16 @@ define(function (require) {
     }; // initialize //
 
     ns.onCommentSuccess = function (response) {
-        // TODO: add notification: 'Comment success!'
         $('.post-comments').append('<li class="inner-pre">' + response.content + '</li>');
         $('.commentarea').val('');
+        $('.alert-success').text('Comment added!');
+        $('.alert-success').show(0).delay(1000).hide(0);
     };
+
+    ns.onCommentFail = function (response) {
+        $('.alert-warning').text(response.responseJSON.detail);
+        $('.alert-warning').show(0).delay(1000).hide(0);
+    }
 
     return ns;
 });

@@ -2,6 +2,14 @@
     opacity: 0.85 !important;
 }
 
+.alert-success {
+    display: none;
+}
+
+.alert-warning {
+    display: none;
+}
+
 .post-delete:hover {
     cursor: pointer;
 }

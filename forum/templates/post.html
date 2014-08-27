@@ -5,6 +5,8 @@
 {% load url from future %}
 
 {% block content %}
+  <div class="alert alert-success" role="alert"></div>
+  <div class="alert alert-warning" role="alert"></div>
   {% if post %}
   <div id="post-{{ post.id }}" data-postid="{{ post.id }}" class="post-content featurette">
     <h3><a href="/posts/{{ post.id }}" class="featurette-heading" style="color: #000000">{{ post.title }}</a></h3>
