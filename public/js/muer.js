@@ -112,7 +112,24 @@ define(function (require) {
         $('.post-delete').click(function () {
             var postId = $(this).data('postid');
             ns.delete_post(postId);
-        })
+        });
+
+        ns.onCommentLikeSuccess = function (response) {
+            var commentId = response.id;
+            $('.comment-upvote[data-commentid=' + commentId + ']').addClass('up');
+            var $commentCount = $('.comment-like-count[data-commentid=' + commentId + ']');
+            var likeCount = parseInt($commentCount.text());
+            $commentCount.text(likeCount + 1);
+        };
+
+        $('.comment-upvote').click(function () {
+            var commentId = $(this).closest('li').data('commentid');
+            $.ajax({
+                type: 'POST',
+                url: '/api/comments/' + commentId + '/like/',
+                success: ns.onCommentLikeSuccess,
+            });
+        });
 
         $(document).ready(function() {
             $('.commentarea').keydown(function(event) {

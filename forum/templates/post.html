@@ -40,13 +40,21 @@
     </figure>
   </div>
 
-  <h4><a style="color: #000000">{% trans "Comments" %}</a></h3>
-  <ul class="post-comments"></ul>
-
   <a href="/posts/{{ post.id }}/edit/">{% trans "Edit" %}</a>
   <a class="post-delete" data-postid="{{ post.id }}">{% trans "Delete" %}</a>
-  </br>
-  </br>
+
+  <h4><a style="color: #000000">{% trans "Comments" %}</a></h3>
+  <ul class="post-comments">
+    {% for comment in post.post_comments.all %}
+      <li class="post-comment inner-pre" data-commentid="{{ comment.id }}">
+        <div>{{ comment.content }}</div>
+        <div>
+          <span class="comment-like-count" data-commentid="{{ comment.id }}">{{ comment.like_count }}</span><span>{% trans "likes" %}</span>
+          <a class="comment-upvote" data-commentid="{{ comment.id }}" href="#">like</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 
   <textarea id="comment_data" name="comment_data" placeholder="{% trans "Enter comment here" %}..." class="commentarea"></textarea>
 

@@ -60,6 +60,19 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes= [CommentViewPermission]
 
+    # TODO: avoid duplicate like
+    @action(permission_classes=[AllowAny])
+    def like(self, request, pk=None):
+        comment = self.get_object()
+        user = self.request.user
+
+        if len(comment.liked_by.filter(id=user.id)) == 0 and user.is_authenticated():
+            comment.liked_by.add(user)
+
+        comment.like_count += 1
+        comment.save()
+        return Response({'status': 'comment liked', 'id': comment.id})
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
