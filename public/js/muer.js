@@ -112,6 +112,7 @@ define(function (require) {
     };
 
     ns.onCommentSuccess = function (response) {
+        // TODO: refresh comment list
         $('.post-comments').append('<li class="inner-pre">' + response.content + '</li>');
         $('.commentarea').val('');
         $('.alert-success').text('Comment added!');
@@ -164,6 +165,7 @@ define(function (require) {
         });
 
         $(document).ready(function() {
+            // TODO: add post button
             $('.commentarea').keydown(function(event) {
                 if (event.keyCode == 13) {
                     var postId = $('.post-content').data('postid');

@@ -43,13 +43,16 @@
   <a href="/posts/{{ post.id }}/edit/">{% trans "Edit" %}</a>
   <a class="post-delete" data-postid="{{ post.id }}">{% trans "Delete" %}</a>
 
-  <h4><a style="color: #000000">{% trans "Comments" %}</a></h3>
+  <h4 class="comments-header"><a style="color: #000000">{% trans "Comments" %}:</a></h3>
   <ul class="post-comments">
     {% for comment in post.post_comments.all %}
       <li class="post-comment inner-pre" data-commentid="{{ comment.id }}">
-        <div>{{ comment.content }}</div>
         <div>
+          <span class="comment-author">{{ comment.author }}</span>
           <span class="comment-like-count" data-commentid="{{ comment.id }}">{{ comment.like_count }}</span><span>{% trans "likes" %}</span>
+        </div>
+        <div class="comment-content">{{ comment.content }}</div>
+        <div>
           {% if comment|is_liked_by:user %}
             <a class="comment-upvote up" data-commentid="{{ comment.id }}" href="#">unlike</a>
           {% else %}
@@ -57,10 +60,13 @@
           {% endif %}
         </div>
       </li>
+      {% if not forloop.last %}
+        <hr class="featurette-divider comment-divider">
+      {% endif %}
     {% endfor %}
+    <textarea class="comment-area" id="comment_data" name="comment_data" placeholder="{% trans "Enter comment here" %}..." class="commentarea"></textarea>
   </ul>
 
-  <textarea id="comment_data" name="comment_data" placeholder="{% trans "Enter comment here" %}..." class="commentarea"></textarea>
 
   {% else %}
     {% trans "The post doesn't exist or has been deleted." %}

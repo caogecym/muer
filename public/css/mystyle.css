@@ -14,6 +14,47 @@
     cursor: pointer;
 }
 
+.post-content {
+    width: 50em;
+}
+
+.post-comments {
+    width: 50em;
+    margin-left: 10px;
+}
+
+.comments-header {
+    padding-top: 5px;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-content {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.comment-like-count {
+    padding-right: 5px;
+}
+
+.comment-divider {
+    margin: 0 0;
+}
+
+.comment-area {
+    resize: none;
+    margin: 0;
+    width: 100%
+}
+
+.post-comment {
+    padding: 10px 0;
+    list-style: none;
+}
+
 pre {
   background-color: #FFFFFF;
   border: 0px;
