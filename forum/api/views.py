@@ -30,7 +30,7 @@ class PostViewSet(viewsets.ModelViewSet):
         post.save()
         return Response({'status': 'post liked'})
 
-    @action()
+    @action(permission_classes=[AllowAny])
     def unlike(self, request, pk=None):
         post = self.get_object()
         user = self.request.user
@@ -60,18 +60,33 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes= [CommentViewPermission]
 
-    # TODO: avoid duplicate like
     @action(permission_classes=[AllowAny])
     def like(self, request, pk=None):
         comment = self.get_object()
         user = self.request.user
 
-        if len(comment.liked_by.filter(id=user.id)) == 0 and user.is_authenticated():
-            comment.liked_by.add(user)
+        if len(comment.liked_by.filter(id=user.id)) == 0:
+            if user.is_authenticated():
+                comment.liked_by.add(user)
+            comment.like_count += 1
+            comment.save()
+            return Response({'status': 'comment liked', 'id': comment.id})
+        else:
+            return Response({'status': 'already liked', 'id': comment.id}, status=status.HTTP_403_FORBIDDEN)
 
-        comment.like_count += 1
-        comment.save()
-        return Response({'status': 'comment liked', 'id': comment.id})
+    @action(permission_classes=[AllowAny])
+    def unlike(self, request, pk=None):
+        comment = self.get_object()
+        user = self.request.user
+
+        if user.is_authenticated():
+            comment.like_count -= 1
+            if len(comment.liked_by.filter(id=user.id)) > 0:
+                comment.liked_by.remove(user)
+            comment.save()
+            return Response({'status': 'comment unliked', 'id': comment.id})
+        else:
+            return Response({'status': 'have to login to unlike'}, status=status.HTTP_403_FORBIDDEN)
 
 class UserViewSet(viewsets.ModelViewSet):
     """

@@ -50,7 +50,11 @@
         <div>{{ comment.content }}</div>
         <div>
           <span class="comment-like-count" data-commentid="{{ comment.id }}">{{ comment.like_count }}</span><span>{% trans "likes" %}</span>
-          <a class="comment-upvote" data-commentid="{{ comment.id }}" href="#">like</a>
+          {% if comment|is_liked_by:user %}
+            <a class="comment-upvote up" data-commentid="{{ comment.id }}" href="#">unlike</a>
+          {% else %}
+            <a class="comment-upvote" data-commentid="{{ comment.id }}" href="#">like</a>
+          {% endif %}
         </div>
       </li>
     {% endfor %}

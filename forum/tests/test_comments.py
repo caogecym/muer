@@ -16,9 +16,31 @@ class CommentTests(APITestCase):
         super_user.save()
         self.post = Post.objects.create(title="test_post", content="Ultimate anwser to everything: 42", 
                                         author=normal_user)
-        Comment.objects.create(content='this is hilarious!', post=self.post, author=normal_user)
+        self.comment = Comment.objects.create(content='this is hilarious!', post=self.post, author=normal_user)
 
         print "In method %s" % self._testMethodName
+
+    def test_like_comment(self):
+        """
+        Anybody can like a post.
+        """
+        self.assertEqual(self.comment.like_count, 0)
+        url = '/api/comments/1/like/'
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['status'], 'comment liked')
+        self.assertEqual(Comment.objects.all()[0].like_count, 1)
+
+    def test_unlike_needs_login(self):
+        """
+        Only logged in user can unlike a post.
+        """
+        self.assertEqual(self.comment.like_count, 0)
+        url = '/api/comments/1/unlike/'
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.data['status'], 'have to login to unlike')
+        self.assertEqual(Comment.objects.all()[0].like_count, 0)
 
     def test_unlogged_in_get_list(self):
         url = '/api/comments/'

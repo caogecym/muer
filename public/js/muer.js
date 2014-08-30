@@ -93,6 +93,37 @@ define(function (require) {
         });
     };
 
+    ns.onCommentLikeSuccess = function (response) {
+        var commentId = response.id;
+        $('.comment-upvote[data-commentid=' + commentId + ']').addClass('up');
+        $('.comment-upvote[data-commentid=' + commentId + ']').text('unlike');
+        var $commentCount = $('.comment-like-count[data-commentid=' + commentId + ']');
+        var likeCount = parseInt($commentCount.text());
+        $commentCount.text(likeCount + 1);
+    };
+
+    ns.onCommentUnlikeSuccess = function (response) {
+        var commentId = response.id;
+        $('.comment-upvote[data-commentid=' + commentId + ']').removeClass('up');
+        $('.comment-upvote[data-commentid=' + commentId + ']').text('like');
+        var $commentCount = $('.comment-like-count[data-commentid=' + commentId + ']');
+        var likeCount = parseInt($commentCount.text());
+        $commentCount.text(likeCount - 1);
+    };
+
+    ns.onCommentSuccess = function (response) {
+        $('.post-comments').append('<li class="inner-pre">' + response.content + '</li>');
+        $('.commentarea').val('');
+        $('.alert-success').text('Comment added!');
+        $('.alert-success').show(0).delay(1000).hide(0);
+    };
+
+    ns.onCommentFail = function (response) {
+        $('.alert-warning').text(response.responseJSON.detail);
+        $('.alert-warning').show(0).delay(1000).hide(0);
+    }
+
+
     ns.initialize = function () {
         // For adding csrf token within internal url calls
         var csrftoken = $.cookie('csrftoken');
@@ -114,21 +145,22 @@ define(function (require) {
             ns.delete_post(postId);
         });
 
-        ns.onCommentLikeSuccess = function (response) {
-            var commentId = response.id;
-            $('.comment-upvote[data-commentid=' + commentId + ']').addClass('up');
-            var $commentCount = $('.comment-like-count[data-commentid=' + commentId + ']');
-            var likeCount = parseInt($commentCount.text());
-            $commentCount.text(likeCount + 1);
-        };
-
         $('.comment-upvote').click(function () {
             var commentId = $(this).closest('li').data('commentid');
-            $.ajax({
-                type: 'POST',
-                url: '/api/comments/' + commentId + '/like/',
-                success: ns.onCommentLikeSuccess,
-            });
+            if (!$(this).hasClass('up')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/comments/' + commentId + '/like/',
+                    success: ns.onCommentLikeSuccess,
+                });
+            }
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/comments/' + commentId + '/unlike/',
+                    success: ns.onCommentUnlikeSuccess,
+                });
+            }
         });
 
         $(document).ready(function() {
@@ -150,22 +182,8 @@ define(function (require) {
             });
         });
 
-        // TODO: pull comments info during init
-
         ns.initKudo();
     }; // initialize //
-
-    ns.onCommentSuccess = function (response) {
-        $('.post-comments').append('<li class="inner-pre">' + response.content + '</li>');
-        $('.commentarea').val('');
-        $('.alert-success').text('Comment added!');
-        $('.alert-success').show(0).delay(1000).hide(0);
-    };
-
-    ns.onCommentFail = function (response) {
-        $('.alert-warning').text(response.responseJSON.detail);
-        $('.alert-warning').show(0).delay(1000).hide(0);
-    }
 
     return ns;
 });
