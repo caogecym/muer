@@ -1,13 +1,28 @@
+import django_filters
+from django.contrib.auth.models import User
+
 from rest_framework import viewsets
 from rest_framework.decorators import action, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
+from rest_framework import filters
 
-from django.contrib.auth.models import User
 from forum.api.permissions import PostViewPermission, TagViewPermission, CommentViewPermission, UserViewPermission
 from forum.models import Post, Tag, Comment
 from forum.api.serializers import PostSerializer, TagSerializer, CommentSerializer, UserSerializer
+
+
+class PostFilter(django_filters.FilterSet):
+    class Meta:
+        model = Post
+        fields = ['author', 'like_count', 'liked_by']
+
+
+class CommentFilter(django_filters.FilterSet):
+    class Meta:
+        model = Comment
+        fields = ['post', 'author', 'like_count', 'liked_by']
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -17,6 +32,8 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes= [PostViewPermission]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = PostFilter
 
     @action(permission_classes=[AllowAny])
     def like(self, request, pk=None):
@@ -42,7 +59,7 @@ class PostViewSet(viewsets.ModelViewSet):
             post.save()
             return Response({'status': 'post unliked'})
         else:
-            return Response({'status': 'have to login to unlike'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'status': 'have to login to unlike'}, status=status.HTTP_403_FORBIDDEN)
 
 class TagViewSet(viewsets.ModelViewSet):
     """
@@ -59,6 +76,8 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes= [CommentViewPermission]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = CommentFilter
 
     @action(permission_classes=[AllowAny])
     def like(self, request, pk=None):

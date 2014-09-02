@@ -13,7 +13,7 @@ admin.autodiscover()
 APP_PATH = os.path.dirname(__file__)
 
 # Create a router and register our viewsets with it.
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register(r'posts', forum_api.PostViewSet)
 router.register(r'tags', forum_api.TagViewSet)
 router.register(r'comments', forum_api.CommentViewSet)
