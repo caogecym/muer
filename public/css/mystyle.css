@@ -44,10 +44,21 @@
     margin: 0 0;
 }
 
+.comment-area-wrapper {
+    width: 50em;
+}
+
 .comment-area {
     resize: none;
-    margin: 0;
-    width: 100%
+    width: 49em;
+}
+
+.comment-submit-wrapper {
+    overflow: hidden;
+}
+
+.comment-submit-btn {
+    float: right;
 }
 
 .post-comment {

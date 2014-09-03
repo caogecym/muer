@@ -112,10 +112,10 @@ define(function (require) {
     };
 
     ns.onCommentSuccess = function (response) {
-        // TODO: refresh comment list
-        $('.post-comments').append('<li class="inner-pre">' + response.content + '</li>');
-        $('.commentarea').val('');
-        $('.alert-success').text('Comment added!');
+        // TODO: refresh comment list using jade dynamic template
+        //$('.post-comments').append('<li class="inner-pre">' + response.content + '</li>');
+        $('.comment-area').val('');
+        $('.alert-success').text('Comment added, please refresh page!');
         $('.alert-success').show(0).delay(1000).hide(0);
     };
 
@@ -124,6 +124,19 @@ define(function (require) {
         $('.alert-warning').show(0).delay(1000).hide(0);
     }
 
+    ns.submitComment = function (postId) {
+        $.ajax({
+            type: 'POST',
+            data: {
+                content: $('.comment-area').val(),
+                post: postId,
+                author: ns.curUser,
+            },
+            url: '/api/comments',
+            success: ns.onCommentSuccess,
+            error: ns.onCommentFail,
+        });
+    };
 
     ns.initialize = function () {
         // For adding csrf token within internal url calls
@@ -151,35 +164,27 @@ define(function (require) {
             if (!$(this).hasClass('up')) {
                 $.ajax({
                     type: 'POST',
-                    url: '/api/comments/' + commentId + '/like/',
+                    url: '/api/comments/' + commentId + '/like',
                     success: ns.onCommentLikeSuccess,
                 });
             }
             else {
                 $.ajax({
                     type: 'POST',
-                    url: '/api/comments/' + commentId + '/unlike/',
+                    url: '/api/comments/' + commentId + '/unlike',
                     success: ns.onCommentUnlikeSuccess,
                 });
             }
         });
 
         $(document).ready(function() {
-            // TODO: add post button
-            $('.commentarea').keydown(function(event) {
+            var postId = $('.post-content').data('postid');
+            $('.comment-submit-btn').click(function () {
+                ns.submitComment(postId);
+            });
+            $('.comment-area').keydown(function(event) {
                 if (event.keyCode == 13) {
-                    var postId = $('.post-content').data('postid');
-                    $.ajax({
-                        type: 'POST',
-                        data: {
-                            content: $(this).val(),
-                            post: postId,
-                            author: ns.curUser,
-                        },
-                        url: '/api/comments/',
-                        success: ns.onCommentSuccess,
-                        error: ns.onCommentFail,
-                    });
+                    ns.submitComment(postId);
                 }
             });
         });

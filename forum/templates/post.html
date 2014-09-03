@@ -64,7 +64,12 @@
         <hr class="featurette-divider comment-divider">
       {% endif %}
     {% endfor %}
-    <textarea class="comment-area" id="comment_data" name="comment_data" placeholder="{% trans "Enter comment here" %}..." class="commentarea"></textarea>
+    <div class="comment-area-wrapper">
+      <textarea class="comment-area" id="comment_data" name="comment_data" placeholder="{% trans "Enter comment here" %}..." class="commentarea"></textarea>
+    </div>
+    <div class="comment-submit-wrapper">
+      <button class="comment-submit-btn">{% trans "Comment" %}</button>
+    </div>
   </ul>
 
 
