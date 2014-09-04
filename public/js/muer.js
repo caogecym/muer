@@ -93,51 +93,6 @@ define(function (require) {
         });
     };
 
-    ns.onCommentLikeSuccess = function (response) {
-        var commentId = response.id;
-        $('.comment-upvote[data-commentid=' + commentId + ']').addClass('up');
-        $('.comment-upvote[data-commentid=' + commentId + ']').text('unlike');
-        var $commentCount = $('.comment-like-count[data-commentid=' + commentId + ']');
-        var likeCount = parseInt($commentCount.text());
-        $commentCount.text(likeCount + 1);
-    };
-
-    ns.onCommentUnlikeSuccess = function (response) {
-        var commentId = response.id;
-        $('.comment-upvote[data-commentid=' + commentId + ']').removeClass('up');
-        $('.comment-upvote[data-commentid=' + commentId + ']').text('like');
-        var $commentCount = $('.comment-like-count[data-commentid=' + commentId + ']');
-        var likeCount = parseInt($commentCount.text());
-        $commentCount.text(likeCount - 1);
-    };
-
-    ns.onCommentSuccess = function (response) {
-        // TODO: refresh comment list using jade dynamic template
-        //$('.post-comments').append('<li class="inner-pre">' + response.content + '</li>');
-        $('.comment-area').val('');
-        $('.alert-success').text('Comment added, please refresh page!');
-        $('.alert-success').show(0).delay(1000).hide(0);
-    };
-
-    ns.onCommentFail = function (response) {
-        $('.alert-warning').text(response.responseJSON.detail);
-        $('.alert-warning').show(0).delay(1000).hide(0);
-    }
-
-    ns.submitComment = function (postId) {
-        $.ajax({
-            type: 'POST',
-            data: {
-                content: $('.comment-area').val(),
-                post: postId,
-                author: ns.curUser,
-            },
-            url: '/api/comments',
-            success: ns.onCommentSuccess,
-            error: ns.onCommentFail,
-        });
-    };
-
     ns.initialize = function () {
         // For adding csrf token within internal url calls
         var csrftoken = $.cookie('csrftoken');
@@ -157,36 +112,6 @@ define(function (require) {
         $('.post-delete').click(function () {
             var postId = $(this).data('postid');
             ns.delete_post(postId);
-        });
-
-        $('.comment-upvote').click(function () {
-            var commentId = $(this).closest('li').data('commentid');
-            if (!$(this).hasClass('up')) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/comments/' + commentId + '/like',
-                    success: ns.onCommentLikeSuccess,
-                });
-            }
-            else {
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/comments/' + commentId + '/unlike',
-                    success: ns.onCommentUnlikeSuccess,
-                });
-            }
-        });
-
-        $(document).ready(function() {
-            var postId = $('.post-content').data('postid');
-            $('.comment-submit-btn').click(function () {
-                ns.submitComment(postId);
-            });
-            $('.comment-area').keydown(function(event) {
-                if (event.keyCode == 13) {
-                    ns.submitComment(postId);
-                }
-            });
         });
 
         ns.initKudo();

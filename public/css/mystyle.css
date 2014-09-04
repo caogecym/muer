@@ -18,52 +18,8 @@
     width: 50em;
 }
 
-.post-comments {
-    width: 50em;
-    margin-left: 10px;
-}
-
-.comments-header {
-    padding-top: 5px;
-}
-
-.comment-author {
-    font-weight: bold;
-}
-
-.comment-content {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.comment-like-count {
-    padding-right: 5px;
-}
-
-.comment-divider {
-    margin: 0 0;
-}
-
-.comment-area-wrapper {
-    width: 50em;
-}
-
 .comment-area {
-    resize: none;
-    width: 49em;
-}
-
-.comment-submit-wrapper {
-    overflow: hidden;
-}
-
-.comment-submit-btn {
-    float: right;
-}
-
-.post-comment {
-    padding: 10px 0;
-    list-style: none;
+    width: 50em;
 }
 
 pre {
