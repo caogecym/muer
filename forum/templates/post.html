@@ -45,8 +45,11 @@
 
   <div id="disqus_thread" class="comment-area"></div>
   <script type="text/javascript">
-      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-      var disqus_shortname = 'muer'; // required: replace example with your forum shortname
+      /* CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE */
+      var disqus_shortname = 'muer';
+      var disqus_identifier = 'post-{{ post.id }}';
+      var disqus_title = '{{ post.title }}';
+      var disqus_url = [location.protocol, '//', location.host, location.pathname].join('');
 
       /* * * DON'T EDIT BELOW THIS LINE * * */
       (function() {
