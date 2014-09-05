@@ -179,7 +179,7 @@ msgstr "保存"
 
 #: forum/templates/post.html:28
 msgid "Comments"
-msgstr "回复"
+msgstr "网友评论"
 
 #: forum/templates/post.html:49
 msgid "Edit"

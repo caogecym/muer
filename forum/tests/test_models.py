@@ -56,23 +56,6 @@ class PostTestCase(TestCase):
         resource2.save()
         self.assertEqual(len(post.resources.all()), 2)
 
-    def test_comment(self):
-        logger.info('start testing test_comment...')
-        post = Post.objects.get(title='test_post')
-        user = post.author
-
-        # two comments for post
-        comment0 = Comment(content_object=post, author=user, content='I am comment 1')
-        comment0.save()
-        comment1 = Comment(content_object=post, author=user, content='I am comment 2')
-        comment1.save()
-        self.assertEqual(len(post.comments.all()), 2)
-
-        # recursive comment for comment0
-        comment0_0 = Comment(content_object=comment0, author=user, content='I am comment 0 for comment 1')
-        comment0_0.save()
-        self.assertEqual(len(post.comments.all().filter(content='I am comment 1')[0].comments.all()), 1)
-
     def test_liked_by(self):
         logger.info('start testing test_liked_by...')
         post = Post.objects.get(title='test_post')

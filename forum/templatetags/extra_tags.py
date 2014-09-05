@@ -9,7 +9,7 @@ def get_user_like_image(users, user):
     return ''
 
 @register.filter
-def is_liked_by(post, user):
-    if user in post.liked_by.all():
+def is_liked_by(resource, user):
+    if user in resource.liked_by.all():
         return True
     return False
