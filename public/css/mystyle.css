@@ -18,8 +18,13 @@
     width: 50em;
 }
 
+.clear {
+    clear: both;
+}
+
 .comment-area {
-    width: 50em;
+    width: 50em !important;
+    float: left !important;
 }
 
 pre {

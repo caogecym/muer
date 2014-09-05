@@ -32,7 +32,7 @@ define(function (require) {
     };
 
     ns.goToHomePage = function(data) {
-        window.location.replace("/home/");
+        window.location.replace('/home');
     }
 
     ns.handleFail = function(xhr, msg){
@@ -41,8 +41,8 @@ define(function (require) {
 
     ns.delete_post = function(postId) {
         $.ajax({
-            type: "DELETE",
-            url: "/api/posts/" + postId,
+            type: 'DELETE',
+            url: '/api/posts/' + postId,
             success: function(data){
                 ns.goToHomePage(data)
             },
@@ -52,8 +52,8 @@ define(function (require) {
 
     ns.like = function(postId) {
         $.ajax({
-            type: "POST",
-            url: "/api/posts/" + postId + "/like/",
+            type: 'POST',
+            url: '/api/posts/' + postId + '/like',
             success: function(){
                 console.log('like successful');
             },
@@ -63,8 +63,8 @@ define(function (require) {
 
     ns.unlike = function(postId) {
         $.ajax({
-            type: "POST",
-            url: "/api/posts/" + postId + "/unlike/",
+            type: 'POST',
+            url: '/api/posts/' + postId + '/unlike',
             success: function(){
                 console.log('unlike successful');
             },
@@ -74,19 +74,19 @@ define(function (require) {
 
     ns.initKudo = function () {
         // initialize kudos
-        $.getScript(STATIC_URL+"libs/kudo/kudos.js", function(){
-            $("figure.kudoable").kudoable();
+        $.getScript(STATIC_URL+'libs/kudo/kudos.js', function(){
+            $('figure.kudoable').kudoable();
         });
         
         // like after kudo'd
-        $("figure.kudo").bind("kudo:added", function(e)
+        $('figure.kudo').bind('kudo:added', function(e)
         {
             var postId = $(this).data('id');
             ns.like(postId);
         });
         
         // unlike after removing a kudo
-        $("figure.kudo").bind("kudo:removed", function(e)
+        $('figure.kudo').bind('kudo:removed', function(e)
         {
             var postId = $(this).data('id');
             ns.unlike(postId);
@@ -104,17 +104,20 @@ define(function (require) {
                     // Send the token to same-origin, relative URLs only.
                     // Send the token only if the method warrants CSRF protection
                     // Using the CSRFToken value acquired earlier
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    xhr.setRequestHeader('X-CSRFToken', csrftoken);
                 }
             }
         });
 
         $('.post-delete').click(function () {
+            // TODO: Add confirm dialog
             var postId = $(this).data('postid');
             ns.delete_post(postId);
         });
 
-        ns.initKudo();
+        $(document).ready(function () {
+            ns.initKudo();
+        });
     }; // initialize //
 
     return ns;
