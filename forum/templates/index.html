@@ -19,7 +19,7 @@
         <pre><span class="inner-pre" style="font-size: 18px">{{ post.content|safe}}</span></pre>
         </br></br>
         {% for tag in post.tags.all %}
-        <a href="/tags/{{tag.name}}"><span class="label">{{tag.name}}</span></a>
+        <a href="/tags/{{tag.name}}"><span class="muer-tag label label-info">{{tag.name}}</span></a>
         {% endfor %}
       </div>
       

@@ -1,3 +1,4 @@
+node_modules
 muer_db
 venv
 *.db

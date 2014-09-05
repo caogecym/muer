@@ -1,0 +1,35 @@
+.muer-tag {
+    padding: 8px 8px;
+    font-size: 16px;
+    background-color: #000000;
+}
+
+.alert-success {
+    display: none;
+}
+
+.alert-warning {
+    display: none;
+}
+
+.post-delete:hover {
+    cursor: pointer;
+}
+
+.post-content {
+    width: 50em;
+}
+
+.clear {
+    clear: both;
+}
+
+.comment-area {
+    width: 50em !important;
+    float: left !important;
+}
+
+pre {
+  background-color: #FFFFFF;
+  border: 0px;
+}
