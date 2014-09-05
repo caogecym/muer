@@ -60,8 +60,6 @@ class Post(models.Model):
     # user preference
     liked_by = models.ManyToManyField(User, null=True, blank=True, related_name='liked_posts')
     like_count = models.PositiveIntegerField(default=0)
-    comments = generic.GenericRelation(Comment)
-    comment_count = models.PositiveIntegerField(default=0)
 
     def save(self, **kwargs):
         """
