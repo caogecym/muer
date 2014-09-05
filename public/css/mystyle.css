@@ -1,5 +1,7 @@
-.featurette-image:hover {
-    opacity: 0.85 !important;
+.muer-tag {
+    padding: 8px 8px;
+    font-size: 16px;
+    background-color: #000000;
 }
 
 .alert-success {
