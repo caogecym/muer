@@ -3,7 +3,7 @@ Scripts for muer platform initialization
 Project Name: Elephant
 All Rights Resevred 2014. 
 */
-/* global define document window alert STATIC_URL require */
+/* global define document window console STATIC_URL require */
 
 define(function (require) {
     'use strict';
@@ -34,10 +34,10 @@ define(function (require) {
 
     ns.goToHomePage = function() {
         window.location.replace('/home');
-    }
+    };
 
-    ns.handleFail = function(xhr, msg){
-        alert(xhr.responseText);
+    ns.handleFail = function(xhr){
+        console.log(xhr.responseText);
     };
 
     ns.deletePost = function(postId) {
@@ -55,9 +55,6 @@ define(function (require) {
         $.ajax({
             type: 'POST',
             url: '/api/posts/' + postId + '/like',
-            success: function(){
-                console.log('like successful');
-            },
             error: ns.handleFail,
         });
     };
@@ -66,9 +63,6 @@ define(function (require) {
         $.ajax({
             type: 'POST',
             url: '/api/posts/' + postId + '/unlike',
-            success: function(){
-                console.log('unlike successful');
-            },
             error: ns.handleFail,
         });
     };

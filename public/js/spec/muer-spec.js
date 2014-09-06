@@ -3,7 +3,6 @@
 define(function (require) {
     'use strict';
     var muer = require('muer');
-    var $ = require('jquery');
 
     describe('muer', function() {
         beforeEach(function() {
