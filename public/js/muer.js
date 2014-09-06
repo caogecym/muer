@@ -81,14 +81,12 @@ define(function (require) {
         
         // like after kudo'd
         $('figure.kudo').bind('kudo:added', function() {
-        {
             var postId = $(this).data('id');
             ns.like(postId);
         });
         
         // unlike after removing a kudo
         $('figure.kudo').bind('kudo:removed', function() {
-        {
             var postId = $(this).data('id');
             ns.unlike(postId);
         });

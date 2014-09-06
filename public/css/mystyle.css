@@ -20,7 +20,11 @@
     width: 50em;
 }
 
-.clear {
+.foot-divider {
+    clear: both;
+}
+
+.admin-options {
     clear: both;
 }
 

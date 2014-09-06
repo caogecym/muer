@@ -170,10 +170,10 @@ def content(request, post_id):
         post = Post.objects.get(id=post_id)
     except:
         post = None
-        context = {
-            'post': post,
-            'user': request.user,
-        }
+    context = {
+        'post': post,
+        'user': request.user,
+    }
     return render(request, 'post.html', context)
 
 @login_required
