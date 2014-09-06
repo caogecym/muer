@@ -1,10 +1,6 @@
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.test.client import Client
-
 from rest_framework import status
 from rest_framework.test import APITestCase
-
 from forum.models import Post, Tag
 
 class PostTests(APITestCase):
@@ -45,7 +41,7 @@ class PostTests(APITestCase):
         self.assertEqual(Post.objects.all()[0].like_count, 0)
 
     def test_logged_in_can_unlike(self):
-        res = self.client.login(username='caogecym', password='42')
+        self.client.login(username='caogecym', password='42')
         self.assertEqual(self.post.like_count, 0)
         url = '/api/posts/1/unlike'
         response = self.client.post(url)
@@ -80,77 +76,77 @@ class PostTests(APITestCase):
 
     def test_normal_user_get_list(self):
         url = '/api/posts'
-        res = self.client.login(username='caogecym', password='42')
+        self.client.login(username='caogecym', password='42')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_normal_user_get_detail(self):
         url = '/api/posts/1'
-        res = self.client.login(username='caogecym', password='42')
+        self.client.login(username='caogecym', password='42')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_normal_user_post(self):
         url = '/api/posts'
-        res = self.client.login(username='caogecym', password='42')
-        data = {'title':'new post', 'content':'new content', 'author':1, 'tags':[1]}
+        self.client.login(username='caogecym', password='42')
+        data = {'title': 'new post', 'content': 'new content', 'author': 1, 'tags': [1]}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_normal_user_put_self(self):
         url = '/api/posts/1'
-        res = self.client.login(username='caogecym', password='42')
-        data = {'title':'updated post', 'content':'new content', 'author':1, 'tags':[1]}
+        self.client.login(username='caogecym', password='42')
+        data = {'title': 'updated post', 'content': 'new content', 'author': 1, 'tags': [1]}
         response = self.client.put(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        
+
     def test_normal_user_put_other(self):
         url = '/api/posts/2'
-        res = self.client.login(username='caogecym', password='42')
-        data = {'title':'updated post', 'content':'new content', 'author':1, 'tags':[1]}
+        self.client.login(username='caogecym', password='42')
+        data = {'title': 'updated post', 'content': 'new content', 'author': 1, 'tags': [1]}
         response = self.client.put(url, data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_normal_user_delete_self(self):
         url = '/api/posts/1'
-        res = self.client.login(username='caogecym', password='42')
+        self.client.login(username='caogecym', password='42')
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_normal_user_delete_other(self):
         url = '/api/posts/2'
-        res = self.client.login(username='caogecym', password='42')
+        self.client.login(username='caogecym', password='42')
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_admin_get_list(self):
         url = '/api/posts'
-        res = self.client.login(username='admin', password='adminpw')
+        self.client.login(username='admin', password='adminpw')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_admin_get_detail(self):
         url = '/api/posts/1'
-        res = self.client.login(username='admin', password='adminpw')
+        self.client.login(username='admin', password='adminpw')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_admin_post(self):
         url = '/api/posts'
-        res = self.client.login(username='admin', password='adminpw')
-        data = {'title':'new post', 'content':'new content', 'author':1, 'tags':[1]}
+        self.client.login(username='admin', password='adminpw')
+        data = {'title': 'new post', 'content': 'new content', 'author': 1, 'tags': [1]}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_admin_put(self):
         url = '/api/posts/1'
-        res = self.client.login(username='admin', password='adminpw')
-        data = {'title':'updated post', 'content':'new content', 'author':1, 'tags':[1]}
+        self.client.login(username='admin', password='adminpw')
+        data = {'title': 'updated post', 'content': 'new content', 'author': 1, 'tags': [1]}
         response = self.client.put(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_admin_delete(self):
         url = '/api/posts/1'
-        res = self.client.login(username='admin', password='adminpw')
+        self.client.login(username='admin', password='adminpw')
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

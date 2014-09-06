@@ -2,7 +2,7 @@ import django_filters
 from django.contrib.auth.models import User
 
 from rest_framework import viewsets
-from rest_framework.decorators import action, permission_classes
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
@@ -31,7 +31,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes= [PostViewPermission]
+    permission_classes = [PostViewPermission]
     filter_backends = (filters.DjangoFilterBackend,)
     filter_class = PostFilter
 
@@ -67,7 +67,7 @@ class TagViewSet(viewsets.ModelViewSet):
     """
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes= [TagViewPermission]
+    permission_classes = [TagViewPermission]
 
 class CommentViewSet(viewsets.ModelViewSet):
     """
@@ -75,7 +75,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes= [CommentViewPermission]
+    permission_classes = [CommentViewPermission]
     filter_backends = (filters.DjangoFilterBackend,)
     filter_class = CommentFilter
 
@@ -113,4 +113,4 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes= [UserViewPermission]
+    permission_classes = [UserViewPermission]

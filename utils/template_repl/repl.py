@@ -1,9 +1,7 @@
-import re
 import sys
 import code
 import readline
 from django.template import Parser, Lexer, Context, TemplateSyntaxError
-from template_repl import get_version
 from template_repl.completion import Completer
 
 class TemplateREPL(code.InteractiveConsole, object):
@@ -12,12 +10,13 @@ class TemplateREPL(code.InteractiveConsole, object):
         The template REPL object has a single parser and context instance
         that persist for the length of the shell session.
         """
+
         super(TemplateREPL, self).__init__()
 
         self.context = context or Context()
         self.parser = parser or Parser([])
         self.output = output or sys.stdout
-        self.completer = Completer(context = self.context, parser = self.parser)
+        self.completer = Completer(context=self.context, parser=self.parser)
 
     def interact(self, banner=None):
         try:

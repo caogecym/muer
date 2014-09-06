@@ -1,8 +1,9 @@
 /*
-Scripts for voting, deleting post
+Scripts for muer platform initialization
 Project Name: Elephant
 All Rights Resevred 2014. 
 */
+/* global define document window console STATIC_URL require */
 
 define(function (require) {
     'use strict';
@@ -22,41 +23,38 @@ define(function (require) {
         // url could be relative or scheme relative or absolute
         var host = document.location.host; // host + port
         var protocol = document.location.protocol;
-        var sr_origin = '//' + host;
-        var origin = protocol + sr_origin;
+        var srOrigin = '//' + host;
+        var origin = protocol + srOrigin;
         // Allow absolute or scheme relative URLs to same origin
-        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+        return (url === origin || url.slice(0, origin.length + 1) === origin + '/') ||
+            (url === srOrigin || url.slice(0, srOrigin.length + 1) === srOrigin + '/') ||
             // or any other URL that isn't scheme relative or absolute i.e relative.
             !(/^(\/\/|http:|https:).*/.test(url));
     };
 
-    ns.goToHomePage = function(data) {
+    ns.goToHomePage = function() {
         window.location.replace('/home');
-    }
-
-    ns.handleFail = function(xhr, msg){
-        alert(xhr.responseText);
     };
 
-    ns.delete_post = function(postId) {
+    ns.handleFail = function(xhr){
+        console.log(xhr.responseText);
+    };
+
+    ns.deletePost = function(postId) {
         $.ajax({
             type: 'DELETE',
             url: '/api/posts/' + postId,
             success: function(data){
-                ns.goToHomePage(data)
+                ns.goToHomePage(data);
             },
             error: ns.handleFail,
         });
-    }
+    };
 
     ns.like = function(postId) {
         $.ajax({
             type: 'POST',
             url: '/api/posts/' + postId + '/like',
-            success: function(){
-                console.log('like successful');
-            },
             error: ns.handleFail,
         });
     };
@@ -65,29 +63,24 @@ define(function (require) {
         $.ajax({
             type: 'POST',
             url: '/api/posts/' + postId + '/unlike',
-            success: function(){
-                console.log('unlike successful');
-            },
             error: ns.handleFail,
         });
     };
 
     ns.initKudo = function () {
         // initialize kudos
-        $.getScript(STATIC_URL+'libs/kudo/kudos.js', function(){
+        $.getScript(STATIC_URL + 'libs/kudo/kudos.js', function() {
             $('figure.kudoable').kudoable();
         });
         
         // like after kudo'd
-        $('figure.kudo').bind('kudo:added', function(e)
-        {
+        $('figure.kudo').bind('kudo:added', function() {
             var postId = $(this).data('id');
             ns.like(postId);
         });
         
         // unlike after removing a kudo
-        $('figure.kudo').bind('kudo:removed', function(e)
-        {
+        $('figure.kudo').bind('kudo:removed', function() {
             var postId = $(this).data('id');
             ns.unlike(postId);
         });

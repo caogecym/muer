@@ -1,3 +1,4 @@
+/* global window require */
 var tests = [];
 for (var file in window.__karma__.files) {
     if (/-spec\.js$/.test(file)) {

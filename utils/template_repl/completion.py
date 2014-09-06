@@ -105,7 +105,6 @@ class Completer(object):
         if tokens[-1].token_type != TOKEN_TEXT:
             return (text, '', '')
 
-        prefix_tokens = tokens[:-1]
         working_area = tokens[-1].contents
 
         prefix = text[:-len(working_area)]

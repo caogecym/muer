@@ -14,8 +14,8 @@ def paginator(context, adjacent_pages=2):
     cur_idx = context['posts'].number
     ttl_idx = context['posts'].paginator.num_pages
 
-    startPage = max(cur_idx- adjacent_pages, 1)
-    if startPage <= 3: 
+    startPage = max(cur_idx - adjacent_pages, 1)
+    if startPage <= 3:
         startPage = 1
     endPage = cur_idx + adjacent_pages + 1
 

@@ -1,6 +1,6 @@
 import os.path
 from django.conf.urls import patterns, include, url
-from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import login
 from django.contrib import admin
 
 from rest_framework.routers import DefaultRouter
@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     (r'^tags/$', forum_views.tags),
     (r'^tags/(?P<tag>[^/]+)/$', forum_views.tag),
     (r'^login/$', login),
-    (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
+    (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     (r'^signup/$', 'forum.views.register'),
 
     # wechat interface
