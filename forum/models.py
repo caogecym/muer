@@ -99,7 +99,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted = models.BooleanField(default=False)
 
-    # user preference 
+    # user preference
     liked_by = models.ManyToManyField(User, null=True, blank=True, related_name='liked_comments')
     like_count = models.PositiveIntegerField(default=0)
 

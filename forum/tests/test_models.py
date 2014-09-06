@@ -6,7 +6,7 @@ when you run "manage.py test forum".
 from django.test import TestCase
 from django.db import IntegrityError
 from django.contrib.auth.models import User
-from forum.models import Post, Tag, Comment, Image, Resource
+from forum.models import Post, Tag, Image, Resource
 import logging
 logger = logging.getLogger(__name__)
 
