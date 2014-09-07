@@ -4,6 +4,12 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from forum.managers import TagManager
 import django.dispatch
+import json
+
+POST_TYPE = {
+    'HTML': 'html',
+    'MPIC': 'mpic'
+}
 
 class Tag(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -45,6 +51,8 @@ class Post(models.Model):
     title = models.CharField(max_length=300, unique=True)
     author = models.ForeignKey(User, related_name='posts')
     content = models.CharField(max_length=8192)  # in html
+    # TODO: VERIFY NOT HTML when params contains mpic related pics
+    post_type = models.CharField(max_length=30, default=POST_TYPE['HTML'])
     images = generic.GenericRelation(Image)
 
     # store useful info other than image, like seed, attachment
@@ -60,6 +68,11 @@ class Post(models.Model):
     # user preference
     liked_by = models.ManyToManyField(User, null=True, blank=True, related_name='liked_posts')
     like_count = models.PositiveIntegerField(default=0)
+    params = models.TextField(blank=True)
+
+    @property
+    def params_dict(self):
+          return json.loads(self.params)
 
     def save(self, **kwargs):
         """
@@ -90,7 +103,6 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='post_comments')
     content = models.CharField(max_length=1024)
-    images = generic.GenericRelation(Image)
     resources = generic.GenericRelation(Resource)
     author = models.ForeignKey(User, related_name='user_comments')
 

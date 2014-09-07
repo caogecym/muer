@@ -16,7 +16,6 @@ class PostTests(APITestCase):
         self.post1 = Post.objects.create(title="test_post_1", content="Ultimate anwser to everything: 42",
         author=normal_user_1)
         Tag.objects.create(name="animal", author=normal_user_0)
-        print "In method %s" % self._testMethodName
 
     def test_like_post(self):
         """
@@ -150,3 +149,17 @@ class PostTests(APITestCase):
         self.client.login(username='admin', password='adminpw')
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_mpic_api(self):
+        url = '/api/posts'
+        self.client.login(username='caogecym', password='42')
+        data = {'title': 'new post', 'content': 'new content', 'author': 1, 'tags': [1], 'params': '{"type": 0}'}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['params'], '{"type": 0}')
+
+    def test_mpic_orm(self):
+        user = User.objects.create_user(username='test_user', password='42')
+        post = Post.objects.create(title="test_mpic", content="Ultimate anwser to everything: 42",
+                                        author=user, params='{"type": 0}')
+        self.assertEqual(post.params_dict['type'], 0)
