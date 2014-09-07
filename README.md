@@ -1,6 +1,8 @@
 muer
 ====
 
+[![Build Status](https://travis-ci.org/caogecym/muer.svg?branch=master)](https://travis-ci.org/caogecym/muer)
+
 Muer is a joke site aims at collecting best jokes from all types of websites and gathering people all around the world to vote, appreciate, and contribute to this joke pool.
 
 The site is developed in django web framework. Joke resource is scraped from internet using BeautifulSoup, a python html parsing tool.
