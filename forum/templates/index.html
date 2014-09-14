@@ -22,7 +22,7 @@
         <a href="/tags/{{tag.name}}"><span class="muer-tag label label-info">{{tag.name}}</span></a>
         {% endfor %}
       </div>
-      
+      <div class="addthis_sharing_toolbox share-toolbox" data-title="{{ post.title }}" data-url="http://www.blackmuer.com/posts/{{ post.id }}"></div>
       {% if post|is_liked_by:user %}
         <figure class="kudo kudoable complete" data-id="{{ post.id }}">
       {% else %}

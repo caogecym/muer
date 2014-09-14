@@ -20,7 +20,7 @@ router.register(r'comments', forum_api.CommentViewSet)
 router.register(r'users', forum_api.UserViewSet)
 
 urlpatterns = patterns('',
-    (r'^$', forum_views.index),
+    url(r'^$', forum_views.index, name='root'),
     (r'^api/', include(router.urls)),
     (r'^about/', forum_views.about),
     (r'^home/', forum_views.index),
