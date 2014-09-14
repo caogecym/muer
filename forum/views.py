@@ -28,6 +28,9 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
+def mpic(request):
+    return render(request, 'mpic.html')
+
 def index(request, tag_name=None, order_by='-added_at'):
     if tag_name is not None:
         posts = Post.objects.filter(tags__name=tag_name)

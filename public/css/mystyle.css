@@ -33,6 +33,18 @@
     float: left !important;
 }
 
+.mpic-section {
+    position: relative;
+    width:439px;
+}
+
+.mpic-subtitle {
+    position:absolute;
+    top:90%;
+    left:25%;
+    text-align:center;
+}
+
 pre {
   background-color: #FFFFFF;
   border: 0px;

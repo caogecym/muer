@@ -7,6 +7,7 @@ urlpatterns = patterns(
     url(r'^$', views.index, name='index'),
     # ex: /posts/hottest
     url(r'hottest$', views.index_hottest, name='hottest_posts'),
+
     # ex: /posts/new_post/
     url(r'new_post/$', views.add_post, name='add_post'),
     # ex: /posts/11/edit/
