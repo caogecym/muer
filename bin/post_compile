@@ -20,3 +20,8 @@ if [ -f bin/install_nodejs ]; then
         bin/install_nodep
     fi
 fi
+
+if [ -f bin/migrate_db ]; then
+    echo "-----> Migrating db"
+    chmod +x bin/migrate_db
+    bin/migrate_db
