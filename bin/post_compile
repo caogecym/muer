@@ -25,3 +25,4 @@ if [ -f bin/migrate_db ]; then
     echo "-----> Migrating db"
     chmod +x bin/migrate_db
     bin/migrate_db
+fi
