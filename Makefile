@@ -1,4 +1,3 @@
-SENV=. ./env.sh;
 HIDE=@
 
 flake8:
@@ -8,7 +7,7 @@ eslint:
 	$(HIDE)grunt lint
 
 django-test:
-	$(HIDE)$(SENV)python manage.py test forum
+	$(HIDE)python manage.py test forum
 
 browser-test:
 	$(HIDE)grunt karma

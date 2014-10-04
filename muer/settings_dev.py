@@ -105,21 +105,12 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+STATIC_URL = '/static/'
+
 # Additional locations of static files, used by collectstatic
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'public'),
 )
-
-# AMAZON S3 config
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-AWS_STORAGE_BUCKET_NAME = 'muer-stage'
-# fix manage.py collectstatic command to only upload changed files instead of all files
-AWS_PRELOAD_METADATA = True
-
-STATIC_URL = 'https://muer-stage.s3.amazonaws.com/'
-ADMIN_MEDIA_PREFIX = 'https://muer-stage.s3.amazonaws.com/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'm&f!1!7g&*5b*!77x(&1!ksv-=yl!+zh@1e6x3y%&zs$p_5ffo'
