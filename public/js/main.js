@@ -22,3 +22,7 @@ require(['muer', 'jquery-cookie', 'bootstrap'], function (muer) {
     'use strict';
     muer.initialize();
 });
+
+// load login.js file, so that DOM can reference its functions
+require(["login"], function(login) {
+});
