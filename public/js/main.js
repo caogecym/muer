@@ -25,4 +25,5 @@ require(['muer', 'jquery-cookie', 'bootstrap'], function (muer) {
 
 // load login.js file, so that DOM can reference its functions
 require(["login"], function(login) {
+    login.initialize();
 });
